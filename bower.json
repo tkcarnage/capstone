@@ -1,0 +1,26 @@
+{
+  "name": "newnewman",
+  "description": "automated gui based testing for http routes",
+  "main": "app.js",
+  "authors": [
+    "TK",
+    "Nate",
+    "David",
+    "Sean"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "test",
+    "http",
+    "automated"
+  ],
+  "homepage": "https://github.com/tkcarnage",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

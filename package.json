@@ -1,0 +1,41 @@
+{
+  "name": "newman",
+  "version": "1.0.0",
+  "description": "automated gui based testing for http routes",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ./src/app.js"
+  },
+  "keywords": [
+    "test",
+    "http",
+    "automated"
+  ],
+  "author": "TK, Nate, David, Sean",
+  "license": "ISC",
+  "devDependencies": {
+    "electron-connect": "^0.3.9",
+    "gulp": "^3.9.1",
+    "gulp-angular-modules": "^0.1.8",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^2.0.0",
+    "gulp-istanbul": "^0.10.4",
+    "gulp-jshint": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify": "0.0.11",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-mocha": "^2.2.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "jshint": "^2.9.2",
+    "karma": "^0.13.22",
+    "mocha": "^2.4.5",
+    "run-sequence": "^1.1.5"
+  }
+}

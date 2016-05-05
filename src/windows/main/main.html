@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+  </head>
+<body> 
+  <h1>Hello World!</h1>
+   We are using Electron 
+   <script> document.write(process.versions['electron']) </script> on 
+   <script> document.write(process.platform) </script>
+   <script type="text/javascript"> 
+      var fs = require('fs');
+      var file = fs.readFileSync('package.json'); 
+      document.write(file); 
+   </script>
+   <script>require('electron-connect').client.create()</script> 
+  </body>
+</html>
