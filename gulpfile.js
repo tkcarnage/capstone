@@ -11,15 +11,15 @@ var babel = require('gulp-ng-annotate');
 var plumber = require('gulp-plumber');
 var minifyCSS = require('gulp-minify-css');
 var ngAnnotate = require('gulp-ng-annotate');
-// var notify = require('gulp-notify');
+var notify = require('gulp-notify');
 var mocha = require('gulp-mocha');
 var karma = require('karma').server;
 var eslint = require('gulp-eslint');
 var runSeq = require('run-sequence');
 var istanbul = require('gulp-istanbul');
 var sourcemaps = require('gulp-sourcemaps');
-// var livereload = require('gulp-livereload');
-// var electron = require('electron-connect').server.create();
+var livereload = require('gulp-livereload');
+var electron = require('electron-connect').server.create();
 
 // gulp.task('serve', function () {
  
@@ -43,17 +43,17 @@ var sourcemaps = require('gulp-sourcemaps');
 //   electron.reload();
 // });
 
-// gulp.task('lintJS', function () {
+gulp.task('lintJS', function () {
 
-//     return gulp.src(['./src/**/*.js', './src/app.js'])
-//         .pipe(plumber({
-//             errorHandler: notify.onError('Linting FAILED! Check your gulp process.')
-//         }))
-//         .pipe(eslint())
-//         .pipe(eslint.format())
-//         .pipe(eslint.failOnError());
+    return gulp.src(['./src/**/*.js', './src/app.js'])
+        .pipe(plumber({
+            errorHandler: notify.onError('Linting FAILED! Check your gulp process.')
+        }))
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
 
-// });
+});
 
 gulp.task('buildJS', ['lintJS'], function () {
     return gulp.src(['./src/app.js', './src/windows/**/*.js'])
@@ -114,19 +114,19 @@ gulp.task('default', function () {
 
     // Run when anything inside of browser/js changes.
     gulp.watch('./src/windows/**/*.js', function () {
-        runSeq('buildJS', 'reloadrenderer');
+        runSeq('buildJS');
     });
 
     gulp.watch('./src/app.js', function () {
-        runSeq('buildJS', 'reloadbrowser');
+        runSeq('buildJS');
     });
 
     // Run when anything inside of browser/scss changes.
     gulp.watch('./src/scss/**', function () {
-        runSeq('buildCSS', 'reloadrenderer');
+        runSeq('buildCSS');
     });
 
-    // gulp.watch('server/**/*.js', ['lintJS']);
+    gulp.watch('server/**/*.js', ['lintJS']);
  
 
 });

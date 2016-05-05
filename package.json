@@ -15,7 +15,7 @@
   "author": "TK, Nate, David, Sean",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^0.4.1",
+    "electron-prebuilt": "^0.37.8",
     "electron-connect": "^0.3.9",
     "gulp": "^3.9.1",
     "gulp-angular-modules": "^0.1.8",
@@ -29,6 +29,7 @@
     "gulp-minify-css": "^1.2.4",
     "gulp-mocha": "^2.2.0",
     "gulp-ng-annotate": "^2.0.0",
+    "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.1",
