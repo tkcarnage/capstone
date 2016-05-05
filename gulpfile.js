@@ -11,49 +11,49 @@ var babel = require('gulp-ng-annotate');
 var plumber = require('gulp-plumber');
 var minifyCSS = require('gulp-minify-css');
 var ngAnnotate = require('gulp-ng-annotate');
-var notify = require('gulp-notify');
+// var notify = require('gulp-notify');
 var mocha = require('gulp-mocha');
 var karma = require('karma').server;
 var eslint = require('gulp-eslint');
 var runSeq = require('run-sequence');
 var istanbul = require('gulp-istanbul');
 var sourcemaps = require('gulp-sourcemaps');
-var livereload = require('gulp-livereload');
-var electron = require('electron-connect').server.create();
+// var livereload = require('gulp-livereload');
+// var electron = require('electron-connect').server.create();
 
-gulp.task('serve', function () {
+// gulp.task('serve', function () {
  
-  // Start browser process 
-  electron.start();
+//   // Start browser process 
+//   electron.start();
  
-  // Restart browser process 
-  gulp.watch('./src/app.js', electron.restart);
+//   // Restart browser process 
+//   gulp.watch('./src/app.js', electron.restart);
  
-  // Reload renderer process 
-  gulp.watch(['./dist/css/*.css', './dist/js/*.html'], electron.reload);
-});
+//   // Reload renderer process 
+//   gulp.watch(['./dist/css/*.css', './dist/js/*.html'], electron.reload);
+// });
 
-gulp.task('reloadbrowser', function () {
-  // Restart main process
-  electron.restart();
-});
+// gulp.task('reloadbrowser', function () {
+//   // Restart main process
+//   electron.restart();
+// });
 
-gulp.task('reloadrenderer', function () {
-  // Reload renderer process
-  electron.reload();
-});
+// gulp.task('reloadrenderer', function () {
+//   // Reload renderer process
+//   electron.reload();
+// });
 
-gulp.task('lintJS', function () {
+// gulp.task('lintJS', function () {
 
-    return gulp.src(['./src/**/*.js', './src/app.js'])
-        .pipe(plumber({
-            errorHandler: notify.onError('Linting FAILED! Check your gulp process.')
-        }))
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failOnError());
+//     return gulp.src(['./src/**/*.js', './src/app.js'])
+//         .pipe(plumber({
+//             errorHandler: notify.onError('Linting FAILED! Check your gulp process.')
+//         }))
+//         .pipe(eslint())
+//         .pipe(eslint.format())
+//         .pipe(eslint.failOnError());
 
-});
+// });
 
 gulp.task('buildJS', ['lintJS'], function () {
     return gulp.src(['./src/app.js', './src/windows/**/*.js'])
@@ -110,7 +110,7 @@ gulp.task('build', function () {
 
 gulp.task('default', function () {
 
-    gulp.start(['build', 'serve']);
+    gulp.start(['build']);
 
     // Run when anything inside of browser/js changes.
     gulp.watch('./src/windows/**/*.js', function () {
@@ -126,7 +126,7 @@ gulp.task('default', function () {
         runSeq('buildCSS', 'reloadrenderer');
     });
 
-    gulp.watch('server/**/*.js', ['lintJS']);
+    // gulp.watch('server/**/*.js', ['lintJS']);
  
 
 });
