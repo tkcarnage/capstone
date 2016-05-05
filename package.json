@@ -15,6 +15,7 @@
   "author": "TK, Nate, David, Sean",
   "license": "ISC",
   "devDependencies": {
+    "electron": "^0.4.1",
     "electron-connect": "^0.3.9",
     "gulp": "^3.9.1",
     "gulp-angular-modules": "^0.1.8",
