@@ -4,3 +4,6 @@
 require('./user');
 require('./index');
 require('./job');
+require('./test');
+
+

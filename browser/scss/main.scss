@@ -1,11 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
 * {
   box-sizing: border-box; }
 
 body {
   background: #D3D3D3;
   padding-bottom: 56px; 
-  }
-
+  font-family: 'Montserrat', sans-serif;
+}
 
 @mixin clearfix {
   &:after {
