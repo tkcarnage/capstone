@@ -1,10 +1,11 @@
 * {
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 body {
-  background: #fdfdfd;
-}
+  background: #D3D3D3;
+  padding-bottom: 56px; 
+  }
+
 
 @mixin clearfix {
   &:after {
@@ -15,12 +16,11 @@ body {
 }
 
 #main {
-  padding-top: 60px;
-  margin: 0 auto;
-}
+  padding-left: 0; }
 
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
+@import 'directives/sidebar';
