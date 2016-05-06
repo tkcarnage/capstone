@@ -28,11 +28,11 @@ var mongoose = require('mongoose');
 
 var testSchema = new mongoose.Schema({
 	prev: {
-		type: Schema.Types.ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Test'
 	},
 	next: {
-		type: Schema.Types.ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Test'
 	},
 	response: {
@@ -57,4 +57,4 @@ var testSchema = new mongoose.Schema({
 });
 
 
-mongoose.model('User', schema);
+mongoose.model('Test', testSchema);
