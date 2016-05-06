@@ -5,7 +5,7 @@
 
 body {
   background: #D3D3D3;
-  padding-bottom: 56px; 
+  padding-bottom: 0px; 
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -17,9 +17,19 @@ body {
   }
 }
 
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
 #main {
   padding-left: 0; }
 
+
+@import 'hover.css/css/hover.css';
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
