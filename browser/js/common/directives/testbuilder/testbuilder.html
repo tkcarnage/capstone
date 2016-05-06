@@ -1,27 +1,18 @@
-<!-- <nav class="navbar navbar-static-top">
-    <div class="container">
-        <div class ='nav-left'>
-            <div class="navbar-header">
-                <gmlogo></gmlogo>
+<div class="container">
+    <form class="form-inline">
+        <div class="form-group">
+            <div class="together">
+                <select class="form-control input-lg" id="typereq">
+                    <option>GET</option>
+                    <option>POST</option>
+                    <option>PUT</option>
+                    <option>DELETE</option>
+                </select>
+                <input type="url" class="form-control input-lg" id="urlinput" placeholder="Enter Request URL">
+                <!--http://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown-->
+                <button type="button" class="btn btn-info btn-lg">Params</button>
             </div>
-            <ul class="nav navbar-nav">
-                <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                    <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-                </li>
-                <li ng-repeat="item in adminItems" ng-show="user.isAdmin">
-                  <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-                </li>
-            </ul>
+            <button type="submit" class="btn btn-success btn-lg">Send</button>
         </div>
-        <div class='nav-right'>
-            <div ng-show="user" class="right-side">
-                <span>Welcome, {{ user.firstName }}!</span>
-                <button class="btn btn-danger" ng-click="logout()">Logout</button>
-            </div>
-            <div ng-show="!user" class="right-side">
-              <button ui-sref="signup" class="btn btn-primary">Signup</button>
-              <button ui-sref="login" class="btn btn-success">Login</button>
-            </div>
-        </div>
-</nav>
- -->
+    </form>
+</div>
