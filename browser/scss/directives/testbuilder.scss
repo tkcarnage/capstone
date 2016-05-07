@@ -1,6 +1,37 @@
 testbuilder {
 	.container {
 		margin-top: 3vh;
+		padding-left: 30px;
+	}
+	#typereq {
+		-webkit-appearance: none;
+		border-radius:0px;
+		background-color: #D3D3D3;
+	}
+	#urlinput {
+		-webkit-appearance: none;
+		margin-left: -6px;
+		border-radius:0px;
+	}
+	.keyform {
+		width: 20vw;
+	}
+	.valform {
+		width: 20vw;
+	}
+	.reqeditor {
+		padding-left: 30px;
+	}
+	.keyvalForms {
+		margin-top: 15px;
+		padding-left: 45px;
 	}
 }
 
+input {
+		border: 0;
+   		outline: 0;
+   		background: transparent;
+   		border-bottom: 2px solid black;
+   		width: 20px;
+   		}
