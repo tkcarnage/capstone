@@ -1,5 +1,6 @@
 <div class="container reqeditor">
     <form class="form-inline">
+        <form name="formInput">
         <div class="form-group reqeditor">
             <!-- <div class="together"> -->
                 <select class="form-control input-lg" class="typereq">
@@ -8,15 +9,16 @@
                     <option>PUT</option>
                     <option>DELETE</option>
                 </select>
-                <input type="url" class="form-control input-lg" id="urlinput" placeholder="Enter Request URL">
-                <!--http://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown-->
+                <input type="url" class="form-control input-lg" id="urlinput" placeholder="Enter Request URL" ng-model="inputTag">
+                <!-- {{inputTag}} -->
                 <button type="button" class="btn btn-info btn-lg" id="params" ng-click="showForm()">Params</button>
             <!-- </div> -->
             <button type="submit" class="btn btn-success btn-lg">Send</button>
         </div>
         <div ng-repeat="param in params track by $index" ng-show="showParams" class="keyvalForms">
-            <input type="text" class="keyform" placeholder="key" ng-click="addForm($index)">
-            <input type="text" class="valform" placeholder="value">
+            <input type="text" class="keyform" placeholder="key" ng-click="addForm($index)" ng-model="params[$index].key">
+            <input type="text" class="valform" placeholder="value" ng-model="params[$index].value" ng-change='composeURL()'>
         </div>
+        </ng-form>
     </form>
 </div>
