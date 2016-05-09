@@ -8,11 +8,14 @@ app.directive('testbuilder', function(){
   };
 });
 
-app.controller('TestbuilderCtrl', function($scope){
-	$scope.inputTag = 'http://';
-	$scope.params = [];
-	$scope.headers = [];
-	$scope.reqbody = [];
+app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory){
+	$scope.test = {};
+	$scope.test.inputTag = 'http://';
+	$scope.test.params = [];
+	$scope.test.headers = [];
+	$scope.test.body = {};
+	$scope.test.body.data = [];
+	$scope.test.method = "GET";
 	$scope.showParams = false;
 	$scope.showHeaders = false;
 	$scope.showBody = false;
@@ -21,48 +24,47 @@ app.controller('TestbuilderCtrl', function($scope){
 	$scope.numBodyObj = 0;
 	$scope.addForm = function(index, type){
 
-		if (index === $scope[type].length - 1 || $scope[type].length === 0) {
+		if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0) {
 			if (type === "params") {
 				$scope.numParams++;
-				$scope.params.push({});
+				$scope.test.params.push({});
 			}
 			else if (type === "headers") {
 				$scope.numHeaders++;
-				$scope.headers.push({});
+				$scope.test.headers.push({});
 			} 
-			else if (type === "reqbody") {
+			else if (type === "body.data") {
 				$scope.numBodyObj++;
-				$scope.reqbody.push({});
+				$scope.test.body.data.push({});
 			}
-			
 		}
 
 		$scope.$evalAsync();
 	};
 
 	$scope.showForm = function(){
-		if ($scope.params.length === 0) {
+		if ($scope.test.params.length === 0) {
 			$scope.addForm(0,"params");
 			$scope.numParams++;
 		}
 		$scope.showParams = !$scope.showParams;  
-		console.log($scope.params);
+		console.log($scope.test.params);
 		$scope.evalAsync;
 	};
 
 	$scope.displayHeaders = function(){
-		if ($scope.headers.length === 0) {
+		if ($scope.test.headers.length === 0) {
 			$scope.addForm(0,"headers");
 			$scope.numHeaders++;
 		}
 		$scope.showHeaders = !$scope.showHeaders;  
-		console.log($scope.headers);
+		console.log($scope.test.headers);
 		$scope.evalAsync;
 	};
 
 	$scope.displayBody = function(){
-		if ($scope.reqbody.length === 0) {
-			$scope.addForm(0,"reqbody");
+		if ($scope.test.body.data.length === 0) {
+			$scope.addForm(0,"body.data");
 			$scope.numBodyObj++;
 		}
 		$scope.showBody = !$scope.showBody;  
@@ -70,16 +72,24 @@ app.controller('TestbuilderCtrl', function($scope){
 	};
 
 	$scope.composeURL = function() {
-		var indexQuestionMark = $scope.inputTag.indexOf('?');
+		var indexQuestionMark = $scope.test.url.indexOf('?');
 		if (indexQuestionMark !== -1) {
-			$scope.inputTag = $scope.inputTag.substring(0,indexQuestionMark);
+			$scope.test.url = $scope.test.url.substring(0,indexQuestionMark);
 		}
-		$scope.inputTag += '?';
+		$scope.test.url += '?';
 		var finalString = '';
-		for(var i = 0; i < $scope.params.length - 1; i++) {
-			finalString = finalString + $scope.params[i].key + '=' + $scope.params[i].value + '&';
+		for(var i = 0; i < $scope.test.params.length - 1; i++) {
+			finalString = finalString + $scope.test.params[i].key + '=' + $scope.test.params[i].value + '&';
 		}
-		$scope.inputTag  = $scope.inputTag + finalString;
-		$scope.inputTag = $scope.inputTag.slice(0,$scope.inputTag.length - 1);
+		$scope.test.url  = $scope.test.url + finalString;
+		$scope.test.url = $scope.test.url.slice(0,$scope.test.url.length - 1);
 	};
+
+	$scope.submitTest = function(){
+		$scope.test.url = $scope.test.url;
+		TestBuilderFactory.create($scope.test);
+	};
+
+
+
 });

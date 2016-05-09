@@ -3,29 +3,28 @@
         <form name="formInput">
             <div class="form-group reqeditor">
                 <!-- <div class="together"> -->
-                <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of test" ng-model="name">
+                <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of test" ng-model="test.name">
                 <hr>
                 <p>URL Request</p>
-                <select class="form-control input-lg" class="typereq">
+                <select class="form-control input-lg" class="typereq" ng-model="test.method" ng-required="true">
                     <option>GET</option>
                     <option>POST</option>
                     <option>PUT</option>
                     <option>DELETE</option>
                 </select>
-                <input type="url" class="form-control input-lg" id="urlinput" placeholder="Enter Request URL" ng-model="inputTag">
-                <!-- {{inputTag}} -->
+                <input type="url" class="form-control input-lg" id="urlinput" placeholder="Enter Request URL" ng-model="test.url" ng-required="true">
                 <hr>
                 <button type="button" class="btn btn-default btn-lg" id="params" ng-click="showForm()">Params</button>
                 <!-- </div> -->
-                <div ng-repeat="param in params track by $index" ng-show="showParams" class="keyvalForms">
-                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'params')" ng-model="params[$index].key">
-                    <input type="text" class="valform" placeholder="value" ng-model="params[$index].value" ng-change='composeURL()'>
+                <div ng-repeat="param in test.params track by $index" ng-show="showParams" class="keyvalForms">
+                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'params')" ng-model="test.params[$index].key">
+                    <input type="text" class="valform" placeholder="value" ng-model="test.params[$index].value" ng-change='composeURL()'>
                 </div>
                 <hr>
                 <button type="button" class="btn btn-default btn-lg" id="headers" ng-click="displayHeaders()">Headers</button> 
-                <div ng-repeat="header in headers track by $index" ng-show="showHeaders" class="keyvalForms">
-                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'headers')" ng-model="headers[$index].key">
-                    <input type="text" class="valform" placeholder="value" ng-model="headers[$index].value">
+                <div ng-repeat="header in test.headers track by $index" ng-show="showHeaders" class="keyvalForms">
+                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'headers')" ng-model="test.headers[$index].key">
+                    <input type="text" class="valform" placeholder="value" ng-model="test.headers[$index].value">
                 </div>
                 <hr>
                  <button type="button" class="btn btn-default btn-lg" id="body" ng-click="displayBody()">Body</button> 
@@ -34,28 +33,29 @@
                  <span ng-show="showBody">Body Type</span>
                  <form name="bodytype">
                     <label ng-show="showBody">
-                        <input type="radio" ng-model="bodytype" value="x-www-form-urlencoded">
+                        <input type="radio" ng-model="test.body.bodytype" value="x-www-form-urlencoded">
                         x-www-form-urlencoded
                     </label>
                     <label ng-show="showBody">
-                        <input type="radio" ng-model="bodytype" ng-show="showBody" value="form-data">
+                        <input type="radio" ng-model="test.body.bodytype" ng-show="showBody" value="form-data">
                         form-data
                     </label>
                 </form>
-                <div ng-repeat="body in reqbody track by $index" ng-show="showBody" class="keyvalForms">
-                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'reqbody')" ng-model="reqbody[$index].key">
-                    <input type="text" class="valform" placeholder="value" ng-model="reqbody[$index].value">
+                <div ng-repeat="body in test.body.data track by $index" ng-show="showBody" class="keyvalForms">
+                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'body.data')" ng-model="test.body.data[$index].key">
+                    <input type="text" class="valform" placeholder="value" ng-model="test.body.data[$index].value">
                 </div>
                 <hr>
                 <p>Auth</p>
-                <input type="text" class="form-control input-lg" id="email" placeholder="Email" ng-model="email">
-                <input type="text" class="form-control input-lg" id="password" placeholder="Password" ng-model="password">
+                <input type="text" class="form-control input-lg" id="email" placeholder="Email" ng-model="test.email">
+                <input type="text" class="form-control input-lg" id="password" placeholder="Password" ng-model="test.password">
                 <hr>
                 <p>Expectation</p>
-                <textarea class="form-control" id="expectation" rows="4" cols="50" placeholder="Enter the expected result here in JSON." ng-model="expectation"></textarea></textarea>
+                <textarea class="form-control" id="expectation" rows="4" cols="50" placeholder="Enter the expected result here in JSON." ng-model="test.expectation" ng-required="true"></textarea></textarea>
                 <hr>
-                <button type="submit" class="btn btn-success btn-lg">Send</button>
-                <button class="btn btn-default btn-lg">Save</button>
+                <button class="btn btn-default btn-lg">Try</button>
+                <button type="submit" class="btn btn-success btn-lg" ng-click="submitTest()">Save</button>
+                {{test}}
             </div>
         </form>
     </div>
