@@ -12,19 +12,29 @@ testbuilder {
 		-webkit-appearance: none;
 		margin-left: -6px;
 		border-radius:0px;
+		width: 400px;
 	}
 	.keyform {
-		width: 20vw;
+		width: 14vw;
 	}
 	.valform {
-		width: 20vw;
+		width: 14vw;
 	}
 	.reqeditor {
-		padding-left: 30px;
+		padding-left: 100px;
 	}
 	.keyvalForms {
 		margin-top: 15px;
-		padding-left: 45px;
+		padding-left: 100px;
+	}
+	#urlinput {
+		background-color: white;
+		color: darken(white, 40%);
+	}
+	#params {
+		background-color: white;
+		color: darken(white, 40%);
+		border: 0px;
 	}
 }
 

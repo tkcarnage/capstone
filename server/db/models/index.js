@@ -3,7 +3,7 @@
 // anywhere the User model needs to be used.
 require('./user');
 require('./index');
-require('./job');
+require('./stack');
 require('./test');
 
 
