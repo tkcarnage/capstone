@@ -30,6 +30,10 @@ var schema = new mongoose.Schema({
         id: String
     },
     jobs: [{type: mongoose.Schema.Types.ObjectId, ref: 'Test'}],
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 });
 
 

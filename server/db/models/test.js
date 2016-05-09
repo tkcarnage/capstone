@@ -49,7 +49,6 @@ var testSchema = new mongoose.Schema({
 		},
 		expectation: {
 			type: String,
-			required: true,
 		},
 		result: {
 			type: String,
