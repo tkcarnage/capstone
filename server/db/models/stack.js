@@ -15,24 +15,24 @@ var stackSchema = new mongoose.Schema({
 		},
 		frequency: {
 			minute: {
-				type: String,
-				default: '*',
+				type: String, // (0-59, but user only sees time input field, so no need to validate generated data)
+				default: '*', // asterisk covers all cases in CRON
 			},
 			hour: {
-				type: String,
-				default: '*',
+				type: String, // (0-23, see above)
+				default: '*', // see above
 			},
-			dayofmonth: {
+			dayofmonth: { // (1-31, see above)
 				type: String,
-				default: '*',
+				default: '*', // see above
 			},
 			month: {
-				type: String,
-				default: '*',
+				type: String, // (1-12, see above)
+				default: '*', // see above
 			},
 			dayofweek: {
-				type: String,
-				default: '*',
+				type: String, // (0-6, Sunday is 0, see above)
+				default: '*', // see above
 			},
 		},
 		
