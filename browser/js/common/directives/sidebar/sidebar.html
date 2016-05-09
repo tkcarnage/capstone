@@ -4,6 +4,9 @@
     <button class="btn btn-xs btn-success sectionbutton"><span class="glyphicon glyphicon-plus"></span></button>
   <h4 class="sidebarsection">Stacks</h4>
   <button class="btn btn-xs btn-success sectionbutton"><span class="glyphicon glyphicon-plus"></span></button>
+  <div ng-repeat="stack in stacks">
+    <p>{{stack.name}}</p>
+  </div>
   <h4 class="sidebarsection">Export Tests</h4>
   <button class="btn btn-xs btn-success sectionbutton"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
 </section>
