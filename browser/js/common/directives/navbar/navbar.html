@@ -15,6 +15,7 @@
       <div class='nav-right'>
         <div ng-show="user" class="right-side">
             <span>Welcome, {{ user.firstName }}!</span>
+            <button class="btn btn-primary" ui-sref="userspage"><span class="glyphicon glyphicon-cog"></span></button>
             <button class="btn btn-danger" ng-click="logout()">Logout</button>
         </div>
   </div>
