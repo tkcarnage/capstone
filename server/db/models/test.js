@@ -37,7 +37,9 @@ var testSchema = new mongoose.Schema({
 		type: Number,
 		default: null
 	},
-	headers: {},
+	headers: {
+		type: Object,
+	},
 	body: {
 		bodytype: {
 			type: String,
