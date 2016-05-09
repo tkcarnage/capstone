@@ -31,10 +31,8 @@ testbuilder {
 		background-color: white;
 		color: darken(white, 40%);
 	}
-	#params {
-		background-color: white;
-		color: darken(white, 40%);
-		border: 0px;
+	#name {
+		display: block;
 	}
 }
 

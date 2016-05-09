@@ -1,8 +1,11 @@
 <div class="container reqeditor">
     <form class="form-inline">
         <form name="formInput">
-        <div class="form-group reqeditor">
-            <!-- <div class="together"> -->
+            <div class="form-group reqeditor">
+                <!-- <div class="together"> -->
+                <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of test" ng-model="name">
+                <hr>
+                <p>URL Request</p>
                 <select class="form-control input-lg" class="typereq">
                     <option>GET</option>
                     <option>POST</option>
@@ -11,15 +14,48 @@
                 </select>
                 <input type="url" class="form-control input-lg" id="urlinput" placeholder="Enter Request URL" ng-model="inputTag">
                 <!-- {{inputTag}} -->
+                <hr>
                 <button type="button" class="btn btn-default btn-lg" id="params" ng-click="showForm()">Params</button>
-            <!-- </div> -->
-            <button type="submit" class="btn btn-success btn-lg">Send</button>
-        </div>
-        <button class="btn btn-default btn-lg right">Save</button>
-        <div ng-repeat="param in params track by $index" ng-show="showParams" class="keyvalForms">
-            <input type="text" class="keyform" placeholder="key" ng-click="addForm($index)" ng-model="params[$index].key">
-            <input type="text" class="valform" placeholder="value" ng-model="params[$index].value" ng-change='composeURL()'>
-        </div>
-        </ng-form>
-    </form>
-</div>
+                <!-- </div> -->
+                <div ng-repeat="param in params track by $index" ng-show="showParams" class="keyvalForms">
+                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'params')" ng-model="params[$index].key">
+                    <input type="text" class="valform" placeholder="value" ng-model="params[$index].value" ng-change='composeURL()'>
+                </div>
+                <hr>
+                <button type="button" class="btn btn-default btn-lg" id="headers" ng-click="displayHeaders()">Headers</button> 
+                <div ng-repeat="header in headers track by $index" ng-show="showHeaders" class="keyvalForms">
+                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'headers')" ng-model="headers[$index].key">
+                    <input type="text" class="valform" placeholder="value" ng-model="headers[$index].value">
+                </div>
+                <hr>
+                 <button type="button" class="btn btn-default btn-lg" id="body" ng-click="displayBody()">Body</button> 
+                 <br>
+                 <br>
+                 <span ng-show="showBody">Body Type</span>
+                 <form name="bodytype">
+                    <label ng-show="showBody">
+                        <input type="radio" ng-model="bodytype" value="x-www-form-urlencoded">
+                        x-www-form-urlencoded
+                    </label>
+                    <label ng-show="showBody">
+                        <input type="radio" ng-model="bodytype" ng-show="showBody" value="form-data">
+                        form-data
+                    </label>
+                </form>
+                <div ng-repeat="body in reqbody track by $index" ng-show="showBody" class="keyvalForms">
+                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'reqbody')" ng-model="reqbody[$index].key">
+                    <input type="text" class="valform" placeholder="value" ng-model="reqbody[$index].value">
+                </div>
+                <hr>
+                <p>Auth</p>
+                <input type="text" class="form-control input-lg" id="email" placeholder="Email" ng-model="email">
+                <input type="text" class="form-control input-lg" id="password" placeholder="Password" ng-model="password">
+                <hr>
+                <p>Expectation</p>
+                <textarea class="form-control" id="expectation" rows="4" cols="50" placeholder="Enter the expected result here in JSON." ng-model="expectation"></textarea></textarea>
+                <hr>
+                <button type="submit" class="btn btn-success btn-lg">Send</button>
+                <button class="btn btn-default btn-lg">Save</button>
+            </div>
+        </form>
+    </div>

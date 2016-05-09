@@ -10,6 +10,7 @@ var testSchema = new mongoose.Schema({
 	method: {
 		type: String,
 		enum: ['GET', 'POST', 'PUT', 'DELETE'],
+		default: 'GET',
 		required: true,
 	},
 	url: {
@@ -20,7 +21,7 @@ var testSchema = new mongoose.Schema({
 	  type: Object,
 	},
 	authorization: {
-		username: {
+		email: {
 			type: String,
 		},
 		password: {
@@ -45,7 +46,7 @@ var testSchema = new mongoose.Schema({
 	body: {
 		bodytype: {
 			type: String,
-			enum: ['form-data', 'x-www-form-urlencoded'],
+			enum: ['form-data', 'x-www-form-urlencoded', 'raw'],
 		},
 		expectation: {
 			type: String,
