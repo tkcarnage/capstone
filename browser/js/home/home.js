@@ -1,6 +1,17 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('home', {
-        url: '/',
-        templateUrl: 'js/home/home.html'
+        url: '/home/:id',
+        templateUrl: 'js/home/home.html',
+        controller: 'homeCtrl',
+        resolve: {
+            stacks: function($http, $stateParams) {
+                return $http.get('/api/stacks?userId='+ $stateParams.id)
+                .then(response => response.data);
+            }
+        }
     });
+});
+
+app.controller('homeCtrl', function ($scope, AuthService, $state, SignupFactory, stacks) {
+    $scope.stacks = stacks;
 });
