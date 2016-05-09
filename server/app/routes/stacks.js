@@ -33,6 +33,15 @@ router.put('/:stackId', Auth.assertAuthenticated, function(req,res,next) {
     .catch(next);
 });
 
+// router.get('/', Auth.assertAuthenticated, function(req, res, next) {
+//     let queryObj = {};
+//     if (req.query.userId) queryObj = {user: req.query.userId};
+//     Stack.find(queryObj)
+//     .populate('tests')
+//     .then(stacks => res.json(stacks))
+//     .catch(next);
+// });
+
 router.get('/', Auth.assertAuthenticated, function(req, res, next) {
     let queryObj = {};
     if (req.query.userId) queryObj = {user: req.query.userId};

@@ -1,6 +1,15 @@
 <section id="home">
-
-    <testbuilder></testbuilder>
-
+    <navbar></navbar>
+    <sidebar class="col-md-2"></sidebar>
+    <div ng-repeat='stack in stacks'>
+        <p>Stack name: {{stack.name}}</p>
+        <ul ng-repeat='test in stack.tests'>
+            <li>Test name: {{test.name}}</li>
+            <li>Test url: {{test.url}}</li>
+            <li>Test method: {{test.method}}</li>
+            <li>Test last ran: {{test.lastRun}}</li>
+            <li>Test result: {{test.body.result}}</li>
+        </ul>
+    </div>
 </section>
 
