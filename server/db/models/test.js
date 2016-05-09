@@ -48,6 +48,9 @@ var testSchema = new mongoose.Schema({
 			type: String,
 			enum: ['form-data', 'x-www-form-urlencoded', 'raw'],
 		},
+		data: {
+			type: String,
+		},
 		expectation: {
 			type: String,
 		},
