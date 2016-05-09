@@ -1,5 +1,24 @@
 'use strict';
 
+app.config(function ($stateProvider) {
+    $stateProvider.state('testbuilder', {
+        url: '/home/testbuilder',
+        template: '<testbuilder><testbuilder>',
+    //     resolve: {
+    //     	User: function($http, AuthService) {
+    //             return AuthService.getLoggedInUser()
+    //             //.then(user => user._id);
+    //             .then(function(user) {
+    //             	// console.log(user,'USER ID BRO');
+    //             	return user;
+    //             });
+ 			// }       
+    //     }		
+    });
+});
+
+
+
 app.directive('testbuilder', function(){
   return {
     restrict: 'E',
@@ -8,9 +27,11 @@ app.directive('testbuilder', function(){
   };
 });
 
-app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory){
+app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory, $rootScope){
 	$scope.test = {};
-	$scope.test.inputTag = 'http://';
+	$scope.test.user = $rootScope.user;
+	console.log($scope.test.user);
+	$scope.test.url = 'http://';
 	$scope.test.params = [];
 	$scope.test.headers = [];
 	$scope.test.body = {};
