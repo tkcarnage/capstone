@@ -12,6 +12,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('homeCtrl', function ($scope, AuthService, $state, SignupFactory, stacks) {
+app.controller('homeCtrl', function ($scope, AuthService, $state, stacks, SidebarFactory) {
     $scope.stacks = stacks;
+    SidebarFactory.stacks = stacks;
 });
