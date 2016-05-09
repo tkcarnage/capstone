@@ -23,10 +23,11 @@
 // -output
 // method(jsify)
 //'use strict'
+
 const mongoose = require('mongoose');
 
-var jobSchema = new mongoose.Schema({
-	array: [{type: mongoose.Schema.Types.ObjectId, ref: 'Test'}],
+var stackSchema = new mongoose.Schema({
+	tests: [{type: mongoose.Schema.Types.ObjectId, ref: 'Test'}],
 	results: [{type: mongoose.Schema.Types.ObjectId, ref: 'Result'}],
 	lastRun: {
 		type: Date,
@@ -34,5 +35,5 @@ var jobSchema = new mongoose.Schema({
 	}
 });
 
-mongoose.model('Job', jobSchema);
+mongoose.model('Stack', stackSchema);
 

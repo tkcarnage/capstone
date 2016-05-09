@@ -1,32 +1,30 @@
-// **user**
-// name
-// email
-// phone
-// pairs
-// collections
-// jobs[jobs]
-
-
-
-// ***JOBS***
-// timing cronjob
-// [test nodes]
-// time - last run
-// results[results obj]
-
-
-// ***TEST***
-// type(get/post)
-// - prev test
-// - next test
-// -input
-// -output
-// method(jsify)
-//'use strict'
-
 var mongoose = require('mongoose');
 
 var testSchema = new mongoose.Schema({
+	name: {
+		type: String,
+		default: null,
+	},
+	method: {
+		type: String,
+		enum: ['GET', 'POST', 'PUT', 'DELETE'],
+		required: true,
+	},
+	url: {
+		type: String,
+		required: true,
+	},
+	params: {
+	  type: Object,
+	},
+	authorization: {
+		username: {
+			type: String,
+		},
+		password: {
+			type: String,
+		},
+	},
 	prev: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Test'
@@ -39,21 +37,22 @@ var testSchema = new mongoose.Schema({
 		type: Number,
 		default: null
 	},
-	input: {},
-	expectedOutput: {},
-	realOutput: {}
-
-	// testSchema.methods.passOrFail = function() {
-	// 	//make sure to npm install diff https://www.npmjs.com/package/diff
-	// 	var difference = JsDiff.diffJson(this.expectedOutput, this.realOutput);
-	// 	if (difference.length === 0) {return true;}
-	// 	return false;
-	// }
-
-	// testSchema.jsify = function(inputFunc) {
-	// 	//do stuff here
-	// }
-
+	headers: {},
+	body: {
+		bodytype: {
+			type: String,
+			enum: ['form-data', 'x-www-form-urlencoded'],
+		},
+		expectation: {
+			type: String,
+			required: true,
+		},
+		result: {
+			type: String,
+			enum: ['New','Passing', 'Failing'],
+			default: 'New'
+		},
+	},
 });
 
 
