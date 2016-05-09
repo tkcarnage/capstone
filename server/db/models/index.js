@@ -5,5 +5,6 @@ require('./user');
 require('./index');
 require('./stack');
 require('./test');
+// require('./project'); //after MVP
 
 
