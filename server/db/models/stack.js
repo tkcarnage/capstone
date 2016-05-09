@@ -1,17 +1,18 @@
 const mongoose = require('mongoose');
 
 var stackSchema = new mongoose.Schema({
-	tests: [{type: mongoose.Schema.Types.ObjectId, ref: 'Test'}],
+	name: String,
+    tests: [{type: mongoose.Schema.Types.ObjectId, ref: 'Test'}],
 	// project: [{type: mongoose.Schema.Types.ObjectId, ref: 'Project'}],
 	user: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-	lastRun: {  
+	lastRun: {
 		type: Date,
 		default: null
 	},
 	// use this model prop to direct the CRON job
 	// the properties in frequency correspond to CRON timing properties
 	// but on the front-end, we simply show "hourly" or "every day at 10:52 P.M."
-	autorun: { // 
+	autorun: { //
 		status: {
 			type: Boolean,
 		},
@@ -37,7 +38,7 @@ var stackSchema = new mongoose.Schema({
 				default: '*', // see above
 			},
 		},
-		
+
 	}
 });
 

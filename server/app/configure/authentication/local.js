@@ -52,4 +52,17 @@ module.exports = function (app) {
 
     });
 
+    app.post('/signup', function (req, res, next) {
+
+    delete req.body.isAdmin;
+
+    User.create(req.body)
+    .then(function (user) {
+      req.login(user, function () {
+        res.status(201).json(user);
+      });
+    })
+    .then(null, next);
+    });
+
 };

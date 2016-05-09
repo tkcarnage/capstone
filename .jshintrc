@@ -1,0 +1,8 @@
+{
+  "node": true,
+  "browser": true,
+  "esversion": 6,
+  "predef": [
+              "app"
+    ]
+}
