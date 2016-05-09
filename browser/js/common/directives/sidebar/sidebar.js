@@ -11,5 +11,4 @@ app.directive('sidebar', function () {
 
 app.controller('sidebarCtrl', function ($scope, SidebarFactory) {
     $scope.stacks = SidebarFactory.stacks;
-    console.log($scope.stacks);
 });
