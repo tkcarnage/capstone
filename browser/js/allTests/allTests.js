@@ -7,12 +7,12 @@ app.config(function ($stateProvider) {
             allTests: function($http, $stateParams, AuthService) {
                 return AuthService.getLoggedInUser()
                 .then(function(user) {
-                    console.log(user,'***USER""');
                     return $http.get('/api/tests?userId=' + user._id);
                 })
                 //.then(user => $http.get('/api/tests?userId=' + user._id))
                 .then(function(response) {
-                    console.log(response);
+                    console.log(response.data,"RESPONSE");
+                    return response.data;
                 });
             }
         }
@@ -25,3 +25,4 @@ app.controller('allTestsCtrl',function($scope, allTests) {
     console.log($scope.allTests);
 
 });
+w

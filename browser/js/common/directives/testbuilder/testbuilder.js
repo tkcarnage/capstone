@@ -2,7 +2,7 @@
 
 app.config(function ($stateProvider) {
     $stateProvider.state('testbuilder', {
-        url: '/home/testbuilder',
+        url: '/:id/testbuilder',
         template: '<testbuilder><testbuilder>',
     //     resolve: {
     //     	User: function($http, AuthService) {
@@ -12,8 +12,8 @@ app.config(function ($stateProvider) {
     //             	// console.log(user,'USER ID BRO');
     //             	return user;
     //             });
- 			// }       
-    //     }		
+ 			// }
+    //     }
     });
 });
 
@@ -53,7 +53,7 @@ app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory, $rootScop
 			else if (type === "headers") {
 				$scope.numHeaders++;
 				$scope.test.headers.push({});
-			} 
+			}
 			else if (type === "body.data") {
 				$scope.numBodyObj++;
 				$scope.test.body.data.push({});
@@ -68,7 +68,7 @@ app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory, $rootScop
 			$scope.addForm(0,"params");
 			$scope.numParams++;
 		}
-		$scope.showParams = !$scope.showParams;  
+		$scope.showParams = !$scope.showParams;
 		console.log($scope.test.params);
 		$scope.evalAsync;
 	};
@@ -78,7 +78,7 @@ app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory, $rootScop
 			$scope.addForm(0,"headers");
 			$scope.numHeaders++;
 		}
-		$scope.showHeaders = !$scope.showHeaders;  
+		$scope.showHeaders = !$scope.showHeaders;
 		console.log($scope.test.headers);
 		$scope.evalAsync;
 	};
@@ -88,7 +88,7 @@ app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory, $rootScop
 			$scope.addForm(0,"body.data");
 			$scope.numBodyObj++;
 		}
-		$scope.showBody = !$scope.showBody;  
+		$scope.showBody = !$scope.showBody;
 		$scope.evalAsync;
 	};
 
