@@ -3,7 +3,8 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('testbuilder', {
         url: '/:id/testbuilder',
-        template: '<testbuilder><testbuilder>',
+        templateUrl: 'js/common/directives/testbuilder/newTest.html',
+        controller: 'TestbuilderCtrl'
     //     resolve: {
     //     	User: function($http, AuthService) {
     //             return AuthService.getLoggedInUser()
@@ -22,12 +23,11 @@ app.config(function ($stateProvider) {
 app.directive('testbuilder', function(){
   return {
     restrict: 'E',
-    templateUrl: 'js/common/directives/testbuilder/testbuilder.html',
-    controller: 'TestbuilderCtrl'
+    templateUrl: 'js/common/directives/testbuilder/testbuilder.html'
   };
 });
 
-app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory, $rootScope){
+app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope){
 	$scope.test = {};
 	$scope.test.user = $rootScope.user;
 	console.log($scope.test.user);
@@ -44,8 +44,7 @@ app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory, $rootScop
 	$scope.numHeaders = 0;
 	$scope.numBodyObj = 0;
 	$scope.addForm = function(index, type){
-
-		if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0) {
+		if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0 || index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
 			if (type === "params") {
 				$scope.numParams++;
 				$scope.test.params.push({});
@@ -54,8 +53,9 @@ app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory, $rootScop
 				$scope.numHeaders++;
 				$scope.test.headers.push({});
 			}
-			else if (type === "body.data") {
-				$scope.numBodyObj++;
+			else if (type === "body") {
+				console.log('should be seeing this');
+                $scope.numBodyObj++;
 				$scope.test.body.data.push({});
 			}
 		}
@@ -84,8 +84,8 @@ app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory, $rootScop
 	};
 
 	$scope.displayBody = function(){
-		if ($scope.test.body.data.length === 0) {
-			$scope.addForm(0,"body.data");
+        if ($scope.test.body.data.length === 0) {
+			$scope.addForm(0,"body");
 			$scope.numBodyObj++;
 		}
 		$scope.showBody = !$scope.showBody;
@@ -106,9 +106,11 @@ app.controller('TestbuilderCtrl', function($scope, TestBuilderFactory, $rootScop
 		$scope.test.url = $scope.test.url.slice(0,$scope.test.url.length - 1);
 	};
 
+    // Need to be able edit a test, not just create a new one every time.
 	$scope.submitTest = function(){
 		$scope.test.url = $scope.test.url;
-		TestBuilderFactory.create($scope.test);
+		TestBuilderFactory.create($scope.test)
+        .then(() => $state.go('allTests'));
 	};
 
 

@@ -11,6 +11,7 @@ app.directive('sidebar', function () {
 
 app.controller('sidebarCtrl', function($scope, $rootScope, SidebarFactory) {
   console.log('HELLO', $rootScope.user._id);
+  console.log('$rootScope:', $rootScope);
   $scope.userId = $rootScope.user._id;
   $scope.stacks = SidebarFactory.stacks;
 });

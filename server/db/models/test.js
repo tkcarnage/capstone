@@ -5,7 +5,7 @@ var testSchema = new mongoose.Schema({
 		type: String,
 		default: null,
 	},
-	user: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	// project: [{type: mongoose.Schema.Types.ObjectId, ref: 'Project'}], to be implemented after MVP
 	method: {
 		type: String,

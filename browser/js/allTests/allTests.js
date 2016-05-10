@@ -5,8 +5,10 @@ app.config(function ($stateProvider) {
         controller: 'allTestsCtrl',
         resolve: {
             allTests: function($http, $stateParams, AuthService) {
+                console.log('inside the allTests resolve');
                 return AuthService.getLoggedInUser()
                 .then(function(user) {
+                    console.log('user:', user);
                     return $http.get('/api/tests?userId=' + user._id);
                 })
                 //.then(user => $http.get('/api/tests?userId=' + user._id))
