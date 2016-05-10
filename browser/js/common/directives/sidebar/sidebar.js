@@ -8,8 +8,10 @@ app.directive('sidebar', function () {
   };
 });
 
+
 app.controller('sidebarCtrl', function($scope, $rootScope) {
   console.log('HELLO', $rootScope.user._id);
   $scope.userId = $rootScope.user._id;
+  $scope.stacks = SidebarFactory.stacks;
 });
 
