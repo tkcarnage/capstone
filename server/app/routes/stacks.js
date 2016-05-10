@@ -6,14 +6,14 @@ const Stack = mongoose.model('Stack');
 
 module.exports = router;
 
-router.get('/:stackId', Auth.assertAuthenticated, function(req,res,next) {
-    Stack.findById(req.params.stackId)
-    .populate('tests')
-    .then(function(stack){
-        res.json(stack);
-    })
-    .catch(next);
-});
+// router.get('/:stackId', Auth.assertAuthenticated, function(req,res,next) {
+//     Stack.findById(req.params.stackId)
+//     .populate('tests')
+//     .then(function(stack){
+//         res.json(stack);
+//     })
+//     .catch(next);
+// });
 
 router.post('/', Auth.assertAuthenticated, function(req,res,next) {
     Stack.create(req.body)
