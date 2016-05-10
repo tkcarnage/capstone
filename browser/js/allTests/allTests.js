@@ -25,4 +25,4 @@ app.controller('allTestsCtrl',function($scope, allTests) {
     console.log($scope.allTests);
 
 });
-w
+
