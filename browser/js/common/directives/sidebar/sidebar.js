@@ -9,7 +9,9 @@ app.directive('sidebar', function () {
 });
 
 
-app.controller('sidebarCtrl', function ($scope, SidebarFactory) {
-    $scope.stacks = SidebarFactory.stacks;
-    console.log($scope.stacks);
+app.controller('sidebarCtrl', function($scope, $rootScope, SidebarFactory) {
+  console.log('HELLO', $rootScope.user._id);
+  $scope.userId = $rootScope.user._id;
+  $scope.stacks = SidebarFactory.stacks;
 });
+
