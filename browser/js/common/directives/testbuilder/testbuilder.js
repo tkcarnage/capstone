@@ -5,16 +5,6 @@ app.config(function ($stateProvider) {
         url: '/:id/testbuilder',
         templateUrl: 'js/common/directives/testbuilder/newTest.html',
         controller: 'TestbuilderCtrl'
-    //     resolve: {
-    //     	User: function($http, AuthService) {
-    //             return AuthService.getLoggedInUser()
-    //             //.then(user => user._id);
-    //             .then(function(user) {
-    //             	// console.log(user,'USER ID BRO');
-    //             	return user;
-    //             });
- 			// }
-    //     }
     });
 });
 
