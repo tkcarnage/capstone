@@ -52,6 +52,8 @@
                 <hr>
                 <p>Expectation</p>
                 <textarea class="form-control" id="expectation" rows="4" cols="50" placeholder="Enter the expected result here in JSON." ng-model="test.body.expectation" ng-required="true"></textarea></textarea>
+                <p>Auth</p>
+                <input type="text" class="form-control input-lg" id="status" placeholder="Enter expected status code" ng-model="test.expectedStatus">
                 <hr>
                 <button class="btn btn-default btn-lg">Try</button>
                 <button type="submit" class="btn btn-success btn-lg" ng-click="submitTest()">Save</button>
