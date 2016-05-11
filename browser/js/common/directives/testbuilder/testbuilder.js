@@ -48,8 +48,7 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 				$scope.test.headers.push({});
 			}
 			else if (type === "body") {
-				console.log('should be seeing this');
-                $scope.numBodyObj++;
+        $scope.numBodyObj++;
 				$scope.test.body.data.push({});
 			}
 		}
