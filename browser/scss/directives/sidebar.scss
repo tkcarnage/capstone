@@ -3,6 +3,7 @@ sidebar {
   left: 0;
   z-index: 5;
   padding: 0 !important;
+  padding-left: 10px;
   background: #5e8bab;
   height: calc(100vh - 56px);
   width: inherit;
@@ -42,6 +43,9 @@ a {
   }
 }
 
+.sidebarcontent {
+  padding-left: 15px;
+}
 
 .stackbutton {
   display: block;
