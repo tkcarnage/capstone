@@ -13,9 +13,24 @@ app.config(function ($stateProvider) {
 });
 
 app.factory('StackViewFactory', function($http) {
-    return { };
+    return {
+        edit: function(obj) {
+            return $http.put('/api/stacks/' + obj._id, obj)
+            .then (response => response.data);
+        },
+    };
 });
 
 app.controller('StackViewCtrl', function($scope, $state, $log, stack, StackViewFactory) {
     $scope.stack = stack;
+    $scope.removeFromStack = function (index) {
+        $scope.stack.tests.splice(index, 1);
+        $scope.$evalAsync();
+    };
+    $scope.submitStack = function () {
+        StackViewFactory.edit($scope.stack)
+        .then(() => $scope.$evalAsync() )
+        .then(() => alert("Your changes were saved!"))
+        .catch($log.error);
+    };
 });

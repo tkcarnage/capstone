@@ -1,10 +1,16 @@
 <navbar></navbar>
 <sidebar class="col-md-2"></sidebar>
 <h1>Welcome to the StackBuilder Page</h1>
-<p>Here are the tests:</p>
+<p>Here are the available tests for your stack:</p>
 <ul ng-repeat='test in tests'>
     <li>{{test.name}}</li>
+    <button class="btn btn-xs" ng-click="addToStack(test)"><i class="glyphicon glyphicon-plus">Add</i></button>
 </ul>
+<p>Here are your selected tests for your stack</p>
+<ol ng-repeat='test in stack.tests'>
+    <li>{{test.name}}</li>
+    <button class="btn btn-xs" ng-click="removeFromStack($index)"><i class="glyphicon glyphicon-remove">Remove</i></button>
+</ol>
 <div class="container reqeditor col-md-10">
     <form class="form-inline">
         <form name="formInput">
