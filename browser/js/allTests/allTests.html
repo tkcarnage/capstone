@@ -1,5 +1,7 @@
+<navbar></navbar>
+<sidebar class="col-md-2"></sidebar>
 <div ng-repeat="test in allTests">
-	<button>
+	<button ui-sref="testeditor({testId: test._id})">
 	  {{test.name}}
 	  {{test.result}}
 	</button>
