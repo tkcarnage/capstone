@@ -1,0 +1,31 @@
+
+  <md-card flex="100" layout="column">
+    <div layout="column">
+    <md-card-title >
+      <md-card-title-text>
+        <span class="md-headline">{{ stack.name }}</span>
+        <span class="md-subhead">Large</span>
+      </md-card-title-text>
+    <div layout-align="start end" layout="row">
+    <div ng-repeat="test in stack.tests">
+      <md-button class="md-fab" ng-class="{'md-primary': test.body.result=='Passing', 'md-accent': test.body.result=='New', 'md-warn': test.body.result=='Failing'}" ui-sref="testeditor({testId: test._id})">
+      </md-button>
+    </div>
+    </div>
+
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ui-sref='stackView({stackId: stack._id})'>Stack Details</md-button>
+      <md-button>Run tests!</md-button>
+    </md-card-actions>
+    </div>
+        </div>
+  </md-card>
+
+<!--
+
+ng-class="{success: test.body.result=="Passing", new: test.body.result=='New', fail: test.body.result=='Failing'}
+ -->
+<!--       <md-card-title-media>
+        <div class="md-media-lg card-media"></div>
+      </md-card-title-media> -->
