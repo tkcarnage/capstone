@@ -1,39 +1,21 @@
 <section id="home">
-<<<<<<< HEAD
     <div class="row">
         <navbar class="col-md-12"></navbar>
     </div>
-
     <div class="row">
         <sidebar class="col-md-2"></sidebar>
-
         <div class="col-md-10">
             <md-content>
                 <div class="container-fluid">
-                <div ng-repeat='stack in stacks'>
-                    <p>Stack name: {{stack.name}}</p>
-                    <ul ng-repeat='test in stack.tests'>
-                        <li>Test name: {{test.name}}</li>
-                        <li>Test url: {{test.url}}</li>
-                        <li>Test method: {{test.method}}</li>
-                        <li>Test last ran: {{test.lastRun}}</li>
-                        <li>Test result: {{test.body.result}}</li>
-                    </ul>
-                </div>
+                    <div layout-gt-md="column" layout-align="center stretch">
+                        <div ng-repeat='stack in stacks'>
+                            <stack-card stack='stack' class="stackCard"></stack-card>
+                        </div>
+                    </div>
                 </div>
             </md-content>
         </div>
     </div>
-=======
-    <navbar></navbar>
-    <sidebar class="col-md-2"></sidebar>
-    <div layout-gt-md="column"  layout-align="center stretch">
-      <div ng-repeat='stack in stacks'>
-        <stack-card stack='stack' class="stackCard"></stack-card>
-      </div>
-    </div>
-</div>
->>>>>>> 17066bc366760d5cdadb246fe88e922f6d4bef45
-
 </section>
+
 
