@@ -43,6 +43,12 @@ var testSchema = new mongoose.Schema({
 	headers: {
 		type: Object,
 	},
+  expectedStatus: {
+    type: String
+  },
+  resultStatus: {
+    type: String
+  },
 	body: {
 		bodytype: {
 			type: String,
@@ -58,7 +64,7 @@ var testSchema = new mongoose.Schema({
 			type: String,
 			enum: ['New','Passing', 'Failing'],
 			default: 'New'
-		},
+		}
 	},
 });
 

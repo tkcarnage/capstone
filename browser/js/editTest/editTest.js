@@ -45,7 +45,6 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
                 $scope.test.headers.push({});
             }
             else if (type === "body") {
-                console.log('should be seeing this');
                 $scope.numBodyObj++;
                 $scope.test.body.data.push({});
             }
