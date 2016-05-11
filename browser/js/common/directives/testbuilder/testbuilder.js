@@ -3,17 +3,7 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('testbuilder', {
         url: '/:id/testbuilder',
-        template: '<testbuilder><testbuilder>',
-    //     resolve: {
-    //     	User: function($http, AuthService) {
-    //             return AuthService.getLoggedInUser()
-    //             //.then(user => user._id);
-    //             .then(function(user) {
-    //             	// console.log(user,'USER ID BRO');
-    //             	return user;
-    //             });
- 			// }
-    //     }
+        template: '<testbuilder><testbuilder>'
     });
 });
 

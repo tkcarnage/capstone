@@ -1,5 +1,5 @@
 <navbar></navbar>
-<sidebar class="col-md-2"></sidebar> 
+<sidebar class="col-md-2"></sidebar>
 <div class="container reqeditor col-md-10">
     <form class="form-inline">
         <form name="formInput">
@@ -23,13 +23,13 @@
                     <input type="text" class="valform" placeholder="value" ng-model="test.params[$index].value" ng-change='composeURL()'>
                 </div>
                 <hr>
-                <button type="button" class="btn btn-default btn-lg" id="headers" ng-click="displayHeaders()">Headers</button> 
+                <button type="button" class="btn btn-default btn-lg" id="headers" ng-click="displayHeaders()">Headers</button>
                 <div ng-repeat="header in test.headers track by $index" ng-show="showHeaders" class="keyvalForms">
                     <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'headers')" ng-model="test.headers[$index].key">
                     <input type="text" class="valform" placeholder="value" ng-model="test.headers[$index].value">
                 </div>
                 <hr>
-                 <button type="button" class="btn btn-default btn-lg" id="body" ng-click="displayBody()">Body</button> 
+                 <button type="button" class="btn btn-default btn-lg" id="body" ng-click="displayBody()">Body</button>
                  <br>
                  <br>
                  <span ng-show="showBody">Body Type</span>
