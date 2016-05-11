@@ -24,7 +24,8 @@ app.factory('StackBuilderFactory', function($http) {
 app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBuilderFactory, $rootScope) {
     $scope.tests = tests;
     $scope.stack = {};
-    $scope.stack.user = $rootScope.user._id;
+    $scope.stack.user = $rootScope.user;
+    $scope.stack.userId = $rootScope.user._id;
     $scope.stack.tests = [];
     $scope.submitStack = function () {
         StackBuilderFactory.create($scope.stack)

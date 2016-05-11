@@ -21,8 +21,10 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 	$scope.test = {};
 	//$scope.test.user = $rootScope.user;
     AuthService.getLoggedInUser()
-    .then(user => $scope.test.user = user)
-    .then(() => 'user from AuthService:', $scope.test.user)
+    .then(function(user){
+    	$scope.test.user = user;
+    	$scope.test.userId = user._id;
+    })
     .catch($log.error);
 
 	$scope.test.url = 'http://';

@@ -1,7 +1,6 @@
 sidebar {
   position: absolute;
   left: 0;
-  margin-top: 0px;
   z-index: 5;
   padding: 0 !important;
   background: #5e8bab;
@@ -26,29 +25,25 @@ sidebar {
   color: #C2C2C2;
 }
 
+a {
+  text-decoration: none;
+  .stacksections {
+    margin-top: 0px;
+    padding: 10px;
+    color: #FFF;
+    font-weight: bold;
+    border: 2px solid #6e97b3;
+    border-right: 0px;
+  }
+  .stacksections:hover {
+    background-color: #527e9d;
+  }
+}
+
+
 .stackbutton {
   display: block;
   float: left;
   background-color: #2c5c74;
   border: 0px;
-}
-
-.sectionbutton {
-  float: right;
-  margin-top: -10%;
-  margin-right: 3%;
-  background-color: #2c5c74;
-}
-
-.sidebarcontent {
-  margin-left: 4%;
-}
-
-.sidebarsection {
-  color: #8FA0A6;
-  margin-top: 5%;
-}
-
-hr {
-  background-color: darken(#FFFFFF, 20%);
 }
