@@ -1,17 +1,4 @@
-navbar {
-
-  display: block;
-  background: white;
-  border-bottom: 1px solid black;
-  box-shadow: 1px 1px 14px -3px black;
-  align-items: center;
-  height: 50px;
-  margin: 0;
-  padding: 0px;
-  border-bottom: 0;
-  .navbar{
-    margin-bottom: 0;
-  }
+md-toolbar {
 
   .container {
     display: flex;
@@ -23,60 +10,27 @@ navbar {
 
   a {
     color: black;
-    font-size: 12px;
+    font-size: 20px;
+    padding: 15px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
   }
 
   .nav-right{
-  width: 25vw;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row-reverse;
-  align-items: center;
+    width: 25vw;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+    align-items: center;
   }
 
-   .nav-left{
-  width: 75vw;
-  height: 100%;
+  .nav-left{
+    width: 75vw;
+    height: 100%;
   }
 
-  .nav > li > a {
-    cursor: pointer;
-    transition: color 0.2s;
-    border-bottom: 0 !important;
-    &.active {
-      color: darken(#dddddd, 50%);
-    }
-    &:hover {
-      background: none;
-      color: #f31214;
-    }
-    &:focus {
-      background: none;
-    }
-  }
-  .navbar-static-top{
-    border-bottom: 0 !important;
-  }
-
-  .login-button {
-    float: right;
-    border: 1px solid black;
-    margin-top: 10px;
-    background: none;
-    outline: none !important;
-  }
-
-  .right-side {
-    float: right;
-    span {
-      color: black;
-      font-size: 32px;
-      margin-right: 5px;
-    }
-    a {
-      color: #f30046;
-      cursor: pointer;
-    }
-  }
 }
