@@ -15,7 +15,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $rootScope){
+app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $rootScope, $state, $log){
     $scope.test = test;
     $scope.test.body.data = JSON.parse($scope.test.body.data);
     $scope.test.user = $rootScope.user;
@@ -99,9 +99,9 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
 
     $scope.submitTest = function(){
         $scope.test.url = $scope.test.url;
-        TestBuilderFactory.create($scope.test);
+        TestBuilderFactory.edit($scope.test)
+        .then(() => $state.go('allTests'))
+        .catch($log.error);
     };
-
-
 
 });

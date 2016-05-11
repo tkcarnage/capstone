@@ -8,11 +8,12 @@ app.directive('sidebar', function () {
   };
 });
 
-
-app.controller('sidebarCtrl', function($scope, $rootScope, SidebarFactory) {
-  console.log('HELLO', $rootScope.user._id);
-  console.log('$rootScope:', $rootScope);
+app.controller('sidebarCtrl', function($scope, $log, $rootScope, SidebarFactory) {
   $scope.userId = $rootScope.user._id;
-  $scope.stacks = SidebarFactory.stacks;
-});
 
+  SidebarFactory.getStacks($scope.userId)
+    .then(stacks => $scope.stacks = stacks)
+    .then(() => $scope.$evalAsync())
+    .then(() => console.log('$scope.stacks:', $scope.stacks))
+    .catch($log.error);
+});

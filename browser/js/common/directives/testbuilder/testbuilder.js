@@ -27,7 +27,7 @@ app.directive('testbuilder', function(){
   };
 });
 
-app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope){
+app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope, $log){
 	$scope.test = {};
 	$scope.test.user = $rootScope.user;
 	console.log($scope.test.user);
@@ -106,13 +106,10 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 		$scope.test.url = $scope.test.url.slice(0,$scope.test.url.length - 1);
 	};
 
-    // Need to be able edit a test, not just create a new one every time.
 	$scope.submitTest = function(){
 		$scope.test.url = $scope.test.url;
 		TestBuilderFactory.create($scope.test)
-        .then(() => $state.go('allTests'));
+        .then(() => $state.go('allTests'))
+        .catch($log.error);
 	};
-
-
-
 });
