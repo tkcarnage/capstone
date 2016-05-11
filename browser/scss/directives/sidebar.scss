@@ -2,7 +2,7 @@ sidebar {
   position: absolute;
   left: 0;
   margin-top: 0px;
-  z-index: -1;
+  z-index: 5;
   padding: 0 !important;
   background: #303030;
   height: calc(100vh - 56px);
@@ -24,6 +24,11 @@ sidebar {
 
 .sidebartext {
   color: #C2C2C2;
+}
+
+.stackbutton {
+  display: block;
+  float: left;
 }
 
 .sectionbutton {
