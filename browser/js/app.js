@@ -101,6 +101,11 @@ app.config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) 
 
 // This app.run is for controlling access to specific states.
 app.run(function ($rootScope, AuthService, $state) {
+    console.log('.run is running');
+
+    AuthService.getLoggedInUser().then(function(user) {
+        $rootScope.user = user;
+    })
 
     // The given state requires an authenticated user.
     var destinationStateRequiresAuth = function (state) {
@@ -127,11 +132,13 @@ app.run(function ($rootScope, AuthService, $state) {
         event.preventDefault();
 
         AuthService.getLoggedInUser().then(function (user) {
+            console.log('user inside the $stateChangeStart event: ', user)
             // If a user is retrieved, then renavigate to the destination
             // (the second time, AuthService.isAuthenticated() will work)
             // otherwise, if no user is logged in, go to "login" state.
             if (user) {
                 $rootScope.user = user;
+                $rootScope.userId = user._id;
                 $state.go(toState.name, toParams);
             } else {
                 $state.go('login');
