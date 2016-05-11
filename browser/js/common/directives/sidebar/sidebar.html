@@ -5,8 +5,8 @@
   <h4 class="sidebarsection">Stacks</h4>
   <button ui-sref="stackBuilder({id:userId})" class="btn btn-xs btn-success sectionbutton"><span class="glyphicon glyphicon-plus"></span></button>
   <hr>
-  <button class="btn btn-md btn-success left" ui-sref="allTests">All Tests</button>
+  <button class="stackbutton btn btn-md btn-success left" ui-sref="allTests">All Tests</button>
   <span ng-repeat="stack in stacks">
-    <button ui-sref="stackView({stackId: stack._id})" class="btn btn-md btn-success left">{{stack.name}}</button>
+    <button ui-sref="stackView({stackId: stack._id})" class="stackbutton btn btn-md btn-success left">{{stack.name}}</button>
   </span>
 </section>
