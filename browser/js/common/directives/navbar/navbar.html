@@ -1,15 +1,11 @@
-<md-toolbar layout="row" layout-align="space-between center">
-    <div class="container">
-      <div class ='nav-left'>
+<md-toolbar>
+    <div layout="row" layout-align="start center">
         <ul class="nav navbar-nav">
            <li><a ui-sref="stackBuilder({userId:userId})"><span class="glyphicon glyphicon-plus"></span>Add Stack</a></li>
            <li><a ui-sref="testbuilder({id:userId})"><span class="glyphicon glyphicon-plus"></span>Add Test</a></li>
         </ul>
-      </div>
 
-      <div ng-show="user" class="nav-right">
-        <span flex><md-button class="md-raised md-accent" ui-sref="userspage"><span class="glyphicon glyphicon-cog"></span></md-button></span>
-        <span flex><md-button class="md-raised md-warn" ng-click="logout()">Log Out</md-button></span>
-      </div>
+        <md-button class="md-raised md-accent" ui-sref="userspage"><span class="glyphicon glyphicon-cog"></span></md-button>
+        <md-button class="md-raised md-warn" ng-click="logout()">Log Out</md-button>
     </div>
 </md-toolbar>

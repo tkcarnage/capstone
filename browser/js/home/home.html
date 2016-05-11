@@ -1,12 +1,21 @@
 <section id="home">
-    <navbar></navbar>
-    <sidebar class="col-md-2"></sidebar>
-    <div layout-gt-md="column"  layout-align="center stretch">
-      <div ng-repeat='stack in stacks'>
-        <stack-card stack='stack' class="stackCard"></stack-card>
-      </div>
+    <div class="row">
+        <navbar class="col-md-12"></navbar>
     </div>
-</div>
-
+    <div class="row">
+        <sidebar class="col-md-2"></sidebar>
+        <div class="col-md-10">
+            <md-content>
+                <div class="container-fluid">
+                    <div layout-gt-md="column" layout-align="center stretch">
+                        <div ng-repeat='stack in stacks'>
+                            <stack-card stack='stack' class="stackCard"></stack-card>
+                        </div>
+                    </div>
+                </div>
+            </md-content>
+        </div>
+    </div>
 </section>
+
 

@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
-
 * {
   box-sizing: border-box; }
 
@@ -28,6 +26,7 @@ body {
 .right {
   float: right;
 }
+
 #stackCard {
   background-color: white;
 }
@@ -44,3 +43,4 @@ body {
 @import 'login/main';
 @import 'directives/sidebar';
 @import 'directives/testbuilder';
+

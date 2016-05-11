@@ -1,27 +1,41 @@
-<navbar></navbar>
-<sidebar class="col-md-2"></sidebar>
-<h1>Welcome to the StackBuilder Page</h1>
-<p>Here are the available tests for your stack:</p>
-<ul ng-repeat='test in tests'>
-    <li>{{test.name}}</li>
-    <button class="btn btn-xs" ng-click="addToStack(test)"><i class="glyphicon glyphicon-plus">Add</i></button>
-</ul>
-<p>Here are your selected tests for your stack</p>
-<ol ng-repeat='test in stack.tests'>
-    <li>{{test.name}}</li>
-    <button class="btn btn-xs" ng-click="removeFromStack($index)"><i class="glyphicon glyphicon-remove">Remove</i></button>
-</ol>
-<div class="container reqeditor col-md-10">
-    <form class="form-inline">
-        <form name="formInput">
-            <div class="form-group reqeditor">
-                <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of stack" ng-model="stack.name">
-                <hr>
-                <button class="btn btn-default btn-lg">Try</button>
-                <button type="submit" class="btn btn-success btn-lg" ng-click="submitStack()">Save</button>
-                {{test}}
-            </div>
-        </form>
-    </form>
-</div>
+<section id="stackbuilder">
+    <div class="row">
+        <navbar class="col-md-12"></navbar>
+    </div>
 
+    <div class="row">
+        <sidebar class="col-md-2"></sidebar>
+
+        <div class="col-md-10">
+            <md-content>
+                <div class="container-fluid">
+                    <h1>Welcome to the StackBuilder Page</h1>
+                    <p>Here are the available tests for your stack:</p>
+                    <ul ng-repeat='test in tests'>
+                        <li>{{test.name}}</li>
+                        <button class="btn btn-xs" ng-click="addToStack(test)"><i class="glyphicon glyphicon-plus">Add</i></button>
+                    </ul>
+                    <p>Here are your selected tests for your stack</p>
+                    <ol ng-repeat='test in stack.tests'>
+                        <li>{{test.name}}</li>
+                        <button class="btn btn-xs" ng-click="removeFromStack($index)"><i class="glyphicon glyphicon-remove">Remove</i></button>
+                    </ol>
+                    <div class="container reqeditor col-md-10">
+                        <form class="form-inline">
+                            <form name="formInput">
+                                <div class="form-group reqeditor">
+                                    <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of stack" ng-model="stack.name">
+                                    <hr>
+                                    <button class="btn btn-default btn-lg">Try</button>
+                                    <button type="submit" class="btn btn-success btn-lg" ng-click="submitStack()">Save</button>
+                                    {{test}}
+                                </div>
+                            </form>
+                        </form>
+                    </div>
+                </div>
+            </md-content>
+        </div>
+    </div>
+
+</section>
