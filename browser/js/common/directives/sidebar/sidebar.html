@@ -1,6 +1,9 @@
-<section class="sidebarcontent">
- <button class="stackbutton btn btn-md btn-success left" ui-sref="allTests">All Tests</button>
- <span ng-repeat="stack in stacks">
-   <a ui-sref="stackView({stackId: stack._id})">{{stack.name}}</a>
- </span>
-</section>
+<div layout="column" layout-align="center start" md-theme="customPrimary">
+    <div class="container">
+        <a ui-sref="allTests"><div class="stacksections">All Tests</div></a>
+        <span ng-repeat="stack in stacks">
+            <a ui-sref="stackView({userId: userId, stackId: stack._id})"><div class="stacksections">{{stack.name}}</div></a>
+        </span>
+    </div>
+</div>
+
