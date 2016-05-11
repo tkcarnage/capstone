@@ -17,10 +17,14 @@ app.directive('testbuilder', function(){
   };
 });
 
-app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope, $log){
+app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope, $log, AuthService){
 	$scope.test = {};
-	$scope.test.user = $rootScope.user;
-	console.log($scope.test.user);
+	//$scope.test.user = $rootScope.user;
+    AuthService.getLoggedInUser()
+    .then(user => $scope.test.user = user)
+    .then(() => 'user from AuthService:', $scope.test.user)
+    .catch($log.error);
+
 	$scope.test.url = 'http://';
 	$scope.test.params = [];
 	$scope.test.headers = [];
