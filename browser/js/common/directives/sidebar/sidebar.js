@@ -5,6 +5,7 @@ app.directive('sidebar', function () {
     restrict: 'E',
     templateUrl: '/js/common/directives/sidebar/sidebar.html',
     controller: 'sidebarCtrl'
+
   };
 });
 
@@ -14,6 +15,5 @@ app.controller('sidebarCtrl', function($scope, $log, $rootScope, SidebarFactory)
   SidebarFactory.getStacks($scope.userId)
     .then(stacks => $scope.stacks = stacks)
     .then(() => $scope.$evalAsync())
-    .then(() => console.log('$scope.stacks:', $scope.stacks))
     .catch($log.error);
 });
