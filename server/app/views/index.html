@@ -20,10 +20,13 @@
     <script src="/main.js"></script>
 </head>
 <body ng-app="FullstackGeneratedApp">
-    <span ng-hide="$state.current.name === 'login' ">
+    <span ng-hide="location.path() === '/'">
         <navbar></navbar>
         <sidebar class="col-md-2"></sidebar>
+        <div id="main" class="col-md-10" ui-view></div>
     </span>
-    <div id="main" class="col-md-10" ui-view></div>
+    <span ng-show="location.path() === '/'">
+        <div id="main" ui-view></div>
+    </span>
 </body>
 </html>

@@ -1,6 +1,6 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('stackView', {
-        url: '/:userId/stackView/:stackId',
+        url: '/stackView/:stackId',
         templateUrl: 'js/stackView/stackView.html',
         controller: 'StackViewCtrl',
         resolve: {

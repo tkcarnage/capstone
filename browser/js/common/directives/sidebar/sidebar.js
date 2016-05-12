@@ -10,11 +10,8 @@ app.directive('sidebar', function () {
 });
 
 app.controller('sidebarCtrl', function($scope, $log, $rootScope, SidebarFactory) {
-  $scope.user = $rootScope.user;
-  $scope.userId = $rootScope.user._id;
-  console.log("rootSCope user", $rootScope.user);
 
-  SidebarFactory.getStacks($scope.userId)
+  SidebarFactory.getStacks()
     .then(stacks => $scope.stacks = stacks)
     .then(() => $scope.$evalAsync())
     .catch($log.error);

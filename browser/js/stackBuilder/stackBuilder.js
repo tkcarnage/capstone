@@ -1,11 +1,14 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('stackBuilder', {
-        url: '/:userId/stackbuilder',
+        url: '/stackbuilder',
         templateUrl: 'js/stackBuilder/stackBuilder.html',
         controller: 'StackBuilderCtrl',
         resolve: {
-            tests: function($http, $stateParams) {
-                return $http.get('/api/tests?userId=' + $stateParams.userId)
+            user: function(AuthService) {
+                return AuthService.getLoggedInUser();
+            },
+            tests: function($http, user) {
+                return $http.get('/api/tests?userId=' + user._id)
                 .then(res => res.data);
             }
         }
