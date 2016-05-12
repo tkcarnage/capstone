@@ -36,13 +36,12 @@ app.controller('usersPageCtrl', function($log, $mdToast, $scope, user, UsersPage
         $mdToast.show(
           $mdToast.simple()
             .textContent('Changes saved.')
-            .position('bottom left')
+            .position('bottom right')
             .hideDelay(3000)
         );
     };
 })
   .config(function($mdThemingProvider) {
-    // Configure a dark theme with primary foreground yellow
     $mdThemingProvider.theme('customPrimary', 'default')
       .primaryPalette('customPrimary');
 });
