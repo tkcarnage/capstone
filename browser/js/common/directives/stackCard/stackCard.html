@@ -3,8 +3,8 @@
     <div layout="column">
     <md-card-title >
       <md-card-title-text>
-        <span class="md-headline">{{ stack.name }}</span>
-        <span class="md-subhead">Large</span>
+        <span class="md-headline cardtitle">{{ stack.name }}</span>
+        <span class="md-subhead">{{ stack.tests.length }} test<span ng-show="stack.tests.length > 1">s</span>
       </md-card-title-text>
     <div layout-align="start end" layout="row">
     <div ng-repeat="test in stack.tests">
@@ -15,17 +15,9 @@
 
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
-      <md-button ui-sref='stackView({stackId: stack._id})'>Stack Details</md-button>
-      <md-button>Run tests!</md-button>
+      <md-button ui-sref='stackView({userId: user._id, stackId: stack._id})'>Stack Details</md-button>
+      <md-button>Run Tests</md-button>
     </md-card-actions>
     </div>
         </div>
   </md-card>
-
-<!--
-
-ng-class="{success: test.body.result=="Passing", new: test.body.result=='New', fail: test.body.result=='Failing'}
- -->
-<!--       <md-card-title-media>
-        <div class="md-media-lg card-media"></div>
-      </md-card-title-media> -->

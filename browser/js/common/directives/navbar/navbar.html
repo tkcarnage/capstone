@@ -5,7 +5,7 @@
            <li><a ui-sref="testbuilder({id:userId})"><span class="glyphicon glyphicon-plus"></span>Add Test</a></li>
         </ul>
         <span flex></span>
-        <md-button class="md-raised md-accent" ui-sref="userspage"><span class="glyphicon glyphicon-cog"></span></md-button>
-        <md-button class="md-raised md-warn logout" ng-click="logout()">Log Out</md-button>
+        <button class="btn btn-md navbutton" ui-sref="userspage" data-toggle="tooltip" title="User Settings"><i class="glyphicon glyphicon-cog"></i></button>
+        <button class="btn btn-md navbutton" ng-click="logout()">Log Out</button>
     </div>
 </md-toolbar>
