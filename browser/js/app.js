@@ -100,11 +100,11 @@ app.config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) 
 });
 
 // This app.run is for controlling access to specific states.
-app.run(function ($rootScope, AuthService, $state) {
+app.run(function ($rootScope, AuthService, $state, $location) {
 
     AuthService.getLoggedInUser().then(function(user) {
         $rootScope.user = user;
-    })
+    });
 
     // The given state requires an authenticated user.
     var destinationStateRequiresAuth = function (state) {
@@ -146,4 +146,5 @@ app.run(function ($rootScope, AuthService, $state) {
 
     });
 
+    $rootScope.location = $location;
 });

@@ -1,6 +1,6 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('allTests', {
-        url: '/home/allTests',
+        url: '/allTests',
         templateUrl: 'js/allTests/allTests.html',
         controller: 'allTestsCtrl',
         resolve: {

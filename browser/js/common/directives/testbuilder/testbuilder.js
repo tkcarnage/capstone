@@ -2,7 +2,7 @@
 
 app.config(function ($stateProvider) {
     $stateProvider.state('testbuilder', {
-        url: '/:id/testbuilder',
+        url: '/testbuilder',
         templateUrl: 'js/common/directives/testbuilder/newTest.html',
         controller: 'TestbuilderCtrl'
     });

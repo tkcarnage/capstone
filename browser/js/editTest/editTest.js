@@ -2,7 +2,7 @@
 
 app.config(function ($stateProvider) {
     $stateProvider.state('testeditor', {
-        url: '/:id/editTest/:testId',
+        url: '/editTest/:testId',
         templateUrl: 'js/editTest/editTest.html',
         controller: 'TestEditorCtrl',
         resolve: {
