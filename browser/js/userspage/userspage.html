@@ -1,15 +1,57 @@
 <section id="userpage">
-    <div class="row">
-    </div>
-
-    <div class="row">
-
-        <div>
-            <md-content>
-                <div class="container-fluid">
-                <h1>HELLO WORLD</h1>
+    <div class='inner'>
+        <md-content layout-padding>
+            <div layout="column" ng-cloak class="md-isnline-form">
+                <div>
+                    <form name="userForm">
+                        <div layout-gt-sm="row">
+                            <h4>Contact Information</h4>
+                        </div>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Email</label>
+                                    <input name="userEmail" ng-model="user.email" ng-pattern="/^.+@.+\..+$/" required>
+                                    <div ng-messages="userForm.userEmail.$error">
+                                        <div ng-message="required">Email is required.</div>
+                                        <div ng-message="pattern">This must be a valid e-mail address.</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Phone</label>
+                                    <input name="userPhone" ng-model="user.phone"  ng-pattern="/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/">
+                                    <div ng-messages="userForm.userPhone.$error">
+                                        <div ng-message="pattern">This must be a valid phone number (###-###-####).</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <div layout-gt-sm="row">
+                            <h4>Alert Subscriptions</h4>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <p>Receive alerts when an automated test fails.</p>
+                        </div>
+                        <md-content layout-padding>
+                            <div layout="column" layout-wrap layout-gt-sm="row" >
+                                <div flex-xs flex="50">
+                                    <md-checkbox ng-model="user.emailAlert" aria-label="Email">Alert me via email</md-checkbox>
+                                </div>
+                                <div flex-xs flex="50">
+                                    <md-checkbox ng-model="user.phoneAlert" aria-label="Phone">Alert me via phone</md-checkbox>
+                                </div>
+                            </div>
+                        </md-content>
+                        <section layout="row" layout-sm="column" layout-align="start end" layout-wrap>
+                            <md-button ng-disabled="userForm.$invalid || userForm.$pristine" ng-click="saveChanges(); userForm.$setPristine()" class="md-raised md-primary">Save changes</md-button>
+                        </section>
+                    </form>
                 </div>
-            </md-content>
-        </div>
+            </div>
+        </md-content>
     </div>
 </section>

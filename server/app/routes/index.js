@@ -4,6 +4,7 @@ module.exports = router;
 
 router.use('/tests', require('./tests'));
 router.use('/stacks', require('./stacks'));
+router.use('/users', require('./users'));
 
 
 // Make sure this is after all of
