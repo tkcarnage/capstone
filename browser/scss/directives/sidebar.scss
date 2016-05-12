@@ -6,7 +6,7 @@ sidebar {
   background: #5e8bab;
   height: calc(100vh - 56px);
   width: inherit;
-  border-right: 2px solid #5e8bab; }
+  }
   sidebar .logo {
     width: 100%;
     padding: 15px; }
@@ -25,12 +25,16 @@ sidebar {
   color: #C2C2C2;
 }
 
+
 .white, .white a {
   color: #FFF;
 }
 
+.sidebarset {
+  padding: 0px;
+}
+
 a {
-  text-decoration: none;
   .stacksections {
     margin-top: 0px;
     padding: 10px;
@@ -43,11 +47,15 @@ a {
     background-color: #527e9d;
     text-decoration: none;
   }
+  .stacksections:active {
+    text-decoration: none;
+  }
 }
 
-a:hover {
-  text-decoration: none;
+a, a:hover, a:active, a:visited {
+    text-decoration:none;
 }
+
 
 .stackbutton {
   display: block;
