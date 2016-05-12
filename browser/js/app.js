@@ -101,7 +101,6 @@ app.config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) 
 
 // This app.run is for controlling access to specific states.
 app.run(function ($rootScope, AuthService, $state) {
-    console.log('.run is running');
 
     AuthService.getLoggedInUser().then(function(user) {
         $rootScope.user = user;
