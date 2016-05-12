@@ -3,7 +3,11 @@ app.factory('SidebarFactory', function($http, AuthService){
 
   SidebarFactory.getStacks = function() {
     return AuthService.getLoggedInUser()
-    .then(user => $http.get('/api/stacks?userId=' + user._id))
+    .then(function(user) {
+        if (user) {
+            return $http.get('/api/stacks?userId=' + user._id);
+        }
+    })
     .then(res => res.data);
   };
 

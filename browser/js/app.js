@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'ngMaterial', 'ngMessages']);
+window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'ngMaterial', 'ngMessages', 'md.data.table']);
 
 app.config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) {
 
@@ -97,6 +97,9 @@ app.config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) 
        .accentPalette('customAccent')
        .warnPalette('customWarn')
        .backgroundPalette('customBackground');
+
+
+
 });
 
 // This app.run is for controlling access to specific states.
