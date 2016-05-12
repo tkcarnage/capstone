@@ -20,8 +20,10 @@
     <script src="/main.js"></script>
 </head>
 <body ng-app="FullstackGeneratedApp">
-    <navbar ng-hide="$state.current.name === ''"></navbar>
-    <sidebar ng-hide="$state.current.name === ''" class="col-md-2"></sidebar>
+    <span ng-hide="$state.current.name === 'login' ">
+        <navbar></navbar>
+        <sidebar class="col-md-2"></sidebar>
+    </span>
     <div id="main" class="col-md-10" ui-view></div>
 </body>
 </html>

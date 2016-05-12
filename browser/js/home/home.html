@@ -1,17 +1,15 @@
 <section id="home">
-        <div>
-            <div class="inner">
-                <md-content>
-                    <div class="container-fluid">
-                        <div layout-gt-md="column" layout-align="center stretch">
-                            <div ng-repeat='stack in stacks'>
-                                <stack-card stack='stack' class="stackCard"></stack-card>
-                            </div>
-                        </div>
+    <div>
+        <div class="inner">
+            <div class="container-fluid">
+                <div layout="column" layout-align="center stretch">
+                    <div ng-repeat='stack in stacks'>
+                        <stack-card stack='stack' class="stackCard"></stack-card>
                     </div>
-                </md-content>
+                </div>
             </div>
         </div>
+    </div>
 </section>
 
 
