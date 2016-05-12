@@ -10,6 +10,7 @@ app.directive('sidebar', function () {
 });
 
 app.controller('sidebarCtrl', function($scope, $log, $rootScope, SidebarFactory) {
+  $scope.user = $rootScope.user;
   $scope.userId = $rootScope.user._id;
   console.log("rootSCope user", $rootScope.user);
 
