@@ -3,7 +3,6 @@ sidebar {
   left: 0;
   z-index: 5;
   padding: 0 !important;
-  padding-left: 10px;
   background: #5e8bab;
   height: calc(100vh - 56px);
   width: inherit;
@@ -35,16 +34,19 @@ a {
   .stacksections {
     margin-top: 0px;
     padding: 10px;
+    padding-top: 15px;
+    padding-left: 15px;
     color: #FFF;
     font-weight: bold;
   }
   .stacksections:hover {
     background-color: #527e9d;
+    text-decoration: none;
   }
 }
 
-.sidebarcontent {
-  padding-left: 15px;
+a:hover {
+  text-decoration: none;
 }
 
 .stackbutton {

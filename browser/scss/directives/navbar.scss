@@ -1,1 +1,27 @@
+a {
+	font-size: 14pt;
+}
 
+ul.nav.navbar-nav {
+	padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+a:hover {
+	background-color: red;
+}
+
+.rightbutton {
+	display: inline;
+	float: right;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}

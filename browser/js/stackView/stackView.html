@@ -1,23 +1,25 @@
-<navbar></navbar>
-<sidebar class="col-md-2"></sidebar>
-<h1>Welcome to the StackView Page</h1>
-<p>Here is the stack name: {{stack.name}}</p>
-<p>Here are the tests in this stack</p>
-<ol ng-repeat='test in stack.tests'>
-    <li>{{test.name}}</li>
-    <button class="btn btn-xs" ng-click="removeFromStack($index)"><i class="glyphicon glyphicon-remove">Remove</i></button>
-</ol>
-<div class="container reqeditor col-md-10">
-    <form class="form-inline">
-        <form name="formInput">
-            <div class="form-group reqeditor">
-                <!-- <div class="together"> -->
-                <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of stack" ng-model="stack.name">
-                <hr>
-                <button class="btn btn-default btn-lg">Try</button>
-                <button type="submit" class="btn btn-success btn-lg" ng-click="submitStack()">Save</button>
-                {{test}}
-            </div>
-        </form>
-    </form>
+<div class="container col-md-10">
+    <div class="inner">
+        <h1>Welcome to the StackView Page</h1>
+        <p>Here is the stack name: {{stack.name}}</p>
+        <p>Here are the tests in this stack</p>
+        <ol ng-repeat='test in stack.tests'>
+            <li>{{test.name}}</li>
+            <button class="btn btn-xs" ng-click="removeFromStack($index)"><i class="glyphicon glyphicon-remove">Remove</i></button>
+        </ol>
+        <div class="container reqeditor">
+            <form class="form-inline">
+                <form name="formInput">
+                    <div class="form-group reqeditor">
+                        <!-- <div class="together"> -->
+                        <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of stack" ng-model="stack.name">
+                        <hr>
+                        <button class="btn btn-default btn-lg">Try</button>
+                        <button type="submit" class="btn btn-success btn-lg" ng-click="submitStack()">Save</button>
+                        {{test}}
+                    </div>
+                </form>
+            </form>
+        </div>
+    </div>
 </div>
