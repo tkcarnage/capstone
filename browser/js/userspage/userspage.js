@@ -37,13 +37,13 @@ app.controller('usersPageCtrl', function($log, $mdToast, $scope, user, UsersPage
           $mdToast.simple()
             .textContent('Changes saved.')
             .position('bottom right')
-            .hideDelay(3000)
+            .hideDelay(2000)
         );
     };
 })
   .config(function($mdThemingProvider) {
-    $mdThemingProvider.theme('customPrimary', 'default')
-      .primaryPalette('customPrimary');
+    $mdThemingProvider.theme('customBackground', 'default')
+      .primaryPalette('customBackground');
 });
 
 
