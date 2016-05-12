@@ -1,14 +1,9 @@
-
-<section class="sidebarcontent">
-    <h4 class="sidebarsection">Tests</h4>
-    <button ui-sref="testbuilder({id:userId})" class="btn btn-xs btn-success sectionbutton"><span class="glyphicon glyphicon-plus"></span></button>
-  <h4 class="sidebarsection">Stacks</h4>
-  <button class="btn btn-xs btn-success sectionbutton"><span class="glyphicon glyphicon-plus"></span></button>
-  <div ng-repeat="stack in stacks">
-    <p>{{stack.name}}</p>
-  </div>
-  <h4 class="sidebarsection">Export Tests</h4>
-  <button class="btn btn-xs btn-success sectionbutton"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
-  <hr>
-  <button class="btn btn-md btn-success left" ui-sref="allTests">All Tests</button>
-</section>
+<div layout="column" layout-align="center start" md-theme="customPrimary">
+    <div class="col-md-12 sidebarset">
+        <a ui-sref="home"><div class="stacksections"><i class="glyphicon glyphicon-home white"></i> Home</div></a>
+         <a ui-sref="allTests"><div class="stacksections "><i class="glyphicon glyphicon-th white"></i> All Tests</div></a>
+         <span ng-repeat="stack in stacks">
+           <a ui-sref="stackView({stackId: stack._id})"><div class="stacksections"><i class="glyphicon glyphicon-align-justify white"></i> {{stack.name}}</div></a>
+         </span>
+    </div>
+</div>

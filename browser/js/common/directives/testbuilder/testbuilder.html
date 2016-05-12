@@ -1,6 +1,4 @@
-<navbar></navbar>
-<sidebar class="col-md-2"></sidebar> 
-<div class="container reqeditor col-md-10">
+<div class="container reqeditor">
     <form class="form-inline">
         <form name="formInput">
             <div class="form-group reqeditor">
@@ -23,13 +21,13 @@
                     <input type="text" class="valform" placeholder="value" ng-model="test.params[$index].value" ng-change='composeURL()'>
                 </div>
                 <hr>
-                <button type="button" class="btn btn-default btn-lg" id="headers" ng-click="displayHeaders()">Headers</button> 
+                <button type="button" class="btn btn-default btn-lg" id="headers" ng-click="displayHeaders()">Headers</button>
                 <div ng-repeat="header in test.headers track by $index" ng-show="showHeaders" class="keyvalForms">
                     <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'headers')" ng-model="test.headers[$index].key">
                     <input type="text" class="valform" placeholder="value" ng-model="test.headers[$index].value">
                 </div>
                 <hr>
-                 <button type="button" class="btn btn-default btn-lg" id="body" ng-click="displayBody()">Body</button> 
+                 <button type="button" class="btn btn-default btn-lg" id="body" ng-click="displayBody()">Body</button>
                  <br>
                  <br>
                  <span ng-show="showBody">Body Type</span>
@@ -44,20 +42,23 @@
                     </label>
                 </form>
                 <div ng-repeat="body in test.body.data track by $index" ng-show="showBody" class="keyvalForms">
-                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'body.data')" ng-model="test.body.data[$index].key">
+                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'body')" ng-model="test.body.data[$index].key">
                     <input type="text" class="valform" placeholder="value" ng-model="test.body.data[$index].value">
                 </div>
                 <hr>
                 <p>Auth</p>
-                <input type="text" class="form-control input-lg" id="email" placeholder="Email" ng-model="test.email">
-                <input type="text" class="form-control input-lg" id="password" placeholder="Password" ng-model="test.password">
+                <input type="text" class="form-control input-lg" id="email" placeholder="Email" ng-model="test.authorization.email">
+                <input type="text" class="form-control input-lg" id="password" placeholder="Password" ng-model="test.authorization.password">
                 <hr>
                 <p>Expectation</p>
-                <textarea class="form-control" id="expectation" rows="4" cols="50" placeholder="Enter the expected result here in JSON." ng-model="test.expectation" ng-required="true"></textarea></textarea>
+                <textarea class="form-control" id="expectation" rows="4" cols="50" placeholder="Enter the expected result here in JSON." ng-model="test.body.expectation" ng-required="true"></textarea></textarea>
+                <p>Auth</p>
+                <input type="text" class="form-control input-lg" id="status" placeholder="Enter expected status code" ng-model="test.expectedStatus">
                 <hr>
                 <button class="btn btn-default btn-lg">Try</button>
                 <button type="submit" class="btn btn-success btn-lg" ng-click="submitTest()">Save</button>
                 {{test}}
             </div>
         </form>
-    </div>
+    </form>
+</div>

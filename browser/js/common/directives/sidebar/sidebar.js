@@ -5,13 +5,14 @@ app.directive('sidebar', function () {
     restrict: 'E',
     templateUrl: '/js/common/directives/sidebar/sidebar.html',
     controller: 'sidebarCtrl'
+
   };
 });
 
+app.controller('sidebarCtrl', function($scope, $log, $rootScope, SidebarFactory) {
 
-app.controller('sidebarCtrl', function($scope, $rootScope, SidebarFactory) {
-  console.log('HELLO', $rootScope.user._id);
-  $scope.userId = $rootScope.user._id;
-  $scope.stacks = SidebarFactory.stacks;
+  SidebarFactory.getStacks()
+    .then(stacks => $scope.stacks = stacks)
+    .then(() => $scope.$evalAsync())
+    .catch($log.error);
 });
-

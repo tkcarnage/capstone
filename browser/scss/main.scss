@@ -1,12 +1,14 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
-
 * {
   box-sizing: border-box; }
 
 body {
-  background: #D3D3D3;
-  padding-bottom: 0px; 
+  padding-bottom: 0px;
   font-family: 'Montserrat', sans-serif;
+
+}
+
+body, html {
+  height: 100%;
 }
 
 @mixin clearfix {
@@ -17,6 +19,7 @@ body {
   }
 }
 
+
 .left {
   float: left;
 }
@@ -26,14 +29,21 @@ body {
 }
 
 #main {
-  padding-left: 0; }
+  background-color: #ededed;
+  height: 100%;
+}
 
+.inner {
+  padding: 25px;
+  padding-bottom: 10px;
+}
 
-@import 'hover.css/css/hover.css';
 @import 'directives/main';
-@import 'home/main';
+@import 'home/main'; 
 @import 'about/main';
-@import 'tutorial/main';
 @import 'login/main';
 @import 'directives/sidebar';
 @import 'directives/testbuilder';
+@import 'directives/navbar';
+@import 'directives/stackCard';
+

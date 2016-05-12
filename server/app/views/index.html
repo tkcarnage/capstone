@@ -3,6 +3,7 @@
 <head>
     <base href="/" />
     <title>Fullstack Academy Generated Application</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script src="/lodash/index.js"></script>
@@ -11,7 +12,6 @@
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-ui-bootstrap/ui-bootstrap.js"></script>
     <script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
@@ -20,8 +20,13 @@
     <script src="/main.js"></script>
 </head>
 <body ng-app="FullstackGeneratedApp">
-<!--     <navbar></navbar>
-    <sidebar class="col-md-2"></sidebar> -->
-    <div id="main" ui-view></div>
+    <span ng-hide="location.path() === '/'">
+        <navbar></navbar>
+        <sidebar class="col-md-2"></sidebar>
+        <div id="main" class="col-md-10" ui-view></div>
+    </span>
+    <span ng-show="location.path() === '/'">
+        <div id="main" ui-view></div>
+    </span>
 </body>
 </html>

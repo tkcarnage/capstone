@@ -15,7 +15,7 @@ var schema = new mongoose.Schema({
         type: String
     },
     phone: {
-        type: Number
+        type: String
     },
     twitter: {
         id: String,
@@ -31,6 +31,14 @@ var schema = new mongoose.Schema({
     },
     jobs: [{type: mongoose.Schema.Types.ObjectId, ref: 'Test'}],
     isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    emailAlert: {
+        type: Boolean,
+        default: false
+    },
+    phoneAlert: {
         type: Boolean,
         default: false
     }

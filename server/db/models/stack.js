@@ -4,7 +4,7 @@ var stackSchema = new mongoose.Schema({
 	name: String,
     tests: [{type: mongoose.Schema.Types.ObjectId, ref: 'Test'}],
 	// project: [{type: mongoose.Schema.Types.ObjectId, ref: 'Project'}],
-	user: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	lastRun: {
 		type: Date,
 		default: null
