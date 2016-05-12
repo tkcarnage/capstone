@@ -31,16 +31,19 @@ body {
   background-color: white;
 }
 
-#main {
+/*#main {
   padding-left: 0; }
+*/
+.inner {
+  padding: 25px;
+  padding-bottom: 10px;
+}
 
-
-@import 'hover.css/css/hover.css';
 @import 'directives/main';
-@import 'home/main';
+@import 'home/main'; 
 @import 'about/main';
-@import 'tutorial/main';
 @import 'login/main';
 @import 'directives/sidebar';
 @import 'directives/testbuilder';
+@import 'directives/navbar';
 
