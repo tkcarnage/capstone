@@ -1,22 +1,9 @@
 var fs = require('fs');
-var chai = require('chai');
-var chaiHttp = require('chai-http');
 var jsDiff = require('diff');
 var exec = require('child_process').exec;
 // var spawn = require('child_process').spawn;
 var spawn = require('child_process').spawnSync;
 chai.use(chaiHttp);
-
-function isDiff(obj1, obj2) {
-	var diff = jsDiff.diffJson(obj1, obj2);
-	for (var i = 0; i < diff.length; i++) {
-		if (diff[i].hasOwnProperty('added') || diff[i].hasOwnProperty('removed')) {
-			return false;
-		}
-	}
-	return true;
-}
-
 
 var curlBuilder = {
   headers: function(test, curlString) {
@@ -74,16 +61,28 @@ function buildCurlString(testObj) {
       curlString = curlBuilder[key](testObj, curlString);
     }
   }
+  // console.log(typeof sendRequest(curlString),'TYPE!!!');
   return sendRequest(curlString);
+  //return isDiff(sendRequest(curlString), testObj.expectation);
+
 }
 
+function isIdentical(obj1, obj2) {
+	var diff = jsDiff.diffJson(obj1, obj2);
+	for (var i = 0; i < diff.length; i++) {
+		if (diff[i].hasOwnProperty('added') || diff[i].hasOwnProperty('removed')) {
+			return false;
+		}
+	}
+	return true;
+}
 
 function sendRequest(curlString) {
-	var array = curlString.split('%');
+  var array = curlString.split('%');
   // console.log(array);
   const response = spawn('curl', array);
   if (response.stdout == null) {
-  	return response.stderr.toString();
+    return response.stderr.toString();
   }
   return response.stdout.toString();
 }
@@ -100,39 +99,12 @@ var testObj = { "url" : "https://httpbin.org/post", "params" : [], "headers" : [
 //var testObj =  {"user":{"_id":"57320be92c0bed2837117814","email":"user@user.com","__v":0,"isAdmin":false,"jobs":[]},"url":"http://httpbin.org/get","params":[],"body":{"data":[]},"method":"GET","name":"david"}
 //var testObj =  {"user":{"_id":"57320be92c0bed2837117814","email":"user@user.com","__v":0,"isAdmin":false,"jobs":[]},"url":"http://httpbin.org/post","params":[],"body":{"data":[{"pizza":"isGood"},{"tacoBell":"YUM"}]},"method":"POST","name":"david", "bodytype" : "x-www-form-urlencoded"};
 
+var comparison = {"args": {}, "data": "", "files": {}, "form": { "iLove": "Pizza", "imOkWith": "Broccoli"},
+  "headers": { "Accept": "*/*", "Content-Length": "29", "Content-Type": "application/x-www-form-urlencoded", "Host": "httpbin.org", "User-Agent": "curl/7.38.0"},
+  "json": null, "origin": "108.41.20.27", "url": "https://httpbin.org/postdsf"}
+console.log(isIdentical(JSON.parse(buildCurlString(testObj)), comparison));
 
-console.log(buildCurlString(testObj));
+//console.log(isIdentical("{test:'hello'}", "{test:'heldfdflo'}"));
 
 
 
-// function sendRequest(curlString) {
-//  exec(curlString, function(error,stdout, stderr){
-//    console.log('stdout: ' + stdout);
-//    //console.log('stderr: ' + stderr);
-//    if (error != null) {
-//      console.log('exec error: ' + error);
-//    }
-//  })
-// }
-
-// function sendRequest(curlString) {
-//  var array = curlString.split(' ');
-//  console.log(array);
-//   const response = spawn('curl', array);
-
-//   response.stdout.on('data', (data) => {
-//       console.log('stdout:', data.toString());
-//   });
-
-//   response.stderr.on('data', (data) => {
-//       //console.log('ERROR STDOUT:', data.toString());
-//   });
-
-//   response.on('close', (code) => {
-//       //console.log('CLOSING', code);
-//   });
-
-//   response.on('error', (error) => {
-//    //console.log("ERRORERROR", error);
-//   });
-// }
