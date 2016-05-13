@@ -1,64 +1,246 @@
-<div class="container reqeditor">
-    <form class="form-inline">
-        <form name="formInput">
-            <div class="form-group reqeditor">
-                <!-- <div class="together"> -->
-                <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of test" ng-model="test.name">
-                <hr>
-                <p>URL Request</p>
-                <select class="form-control input-lg" class="typereq" ng-model="test.method" ng-required="true">
-                    <option>GET</option>
-                    <option>POST</option>
-                    <option>PUT</option>
-                    <option>DELETE</option>
-                </select>
-                <input type="url" class="form-control input-lg" id="urlinput" placeholder="Enter Request URL" ng-model="test.url" ng-required="true">
-                <hr>
-                <button type="button" class="btn btn-default btn-lg" id="params" ng-click="showForm()">Params</button>
-                <!-- </div> -->
-                <div ng-repeat="param in test.params track by $index" ng-show="showParams" class="keyvalForms">
-                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'params')" ng-model="test.params[$index].key">
-                    <input type="text" class="valform" placeholder="value" ng-model="test.params[$index].value" ng-change='composeURL()'>
+<section id="userpage">
+    <div class='inner'>
+    <div class="md-whiteframe-2dp">
+        <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools ">
+            <span>Create a Test</span>
+        </div>
+    </md-toolbar>
+        <md-content layout-padding>
+            <div layout="column" ng-cloak class="md-inline-form">
+                    <form name="testForm">
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Test Name</label>
+                                    <input name="name" ng-model="test.name" required>
+                                    <div ng-messages="testForm.name.$error">
+                                        <div ng-message="required">Test name is required.</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="25">
+                                    <label>Route Method</label>
+                                    <md-select ng-model="test.method">
+                                        <md-option>GET</md-option>
+                                        <md-option>POST</md-option>
+                                        <md-option>PUT</md-option>
+                                        <md-option>DELETE</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex="75">
+                                    <label>URL</label>
+                                    <input name="url" ng-model="test.url" required>
+                                    <div ng-messages="testForm.url.$error">
+                                        <div ng-message="required">Route URL is required.</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-button class="md-raised md-accent" id="params" ng-click="showForm()">Add Query Parameters</md-button>
+                            </div>
+                            <div ng-repeat="param in test.params track by $index" ng-show="showParams" class="keyvalForms">
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex="50" ng-click="addForm($index, 'params')">
+                                        <label>Key</label>
+                                        <input ng-model="test.params[$index].key" ng-change='composeURL()'>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex="50">
+                                        <label>Value</label>
+                                        <input ng-model="test.params[$index].value" ng-change='composeURL()'>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-button class="md-raised md-accent" id="params" ng-click="displayHeaders()">Add Headers</md-button>
+                            </div>
+                            <div ng-repeat="header in test.headers track by $index" ng-show="showHeaders">
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex="50" ng-click="addForm($index, 'headers')">
+                                        <label>Key</label>
+                                        <input ng-model="test.headers[$index].key" ng-change='composeURL()'>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex="50">
+                                        <label>Value</label>
+                                        <input ng-model="test.headers[$index].value" ng-change='composeURL()'>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-button class="md-raised md-accent" id="params" ng-click="displayBody()">Add Request Body</md-button>
+                            </div>
+                                <md-radio-group ng-model="test.body.bodytype" ng-show="showBody">
+                                            <md-radio-button value="x-www-form-urlencoded" class="md-primary">x-www-form-urlencoded</md-radio-button>
+                                            <md-radio-button value="form-data" class="md-primary">form-data</md-radio-button>
+                                </md-radio-group>
+                            <div ng-repeat="body in test.body.data track by $index" ng-show="showBody">
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex="50" ng-click="addForm($index, 'headers')">
+                                        <label>Key</label>
+                                        <input ng-click="addForm($index, 'body')" ng-model="test.body.data[$index].key" ng-change='composeURL()'>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex="50">
+                                        <label>Value</label>
+                                        <input ng-model="test.body.data[$index].value" ng-change='composeURL()'>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="50">
+                                    <label>Email or Username (for basic Auth)</label>
+                                    <input ng-model="test.authorization.email" ng-change='composeURL()'>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex="50">
+                                    <label>Password</label>
+                                    <input ng-model="test.authorization.password" ng-change='composeURL()'>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="20">
+                                    <label>Expected Response Code</label>
+                                    <input ng-model="test.expectedStatus", ng-change='composeURL()'>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                    </form>
                 </div>
-                <hr>
-                <button type="button" class="btn btn-default btn-lg" id="headers" ng-click="displayHeaders()">Headers</button>
-                <div ng-repeat="header in test.headers track by $index" ng-show="showHeaders" class="keyvalForms">
-                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'headers')" ng-model="test.headers[$index].key">
-                    <input type="text" class="valform" placeholder="value" ng-model="test.headers[$index].value">
-                </div>
-                <hr>
-                 <button type="button" class="btn btn-default btn-lg" id="body" ng-click="displayBody()">Body</button>
-                 <br>
-                 <br>
-                 <span ng-show="showBody">Body Type</span>
-                 <form name="bodytype">
-                    <label ng-show="showBody">
-                        <input type="radio" ng-model="test.body.bodytype" value="x-www-form-urlencoded">
-                        x-www-form-urlencoded
-                    </label>
-                    <label ng-show="showBody">
-                        <input type="radio" ng-model="test.body.bodytype" ng-show="showBody" value="form-data">
-                        form-data
-                    </label>
-                </form>
-                <div ng-repeat="body in test.body.data track by $index" ng-show="showBody" class="keyvalForms">
-                    <input type="text" class="keyform" placeholder="key" ng-click="addForm($index, 'body')" ng-model="test.body.data[$index].key">
-                    <input type="text" class="valform" placeholder="value" ng-model="test.body.data[$index].value">
-                </div>
-                <hr>
-                <p>Auth</p>
-                <input type="text" class="form-control input-lg" id="email" placeholder="Email" ng-model="test.authorization.email">
-                <input type="text" class="form-control input-lg" id="password" placeholder="Password" ng-model="test.authorization.password">
-                <hr>
-                <p>Expectation</p>
-                <textarea class="form-control" id="expectation" rows="4" cols="50" placeholder="Enter the expected result here in JSON." ng-model="test.body.expectation" ng-required="true"></textarea></textarea>
-                <p>Auth</p>
-                <input type="text" class="form-control input-lg" id="status" placeholder="Enter expected status code" ng-model="test.expectedStatus">
-                <hr>
-                <button class="btn btn-default btn-lg">Try</button>
-                <button type="submit" class="btn btn-success btn-lg" ng-click="submitTest()">Save</button>
-                {{test}}
             </div>
-        </form>
-    </form>
-</div>
+        </md-content>
+        </div>
+    </div>
+     <div class='inner'>
+    <div class="md-whiteframe-2dp">
+        <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools ">
+            <span>Create a Test</span>
+        </div>
+    </md-toolbar>
+        <md-content layout-padding>
+            <div layout="column" ng-cloak class="md-inline-form">
+                    <form name="testForm">
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Test Name</label>
+                                    <input name="name" ng-model="test.name" required>
+                                    <div ng-messages="testForm.name.$error">
+                                        <div ng-message="required">Test name is required.</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="25">
+                                    <label>Route Method</label>
+                                    <md-select ng-model="test.method">
+                                        <md-option>GET</md-option>
+                                        <md-option>POST</md-option>
+                                        <md-option>PUT</md-option>
+                                        <md-option>DELETE</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex="75">
+                                    <label>URL</label>
+                                    <input name="url" ng-model="test.url" required>
+                                    <div ng-messages="testForm.url.$error">
+                                        <div ng-message="required">Route URL is required.</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-button class="md-raised md-accent" id="params" ng-click="showForm()">Add Query Parameters</md-button>
+                            </div>
+                            <div ng-repeat="param in test.params track by $index" ng-show="showParams" class="keyvalForms">
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex="50" ng-click="addForm($index, 'params')">
+                                        <label>Key</label>
+                                        <input ng-model="test.params[$index].key" ng-change='composeURL()'>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex="50">
+                                        <label>Value</label>
+                                        <input ng-model="test.params[$index].value" ng-change='composeURL()'>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-button class="md-raised md-accent" id="params" ng-click="displayHeaders()">Add Headers</md-button>
+                            </div>
+                            <div ng-repeat="header in test.headers track by $index" ng-show="showHeaders">
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex="50" ng-click="addForm($index, 'headers')">
+                                        <label>Key</label>
+                                        <input ng-model="test.headers[$index].key" ng-change='composeURL()'>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex="50">
+                                        <label>Value</label>
+                                        <input ng-model="test.headers[$index].value" ng-change='composeURL()'>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-button class="md-raised md-accent" id="params" ng-click="displayBody()">Add Request Body</md-button>
+                            </div>
+                                <md-radio-group ng-model="test.body.bodytype" ng-show="showBody">
+                                            <md-radio-button value="x-www-form-urlencoded" class="md-primary">x-www-form-urlencoded</md-radio-button>
+                                            <md-radio-button value="form-data" class="md-primary">form-data</md-radio-button>
+                                </md-radio-group>
+                            <div ng-repeat="body in test.body.data track by $index" ng-show="showBody">
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex="50" ng-click="addForm($index, 'headers')">
+                                        <label>Key</label>
+                                        <input ng-click="addForm($index, 'body')" ng-model="test.body.data[$index].key" ng-change='composeURL()'>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex="50">
+                                        <label>Value</label>
+                                        <input ng-model="test.body.data[$index].value" ng-change='composeURL()'>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="50">
+                                    <label>Email or Username (for basic Auth)</label>
+                                    <input ng-model="test.authorization.email" ng-change='composeURL()'>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex="50">
+                                    <label>Password</label>
+                                    <input ng-model="test.authorization.password" ng-change='composeURL()'>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="20">
+                                    <label>Expected Response Code</label>
+                                    <input ng-model="test.expectedStatus", ng-change='composeURL()'>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                    </form>
+                </div>
+            </div>
+        </md-content>
+        </div>
+    </div>
+</section>

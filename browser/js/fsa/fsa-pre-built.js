@@ -54,7 +54,6 @@
             var data = response.data;
             Session.create(data.id, data.user);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-            console.log('data.user:', data.user);
             return data.user;
         }
 

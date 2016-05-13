@@ -6,19 +6,19 @@ app.config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) 
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
     $locationProvider.html5Mode(true);
     // If we go to a URL that ui-router doesn't have registered, go to the "/" url.
-    $urlRouterProvider.otherwise('/');
+    // $urlRouterProvider.otherwise('/');
     // Trigger page refresh when accessing an OAuth route
     $urlRouterProvider.when('/auth/:provider', function () {
         window.location.reload();
     });
 
-    var customPrimary = {
-        '50': '#03A9F3',
+var customPrimary = {
+        '50': '#e4ebf1',
         '100': '#d3dfe8',
         '200': '#c2d3df',
         '300': '#b1c7d6',
         '400': '#a1bbce',
-        '500': '90Afc5',
+        '500': '#90AFC5',
         '600': '#7fa3bc',
         '700': '#6e97b3',
         '800': '#5e8bab',
@@ -29,76 +29,79 @@ app.config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) 
         'A700': '#49708c'
     };
     $mdThemingProvider
-        .definePalette('customPrimary',
+        .definePalette('customPrimary', 
                         customPrimary);
 
     var customAccent = {
-        '50': '#03A9F3',
-        '100': '#d3dfe8',
-        '200': '#c2d3df',
-        '300': '#b1c7d6',
-        '400': '#a1bbce',
-        '500': '90Afc5',
-        '600': '#7fa3bc',
-        '700': '#6e97b3',
-        '800': '#5e8bab',
-        '900': '#527e9d',
-        'A100': '#f4f7fa',
-        'A200': '#ffffff',
-        'A400': '#ffffff',
-        'A700': '#49708c'
+        '50': '#32924a',
+        '100': '#38a554',
+        '200': '#3fb85e',
+        '300': '#4ec36b',
+        '400': '#61c97b',
+        '500': '#74cf8b',
+        '600': '#9adcab',
+        '700': '#ade3bb',
+        '800': '#c0e9cb',
+        '900': '#d3f0da',
+        'A100': '#9adcab',
+        'A200': '87D69B',
+        'A400': '#74cf8b',
+        'A700': '#e6f6ea'
     };
     $mdThemingProvider
-        .definePalette('customAccent',
+        .definePalette('customAccent', 
                         customAccent);
 
     var customWarn = {
-        '50': '#03A9F3',
-        '100': '#d3dfe8',
-        '200': '#c2d3df',
-        '300': '#b1c7d6',
-        '400': '#a1bbce',
-        '500': '90Afc5',
-        '600': '#7fa3bc',
-        '700': '#6e97b3',
-        '800': '#5e8bab',
-        '900': '#527e9d',
-        'A100': '#f4f7fa',
-        'A200': '#ffffff',
-        'A400': '#ffffff',
-        'A700': '#49708c'
+        '50': '#ffd280',
+        '100': '#ffc966',
+        '200': '#ffc04d',
+        '300': '#ffb733',
+        '400': '#ffae1a',
+        '500': '#ffae1a',
+        '600': '#e69500',
+        '700': '#cc8400',
+        '800': '#b37300',
+        '900': '#996300',
+        'A100': '#ffdb99',
+        'A200': '#ffe4b3',
+        'A400': '#ffedcc',
+        'A700': '#805300'
     };
     $mdThemingProvider
-        .definePalette('customWarn',
+        .definePalette('customWarn', 
                         customWarn);
 
     var customBackground = {
-        '50': '#FFFFFF',
-        '100': '#FFFFFF',
-        '200': '#FFFFFF',
-        '300': '#FFFFFF',
-        '400': '#FFFFFF',
+        '50': '#ffffff',
+        '100': '#ffffff',
+        '200': '#ffffff',
+        '300': '#ffffff',
+        '400': '#ffffff',
         '500': '#FFFFFF',
-        '600': '#FFFFFF',
-        '700': '#FFFFFF',
-        '800': '#FFFFFF',
-        '900': '#FFFFFF',
-        'A100': '#FFFFFF',
-        'A200': '#FFFFFF',
-        'A400': '#FFFFFF',
-        'A700': '#FFFFFF'
+        '600': '#f2f2f2',
+        '700': '#e6e6e6',
+        '800': '#d9d9d9',
+        '900': '#cccccc',
+        'A100': '#ffffff',
+        'A200': '#ffffff',
+        'A400': '#ffffff',
+        'A700': '#bfbfbf'
     };
     $mdThemingProvider
-        .definePalette('customBackground',
+        .definePalette('customBackground', 
                         customBackground);
 
    $mdThemingProvider.theme('default')
-       .primaryPalette('customPrimary')
+       .primaryPalette('customPrimary', {
+            'default' : '500',
+            'hue-1' : '50',
+            'hue-2' : '200',
+            'hue-3' : '300'
+       }) 
        .accentPalette('customAccent')
        .warnPalette('customWarn')
-       .backgroundPalette('customBackground');
-
-
+       .backgroundPalette('customBackground')
 
 });
 
