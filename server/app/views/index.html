@@ -24,11 +24,11 @@
 
 </head>
 <body ng-app="FullstackGeneratedApp">
-    <div ng-hide="location.path() === '/'">
+    <span ng-hide="location.path() === '/'">
         <navbar></navbar>
         <sidebar class="col-md-2"></sidebar>
         <div id="main" class="col-md-10" ui-view></div>
-    </div>
+    </span>
     <span ng-show="location.path() === '/'">
         <div id="main" ui-view></div>
     </span>
