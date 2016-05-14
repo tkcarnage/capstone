@@ -43,12 +43,9 @@ var testSchema = new mongoose.Schema({
 	headers: {
 		type: Object,
 	},
-  expectedStatus: {
-    type: String
-  },
-  resultStatus: {
-    type: String
-  },
+    validators: {
+        type: [String]
+    },
 	body: {
 		bodytype: {
 			type: String,

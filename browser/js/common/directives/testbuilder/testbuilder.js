@@ -17,7 +17,74 @@ app.directive('testbuilder', function(){
   };
 });
 
-app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope, $log, AuthService){
+app.factory('TestFactory', function($http, $log) {
+
+    let parseResponse = function(response) {};
+
+    let makeRequest = function(test) {
+
+        console.log('makeRequest is making a request with this test:', test);
+
+        let requestObj = {};
+
+        requestObj.method = test.method;
+        requestObj.url = test.url;
+
+        if (test.headers.length) {
+            requestObj.headers = {};
+            test.headers.forEach(header => requestObj.headers[header.key] = requestObj.headers[header.value]);
+        }
+        let testData;
+        if (typeof test.body.data === 'string') testData = JSON.parse(test.body.data);
+        testData = test.body.data;
+
+        if (test.body.bodytype === 'raw') {
+            requestObj.data = testData.reduce(function(dataObj, nextBodyPair) {
+                dataObj[nextBodyPair.key] = nextBodyPair.value;
+                return dataObj;
+            }, {});
+        }
+
+        if (test.body.bodytype === 'x-www-form-urlencoded') {
+            requestObj.data = testData.reduce(function(dataArr, nextBodyPair) {
+                dataArr.push(nextBodyPair.key + '=' + nextBodyPair.value);
+                return dataArr;
+            },"").join('&');
+            requestObj.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+        let formData;
+        if (test.body.bodytype === 'form-data') {
+            formData = new FormData();
+            testData.forEach(keyValuePair => formData.set(keyValuePair.key, keyValuePair.value));
+            requestObj.headers['Content-Type'] = undefined;
+        }
+
+        if (test.body.bodytype === 'form-data') {
+            return $http[requestObj.method.toLowerCase()](requestObj.url, formData, {
+                transformRequest: angular.identity,
+                headers: requestObj.headers
+            })
+            .then(response => response.data);
+        } else {
+            return $http(requestObj)
+            .then(response => response.data);
+        }
+    };
+
+
+    return {
+        runTest: function(test) {
+            //Construct and send the $http request
+            return makeRequest(test)
+            .catch($log.error);
+
+            //Parsing the response
+
+        }
+    };
+});
+
+app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope, $log, AuthService, TestFactory){
 	$scope.test = {};
 	//$scope.test.user = $rootScope.user;
     AuthService.getLoggedInUser()
@@ -32,15 +99,18 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 	$scope.test.headers = [];
 	$scope.test.body = {};
 	$scope.test.body.data = [];
+    $scope.test.validators = [];
 	$scope.test.method = "GET";
 	$scope.showParams = false;
 	$scope.showHeaders = false;
 	$scope.showBody = false;
+    $scope.showValidators = false;
 	$scope.numParams = 0;
 	$scope.numHeaders = 0;
 	$scope.numBodyObj = 0;
 	$scope.addForm = function(index, type){
-		if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0 || index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
+		if (type === 'validator') $scope.test.validators.push("function(response) {\n\n}");
+        else if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0 || index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
 			if (type === "params") {
 				$scope.numParams++;
 				$scope.test.params.push({});
@@ -54,7 +124,6 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 				$scope.test.body.data.push({});
 			}
 		}
-
 		$scope.$evalAsync();
 	};
 
@@ -64,8 +133,6 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 			$scope.numParams++;
 		}
 		$scope.showParams = !$scope.showParams;
-		console.log($scope.test.params);
-		$scope.evalAsync;
 	};
 
 	$scope.displayHeaders = function(){
@@ -74,8 +141,6 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 			$scope.numHeaders++;
 		}
 		$scope.showHeaders = !$scope.showHeaders;
-		console.log($scope.test.headers);
-		$scope.evalAsync;
 	};
 
 	$scope.displayBody = function(){
@@ -84,8 +149,14 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 			$scope.numBodyObj++;
 		}
 		$scope.showBody = !$scope.showBody;
-		$scope.evalAsync;
 	};
+
+    $scope.displayValidators = function(){
+        if ($scope.test.validators.length === 0) {
+            $scope.addForm(0,"validator");
+        }
+        $scope.showValidators = !$scope.showValidators;
+    };
 
 	$scope.composeURL = function() {
 		var indexQuestionMark = $scope.test.url.indexOf('?');
@@ -101,10 +172,17 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 		$scope.test.url = $scope.test.url.slice(0,$scope.test.url.length - 1);
 	};
 
-	$scope.submitTest = function(){
+	$scope.saveTest = function(){
 		$scope.test.url = $scope.test.url;
 		TestBuilderFactory.create($scope.test)
         .then(() => $state.go('allTests'))
         .catch($log.error);
 	};
+
+    $scope.runTest = function() {
+        console.log('$scope.test:', $scope.test);
+        TestFactory.runTest($scope.test)
+        .then(resData => console.log(resData))
+        .catch($log.error);
+    };
 });

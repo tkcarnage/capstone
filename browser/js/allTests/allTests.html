@@ -35,11 +35,11 @@
           <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
             <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
               <tr md-row>
-                <th md-column md-order-by="test.name.value"><span>Name</span></th>
-                <th md-column md-order-by="test.method.value"><span>Method</span></th>
-                <th md-column md-order-by="test.URL.value"><span>URL</span></th>
-                <th md-column md-order-by="test.expectedStatus.value"><span>Expected Status</span></th>
-                <th md-column md-order-by="test.resultStatus.value"><span>Status</span></th>
+                <th md-column md-order-by="name"><span>Name</span></th>
+                <th md-column md-order-by="method"><span>Method</span></th>
+                <th md-column md-order-by="name"><span>URL</span></th>
+                <th md-column md-order-by="expectedStatus"><span>Expected Status</span></th>
+                <th md-column md-order-by="resultStatus"><span>Status</span></th>
                 <th md-column>
                   <md-icon>info</md-icon>
                   <span>Details</span>
