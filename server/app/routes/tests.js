@@ -40,6 +40,15 @@ router.get('/', Auth.assertAuthenticated, function(req, res, next) {
     let queryObj = {};
     if (req.query.userId) queryObj = {user: req.query.userId};
     Test.find(queryObj)
-    .then(tests => res.json(tests))
+    .then(tests =>{
+        console.log("hello");
+        res.json(tests);
+    })
     .catch(next);
+});
+
+router.delete('/:testid', Auth.assertAuthenticated, function(req, res, next){
+   const testid = req.params.testid;
+   Test.findById(testid).remove().exec()
+   .catch(next);
 });

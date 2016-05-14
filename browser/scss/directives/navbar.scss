@@ -1,55 +1,8 @@
-a {
-	font-size: 14pt;
-}
-
-ul.nav.navbar-nav {
-	padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 5px;
-}
 
 md-toolbar {
 	padding-right: 10px;
 }
 
-.navbutton { 
-  display: none;
-  color: white;
-  font-weight: bold;
-  background-color: #5e8bab; 
-  margin-right: 5px;
-} 
- 
-.navbutton:hover, 
-.navbutton:focus, 
-.navbutton:active, 
-.navbutton.active, 
-.open .dropdown-toggle.navbutton { 
-  color: darken(#5e8bab, 20%); 
-} 
- 
-.navbutton:active, 
-.navbutton.active, 
-.open .dropdown-toggle.navbutton { 
-  background-image: none; 
-} 
- 
-.navbutton.disabled, 
-.navbutton[disabled], 
-fieldset[disabled] .navbutton, 
-.navbutton.disabled:hover, 
-.navbutton[disabled]:hover, 
-fieldset[disabled] .navbutton:hover, 
-.navbutton.disabled:focus, 
-.navbutton[disabled]:focus, 
-fieldset[disabled] .navbutton:focus, 
-.navbutton.disabled:active, 
-.navbutton[disabled]:active, 
-fieldset[disabled] .navbutton:active, 
-.navbutton.disabled.active, 
-.navbutton[disabled].active, 
-fieldset[disabled] .navbutton.active { 
-  background-color: #FFFFFF; 
-  border-color: #EDEDED; 
-} 
+a:-webkit-any-link {
+	text-decoration: none !important;
+}

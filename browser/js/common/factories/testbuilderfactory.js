@@ -10,5 +10,8 @@ app.factory('TestBuilderFactory', function($http){
         return $http.put('/api/tests/' + obj._id, obj)
         .then(response => response.data);
     };
+    testobj.delete = function(obj){
+        return $http.delete('/api/tests/' + obj._id, obj);
+    };
 	return testobj;
 });
