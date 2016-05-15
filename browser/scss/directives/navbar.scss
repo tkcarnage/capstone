@@ -6,3 +6,12 @@ md-toolbar {
 a:-webkit-any-link {
 	text-decoration: none !important;
 }
+
+.logo {
+	margin-left: 10px;
+	height: 30px;
+}
+
+.logo:hover {
+	opacity: 0.5;
+}

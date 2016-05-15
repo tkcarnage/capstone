@@ -1,11 +1,9 @@
 sidebar {
-  position: absolute;
-  left: 0;
   z-index: 5;
   padding: 0 !important;
   background-color: #5e8bab;
-  height: 100%;
   width: inherit;
+  height: 100vh; //removing this changes the height to 100px
   }
   sidebar .logo {
     width: 100%;
