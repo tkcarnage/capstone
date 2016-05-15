@@ -24,13 +24,8 @@
 
 </head>
 <body ng-app="FullstackGeneratedApp">
-    <span ng-hide="location.path() === '/'">
-        <navbar></navbar>
-        <sidebar class="col-md-2"></sidebar>
-        <div id="main" class="col-md-10" ui-view></div>
-    </span>
-    <span ng-show="location.path() === '/'">
-        <div id="main" ui-view></div>
-    </span>
+    <navbar ng-if="location.path() !== '/'"></navbar>
+    <sidebar ng-if="location.path() !== '/'" class="col-md-2"></sidebar>
+    <div id="main" ng-class="{'col-md-10': location.path() !== '/'}" ui-view></div>
 </body>
 </html>

@@ -137,6 +137,7 @@ app.controller('allTestsCtrl', function ($mdEditDialog, $mdDialog, $q, $state, $
           $scope.tests = $scope.tests.filter(function(ele){
             return $scope.selected.indexOf(ele) === -1; 
           });
+          $scope.selected = [];
           $scope.$evalAsync();
         });
       }, function() {
