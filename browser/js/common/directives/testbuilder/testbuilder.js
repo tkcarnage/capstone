@@ -49,7 +49,7 @@ app.factory('TestFactory', function($http, $log) {
             requestObj.data = testData.reduce(function(dataArr, nextBodyPair) {
                 dataArr.push(nextBodyPair.key + '=' + nextBodyPair.value);
                 return dataArr;
-            },"").join('&');
+            },[]).join('&');
             requestObj.headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
         let formData;
