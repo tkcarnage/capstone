@@ -187,14 +187,13 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
                 funcArray.push(eval('(' + elem + ')'));
             }
         });
-        //test function calls;
-        funcArray.forEach(function(elem) {
-            console.log(elem(5));
+        var isValid = true;
+        TestFactory.runTest($scope.test)
+        .then(function(resData) {
+            for (var i = 0; i < funcArray.length && isValid; i++) {
+                if (funcArray[i](resData) == false) { isValid = false; }
+            }
+            alert(isValid);
         });
-        //TestFactory.runTest($scope.test)
-        // .then(resData => console.log('****',resData))
-        //.then(resData => console.log('****', eval(functionString)))
-        //.then(() => console.log($scope.test.validators[1].length))
-        //.catch($log.error);
     };
 });
