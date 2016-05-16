@@ -64,8 +64,18 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
         $scope.stack.tests.push(test);
         $scope.$evalAsync();
     };
-    $scope.removeFromStack = function (index) {
-        $scope.stack.tests.splice(index, 1);
+    $scope.removeFromStack = function (obj) {
+        $scope.stack.tests = $scope.stack.tests.filter(function(el){
+            return el !== obj;
+        });
+            
         $scope.$evalAsync();
+    };
+    $scope.onDropComplete = function (index, obj, evt) {
+        var otherObj = $scope.stack.tests[index];
+        var otherIndex = $scope.stack.tests.indexOf(obj);
+        $scope.stack.tests[index] = obj;
+        $scope.stack.tests[otherIndex] = otherObj;
+        console.log($scope.stack.tests);
     };
 });
