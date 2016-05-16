@@ -19,27 +19,28 @@
                                     </div>
                                 </md-input-container>
                             </div>
-                        </md-content>
-                        <md-content layout-padding>
+                        <div layout-gt-sm="row">
                             <div layout-gt-sm="column">
                                 <h4>Tests available for your stack</h4>
                                 <span ng-repeat='test in tests'>
-                                <md-button class="btn btn-xs" ng-click="addToStack(test)"><md-icon class="material-icons">add</md-icon>Add {{test.name}}</md-button>
+                                <md-button class="btn btn-xs" ng-click="addToStack(test)" ng-disabled="stack.tests.indexOf(test) !== -1"><md-icon class="material-icons">add</md-icon>Add {{test.name}}, {{test.method}}, {{test.url}}</md-button>
                                 </span>
                             </div>
-                        </md-content>
-                        <md-content layout-padding>
+                            <span flex></span>
                             <div layout-gt-sm="column">
+                                <h4 ng-show="stack.tests.length">Tests in your stack</h4>
                                 <span ng-repeat='test in stack.tests'>
                                     <md-button class="btn btn-xs" ng-click="removeFromStack($index)"><md-icon class="material-icons">delete</md-icon>Remove {{test.name}}</md-button>
                                 </span>
-                            </div>       
+                            </div>
+                        </div>  
                         <div layout-gt-sm="row">
-                            <h4>{{stack.tests.length}} tests currently in stack</h4>
+                            <h4><strong>{{stack.tests.length}}</strong> tests currently in stack</h4>
                             <span flex></span>
                             <md-button>Run Stack</md-button>
                             <md-button type="submit" class="md-raised md-accent" ng-click="submitStack()">Save Stack</md-button>
                         </div>
+                        </md-content>
                     </form>
                 </div>
             </div>
