@@ -30,10 +30,19 @@
                             <div layout-gt-sm="column">
                                 <h4 ng-show="stack.tests.length">Tests in your stack</h4>
                                 <span ng-repeat='test in stack.tests'>
-                                    <md-button class="btn btn-xs" ng-click="removeFromStack($index)"><md-icon class="material-icons">delete</md-icon>Remove {{test.name}}</md-button>
+                                    <md-button class="btn btn-xs" ng-click="removeFromStack(test)"><md-icon class="material-icons">delete</md-icon>Remove {{test.name}}</md-button>
                                 </span>
                             </div>
                         </div>  
+                        <div class="row text-center">
+                            <ul class="draglist">
+                                <li ng-repeat="test in stack.tests" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
+                                    <div ng-drag="true" ng-drag-data="test" ng-class="test.name">
+                                        {{test.name}}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                         <div layout-gt-sm="row">
                             <h4><strong>{{stack.tests.length}}</strong> tests currently in stack</h4>
                             <span flex></span>
