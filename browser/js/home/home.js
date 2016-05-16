@@ -14,24 +14,17 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('homeCtrl', function ($scope, $state, user, stacks, SidebarFactory, SignupFactory, $rootScope, StackBuilderFactory, $mdDialog) {
-    $scope.user = user;
-    $scope.stacks = function() {
-        return StackBuilderFactory.getStacks();
-    };
+app.controller('homeCtrl', function ($scope, user, stacks, $rootScope) {
+  $scope.user = user;
+  $scope.stacks = stacks;
 
-    $scope.showConfirm = function(stack) {
+  $rootScope.$on('createstack', function(event, data){
+    $scope.stacks.push(data);
+  });
 
-      // Appending dialog to document.body to cover sidenav in docs app
-      var confirm = $mdDialog.confirm()
-      .title("Confirm Deletion")
-      .ariaLabel('Delete')
-      .ok('Delete')
-      .cancel('Cancel');
-      $mdDialog.show(confirm).then(function() {
-        return StackBuilderFactory.delete(stack);
-      }, function() {
-        $scope.status = 'Delete cancelled';
+  $rootScope.$on('deletestack', function(event, data){
+    $scope.stacks = $scope.stacks.filter(function(ele){
+      return data !== ele._id;
     });
-  };
+  });
 });
