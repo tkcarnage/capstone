@@ -10,6 +10,7 @@ app.directive('sidebar', function () {
 });
 
 app.controller('sidebarCtrl', function($scope, $log, $rootScope, SidebarFactory) {
+	
 
   SidebarFactory.getStacks()
     .then(stacks => $scope.stacks = stacks)

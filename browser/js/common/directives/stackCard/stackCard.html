@@ -3,6 +3,7 @@
     <div layout="column">
     <md-card-title >
       <md-card-title-text>
+
         <span class="md-headline cardtitle">{{ stack.name }}</span>
         <span class="md-subhead">{{ stack.tests.length }} test<span ng-show="stack.tests.length > 1 || stack.tests.length === 0">s</span>
       </md-card-title-text>
@@ -17,6 +18,9 @@
     <md-card-actions layout="row" layout-align="end center">
       <md-button ui-sref='stackView({stackId: stack._id})'>Stack Details</md-button>
       <md-button>Run Tests</md-button>
+        <md-button class="md-icon-button"> <!--ng-click="deletetests()" -->
+          <md-icon>delete</md-icon>
+        </md-button>
     </md-card-actions>
     </div>
         </div>
