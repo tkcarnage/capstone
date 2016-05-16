@@ -18,7 +18,7 @@
     <md-card-actions layout="row" layout-align="end center">
       <md-button ui-sref='stackView({stackId: stack._id})'>Stack Details</md-button>
       <md-button>Run Tests</md-button>
-        <md-button class="md-icon-button"> <!--ng-click="deletetests()" -->
+        <md-button class="md-icon-button" ng-click="showConfirm(stack)">
           <md-icon>delete</md-icon>
         </md-button>
     </md-card-actions>

@@ -1,25 +1,30 @@
-<div class="container">
-    <div class="inner">
-        <h1>Welcome to the StackView Page</h1>
-        <p>Here is the stack name: {{stack.name}}</p>
-        <p>Here are the tests in this stack</p>
-        <ol ng-repeat='test in stack.tests'>
-            <li>{{test.name}}</li>
-            <button class="btn btn-xs" ng-click="removeFromStack($index)"><i class="glyphicon glyphicon-remove">Remove</i></button>
-        </ol>
-        <div class="container reqeditor">
-            <form class="form-inline">
-                <form name="formInput">
-                    <div class="form-group reqeditor">
-                        <!-- <div class="together"> -->
-                        <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of stack" ng-model="stack.name">
-                        <hr>
-                        <button class="btn btn-default btn-lg">Try</button>
-                        <button type="submit" class="btn btn-success btn-lg" ng-click="submitStack()">Save</button>
-                        {{test}}
+<section id="userpage">
+    <div class='inner'>
+        <md-content layout-padding>
+            <div layout="column" ng-cloak class="md-inline-form"></div>
+            <div class="container">
+                <div class="inner">
+                    <h1>{{stack.name}}</h1>
+                    <ol ng-repeat='test in stack.tests'>
+                        <li>{{test.name}}</li>
+                        <button class="btn btn-xs" ng-click="removeFromStack($index)"><i class="glyphicon glyphicon-remove">Remove</i></button>
+                    </ol>
+                    <div class="container reqeditor">
+                        <form class="form-inline">
+                            <form name="formInput">
+                                <div class="form-group reqeditor">
+                                    <!-- <div class="together"> -->
+                                    <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of stack" ng-model="stack.name">
+                                    <hr>
+                                    <button class="btn btn-default btn-lg">Try</button>
+                                    <button type="submit" class="btn btn-success btn-lg" ng-click="submitStack()">Save</button>
+                                    {{test}}
+                                </div>
+                            </form>
+                        </form>
                     </div>
-                </form>
-            </form>
-        </div>
+                </div>
+            </div>
+        </md-content>
     </div>
-</div>
+</section>
