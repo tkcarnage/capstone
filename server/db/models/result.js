@@ -7,9 +7,10 @@ const resultSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Test'
     },
-    validatorResult: {
+    validatorResults: {
         type: [Boolean] // true means validator passed
     },
+    finalResult: Boolean,
     lastRun: Date
 });
 

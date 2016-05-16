@@ -44,7 +44,7 @@ var testSchema = new mongoose.Schema({
 		type: Object,
 	},
     validators: {
-        type: [Object] //name of the validator, function string of the validator
+        type: String //name of the validator, function string of the validator
     },
 	body: {
 		bodytype: {

@@ -8,14 +8,19 @@ app.config(function ($stateProvider) {
         resolve: {
             test: function($http, $stateParams) {
                 return $http.get('/api/tests/' + $stateParams.testId)
-                .then( res => res.data);
+                .then(res => res.data)
+                .then(test => {
+                    console.log(typeof test.validators, test.validators,'*****');
+                    test.validators = JSON.parse(test.validators);
+                    return test;
+                });
             }
         }
     });
 });
 
 
-app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $rootScope, $state, $log){
+app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $rootScope, $state, $log, TestFactory, $mdDialog, $mdMedia){
     $scope.test = test;
     if (typeof $scope.test.body.data === 'string')  $scope.test.body.data = JSON.parse($scope.test.body.data);
     $scope.test.user = $rootScope.user;
@@ -27,7 +32,7 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
     $scope.numHeaders = 0;
     $scope.numBodyObj = 0;
     $scope.addForm = function(index, type){
-        if (type === 'validator') $scope.test.validators.push("function(response) {\n\n}");
+        if (type === 'validator') $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
         else if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0 || index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
             if (type === "params") {
                 $scope.numParams++;
@@ -99,5 +104,56 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
         .then(() => $state.go('allTests'))
         .catch($log.error);
     };
+
+    $scope.showResults = function(ev) {
+        $mdDialog.test = $scope.test;
+        $mdDialog.results = $scope.results;
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'js/common/directives/testbuilder/testResults.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: useFullScreen
+        });
+    };
+
+    $scope.runTest = function() {
+        let funcArray = [];
+        $scope.results = {
+            validatorResults: [],
+            lastRun: Date.now()
+        };
+        $scope.test.validators.forEach(function (elem) {
+            if (elem.length > 23) {
+                funcArray.push(eval('(' + elem + ')'));
+            }
+        });
+        TestFactory.runTest($scope.test)
+        .then(function(resData) {
+            for (var i = 0; i < funcArray.length; i++) {
+                $scope.results.validatorResults.push(!!funcArray[i](resData));
+            }
+            $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
+        })
+        .then($scope.showResults);
+    };
+
+    function DialogController($scope, $mdDialog) {
+        $scope.test = $mdDialog.test;
+        $scope.results = $mdDialog.results;
+        console.log('$scope.test:', $scope.test);
+        console.log('$scope.results', $scope.results);
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
+    }
 
 });
