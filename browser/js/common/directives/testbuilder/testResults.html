@@ -11,7 +11,8 @@
     </md-toolbar>
     <md-dialog-content>
       <div class="md-dialog-content">
-        <h2>This test passed: {{results.lastResult}}</h2>
+        <h2 ng-show='results.finalResult'>Your test passed.</h2>
+        <h2 ng-hide='results.finalResult'>Your test failed.</h2>
         <ul ng-repeat="validator in results.validatorResults track by $index">
           <li>{{test.validators[$index].name}}: {{validator}}</li>
         </ul>

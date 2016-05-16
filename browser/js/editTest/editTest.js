@@ -126,14 +126,15 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
             lastRun: Date.now()
         };
         $scope.test.validators.forEach(function (elem) {
-            if (elem.length > 23) {
-                funcArray.push(eval('(' + elem + ')'));
+            if (elem.func.length > 23) {
+                funcArray.push(eval('(' + elem.func + ')'));
             }
         });
         TestFactory.runTest($scope.test)
         .then(function(resData) {
             for (var i = 0; i < funcArray.length; i++) {
                 $scope.results.validatorResults.push(!!funcArray[i](resData));
+                console.log('$scope.results.validatorResults in the forLoop:', $scope.results.validatorResults);
             }
             $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
         })
