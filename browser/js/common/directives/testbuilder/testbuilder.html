@@ -51,6 +51,7 @@
                                         <input ng-model="test.authorization.password" ng-change='composeURL()'>
                                     </md-input-container>
                                 </div>
+<!-- <<<<<<< HEAD -->
                             </md-content>
                             <md-content layout-padding>
                                 <div layout-gt-sm="row">
@@ -66,6 +67,78 @@
                                             <label>Value</label>
                                             <input ng-model="test.params[$index].value" ng-change='composeURL()'>
                                         </md-input-container>
+<!-- ======= --><!-- -->
+                            <!-- </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="50">
+                                    <label>Email or Username (for basic Auth)</label>
+                                    <input ng-model="test.authorization.email" ng-change='composeURL()'>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex="50">
+                                    <label>Password</label>
+                                    <input ng-model="test.authorization.password" ng-change='composeURL()'>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="20">
+                                    <label>Expected Response Code</label>
+                                    <input ng-model="test.expectedStatus", ng-change='composeURL()'>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <div layout-gt-sm="row">
+                            <md-button>Run Test</md-button>
+                            <span flex></span>
+                            <md-button type="submit" class="md-raised md-accent" ng-click="submitTest()">Save Test</md-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </md-content>
+        </div>
+    </div>
+    <div class='inner'>
+    <div class="md-whiteframe-2dp">
+        <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools ">
+            <span>Create a Test</span>
+        </div>
+    </md-toolbar>
+        <md-content layout-padding>
+            <div layout="column" ng-cloak class="md-inline-form">
+                    <form name="testForm">
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Test Name</label>
+                                    <input name="name" ng-model="test.name" required>
+                                    <div ng-messages="testForm.name.$error">
+                                        <div ng-message="required">Test name is required.</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="25">
+                                    <label>Route Method</label>
+                                    <md-select ng-model="test.method">
+                                        <md-option>GET</md-option>
+                                        <md-option>POST</md-option>
+                                        <md-option>PUT</md-option>
+                                        <md-option>DELETE</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex="75">
+                                    <label>URL</label>
+                                    <input name="url" ng-model="test.url" required>
+                                    <div ng-messages="testForm.url.$error">
+                                        <div ng-message="required">Route URL is required.</div> -->
+<!-- >>>>>>> master -->
                                     </div>
                                 </div>
                             </md-content>
@@ -121,6 +194,7 @@
                                         </md-input-container>
                                     </div>
                                 </div>
+<!-- <<<<<<< HEAD -->
                             </md-content>
                             <section layout="row" layout-sm="column" layout-align="end end" layout-wrap>
                                 <md-button ng-disabled="testForm.$invalid || testForm.$pristine" ng-click="runTest(); testForm.$setPristine()" class="md-raised md-accent">Run test</md-button>
@@ -128,6 +202,36 @@
                             </section>
                         </form>
                     </div>
+<!-- ======= -->
+                            <!-- </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="50">
+                                    <label>Email or Username (for basic Auth)</label>
+                                    <input ng-model="test.authorization.email" ng-change='composeURL()'>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex="50">
+                                    <label>Password</label>
+                                    <input ng-model="test.authorization.password" ng-change='composeURL()'>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex="20">
+                                    <label>Expected Response Code</label>
+                                    <input ng-model="test.expectedStatus", ng-change='composeURL()'>
+                                </md-input-container>
+                            </div>
+                        </md-content>
+                        <div layout-gt-sm="row">
+                            <md-button>Run Test</md-button>
+                            <span flex></span>
+                            <md-button type="submit" class="md-raised md-accent" ng-click="submitTest()">Save Test</md-button>
+                        </div>
+                    </form> -->
+<!-- >>>>>>> master -->
                 </div>
             </md-content>
         </div>
