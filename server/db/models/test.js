@@ -37,14 +37,14 @@ var testSchema = new mongoose.Schema({
 		ref: 'Test'
 	},
 	response: {
-		type: Number,
+		type: String,
 		default: null
 	},
 	headers: {
 		type: Object,
 	},
     validators: {
-        type: [String]
+        type: [Object] //name of the validator, function string of the validator
     },
 	body: {
 		bodytype: {
@@ -64,6 +64,5 @@ var testSchema = new mongoose.Schema({
 		}
 	},
 });
-
 
 mongoose.model('Test', testSchema);

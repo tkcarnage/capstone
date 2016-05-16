@@ -15,10 +15,13 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.factory('StackBuilderFactory', function($http) {
+app.factory('StackBuilderFactory', function($http, TestBuilderFactory) {
     return {
         create: function(stackObj) {
-            return $http.post('/api/stacks', stackObj)
+            let newTests = stackObj.tests.map(test => TestBuilderFactory.create(test));
+            return Promise.all(newTests)
+            .then(savedTests => stackObj.tests = savedTests)
+            .then( () => $http.post('/api/stacks', stackObj))
             .then(res => res.data);
         },
     };
@@ -36,7 +39,9 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
         .catch($log.error);
     };
     $scope.addToStack = function (test) {
-        $scope.stack.tests.push(test);
+        let copyOfTest = _.cloneDeep(test);
+        copyOfTest.name = copyOfTest.name + '(' + $scope.stack.name + ')';
+        $scope.stack.tests.push(copyOfTest);
         $scope.$evalAsync();
     };
     $scope.removeFromStack = function (index) {
