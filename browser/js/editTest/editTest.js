@@ -10,7 +10,6 @@ app.config(function ($stateProvider) {
                 return $http.get('/api/tests/' + $stateParams.testId)
                 .then(res => res.data)
                 .then(test => {
-                    console.log(typeof test.validators, test.validators,'*****');
                     test.validators = JSON.parse(test.validators);
                     return test;
                 });
@@ -121,24 +120,41 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
 
     $scope.runTest = function() {
         let funcArray = [];
+        let cancelTest = false;
         $scope.results = {
             validatorResults: [],
             lastRun: Date.now()
         };
         $scope.test.validators.forEach(function (elem) {
-            if (elem.func.length > 23) {
-                funcArray.push(eval('(' + elem.func + ')'));
+            try {
+                if (elem.func.length > 23) {
+                    funcArray.push(eval('(' + elem.func + ')'));
+                }
             }
+            catch(err) {
+                alert('There was an error parsing the ' + elem.name + ' validator function. Refactor that function and try again.');
+                cancelTest = true;
+            }
+
         });
+        if (cancelTest) return;
         TestFactory.runTest($scope.test)
         .then(function(resData) {
             for (var i = 0; i < funcArray.length; i++) {
-                $scope.results.validatorResults.push(!!funcArray[i](resData));
-                console.log('$scope.results.validatorResults in the forLoop:', $scope.results.validatorResults);
+                try {
+                    $scope.results.validatorResults.push(!!funcArray[i](resData));
+                }
+                catch (err){
+                    alert('The following error occured while running the ' + $scope.test.validators[i].name + ' validator function: ' + err.message + '. Refactor that function and try again.');
+                    return;
+                }
             }
             $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
+            return TestFactory.saveResults($scope.results,test._id);
+            // need to add the test id to the results object
         })
-        .then($scope.showResults);
+        .then($scope.showResults)
+        .catch($log.error);
     };
 
     function DialogController($scope, $mdDialog) {

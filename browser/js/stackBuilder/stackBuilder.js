@@ -16,6 +16,7 @@ app.config(function ($stateProvider) {
 });
 
 app.factory('StackBuilderFactory', function($http, TestBuilderFactory) {
+
     return {
         create: function(stackObj) {
             let newTests = stackObj.tests.map(test => TestBuilderFactory.create(test));
@@ -23,7 +24,7 @@ app.factory('StackBuilderFactory', function($http, TestBuilderFactory) {
             .then(savedTests => stackObj.tests = savedTests)
             .then( () => $http.post('/api/stacks', stackObj))
             .then(res => res.data);
-        },
+        }
     };
 });
 

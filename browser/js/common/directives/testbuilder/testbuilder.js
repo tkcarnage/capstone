@@ -33,7 +33,6 @@ app.factory('TestFactory', function($http, $log) {
         if (test.headers.length) {
             requestObj.headers = {};
             test.headers.forEach(header => {
-                console.log("HEADER: ", header);
                 if (header !== null) requestObj.headers[header.key] = requestObj.headers[header.value];
             });
         }
@@ -80,9 +79,12 @@ app.factory('TestFactory', function($http, $log) {
             //Construct and send the $http request
             return makeRequest(test)
             .catch($log.error);
-
             //Parsing the response
-
+        },
+        saveResults: function(results, test_id) {
+            results.test = test_id;
+            return $http.post('/api/results',results)
+            .then(res => res.data);
         }
     };
 });
@@ -182,24 +184,40 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
         .catch($log.error);
 	};
 
-    $scope.runTest = function() {
+$scope.runTest = function() {
         let funcArray = [];
+        let cancelTest = false;
         $scope.results = {
             validatorResults: [],
             lastRun: Date.now()
         };
         $scope.test.validators.forEach(function (elem) {
-            if (elem.length > 23) {
-                funcArray.push(eval('(' + elem + ')'));
+            try {
+                if (elem.func.length > 23) {
+                    funcArray.push(eval('(' + elem.func + ')'));
+                }
             }
+            catch(err) {
+                alert('There was an error parsing the ' + elem.name + ' validator function. Refactor that function and try again.');
+                cancelTest = true;
+            }
+
         });
+        if (cancelTest) return;
         TestFactory.runTest($scope.test)
         .then(function(resData) {
             for (var i = 0; i < funcArray.length; i++) {
-                $scope.results.validatorResults.push(!!funcArray[i](resData));
+                try {
+                    $scope.results.validatorResults.push(!!funcArray[i](resData));
+                }
+                catch (err){
+                    alert('The following error occured while running the ' + $scope.test.validators[i].name + ' validator function: ' + err.message + '. Refactor that function and try again.');
+                    return;
+                }
             }
             $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
-        });
+        })
+        .then($scope.showResults);
     };
 
     $scope.testName="Another Test Title";
