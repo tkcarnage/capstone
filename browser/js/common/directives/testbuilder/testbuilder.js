@@ -181,8 +181,20 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 
     $scope.runTest = function() {
         console.log('$scope.test:', $scope.test);
-        TestFactory.runTest($scope.test)
-        .then(resData => console.log(resData))
-        .catch($log.error);
+        var funcArray = [];
+        $scope.test.validators.forEach(function (elem) {
+            if (elem.length > 23) {
+                funcArray.push(eval('(' + elem + ')'));
+            }
+        });
+        //test function calls;
+        funcArray.forEach(function(elem) {
+            console.log(elem(5));
+        });
+        //TestFactory.runTest($scope.test)
+        // .then(resData => console.log('****',resData))
+        //.then(resData => console.log('****', eval(functionString)))
+        //.then(() => console.log($scope.test.validators[1].length))
+        //.catch($log.error);
     };
 });
