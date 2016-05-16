@@ -92,9 +92,6 @@ app.controller('allTestsCtrl', function ($mdEditDialog, $mdDialog, $q, $state, $
     $scope.limitOptions = $scope.limitOptions ? undefined : [5, 10, 15];
   };
 
-  $scope.getTypes = function () {
-    return ['Candy', 'Ice cream', 'Other', 'Pastry'];
-  };
 
   $scope.loadStuff = function () {
     $scope.promise = $timeout(function () {
