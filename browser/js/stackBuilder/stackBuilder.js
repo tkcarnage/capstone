@@ -16,12 +16,39 @@ app.config(function ($stateProvider) {
 });
 
 app.factory('StackBuilderFactory', function($http) {
-    return {
-        create: function(stackObj) {
+    var obj = {};
+        var storedStacks = [];
+        obj.getStacks = function(){
+            return storedStacks;
+        };
+        obj.getUserStacks = function(user){
+            return $http.get('/api/stacks?userId=' + user._id) //TEST $stateParams.id
+            .then(response => {
+                angular.copy(response.data, storedStacks);
+                return storedStacks;
+            });
+        };
+
+        obj.create = function(stackObj) {
             return $http.post('/api/stacks', stackObj)
-            .then(res => res.data);
-        },
-    };
+            .then(res => {
+                return res.data;
+            });
+        };
+        obj.delete = function(stackObj) {
+            console.log("This function is running", storedStacks);
+            return $http.delete('/api/stacks/' + stackObj._id)
+            .then(res => {
+                console.log("before", storedStacks);
+                console.log(res.data);
+                storedStacks = storedStacks.filter(function(ele){
+                    return ele._id !== res.data;
+                    });
+                console.log("after", storedStacks);
+                return res.data;
+            });
+        };
+    return obj;
 });
 
 app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBuilderFactory, $rootScope) {
