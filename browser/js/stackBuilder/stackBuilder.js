@@ -15,7 +15,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.factory('StackBuilderFactory', function($http) {
+app.factory('StackBuilderFactory', function($http, $rootScope) {
     var obj = {};
         var storedStacks = [];
         obj.getStacks = function(){
@@ -32,19 +32,17 @@ app.factory('StackBuilderFactory', function($http) {
         obj.create = function(stackObj) {
             return $http.post('/api/stacks', stackObj)
             .then(res => {
+                $rootScope.$emit('createstack', res.data);
                 return res.data;
             });
         };
         obj.delete = function(stackObj) {
-            console.log("This function is running", storedStacks);
             return $http.delete('/api/stacks/' + stackObj._id)
             .then(res => {
-                console.log("before", storedStacks);
-                console.log(res.data);
                 storedStacks = storedStacks.filter(function(ele){
                     return ele._id !== res.data;
-                    });
-                console.log("after", storedStacks);
+                });
+                $rootScope.$emit('deletestack', res.data);
                 return res.data;
             });
         };

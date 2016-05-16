@@ -5,15 +5,28 @@ app.directive('sidebar', function () {
     restrict: 'E',
     templateUrl: '/js/common/directives/sidebar/sidebar.html',
     controller: 'sidebarCtrl'
-
   };
 });
 
-app.controller('sidebarCtrl', function($scope, $log, $rootScope, SidebarFactory) {
-	
+app.controller('sidebarCtrl', function($scope, $log, $rootScope, StackBuilderFactory, AuthService) {
 
-  SidebarFactory.getStacks()
-    .then(stacks => $scope.stacks = stacks)
-    .then(() => $scope.$evalAsync())
-    .catch($log.error);
+  AuthService.getLoggedInUser().then(function(user){
+    $scope.user = user;
+  });
+
+
+  StackBuilderFactory.getUserStacks($scope.user)
+  .then(function(stacks){
+    $scope.stacks = stacks;
+  });
+
+  $rootScope.$on('createstack', function(event, data){
+    $scope.stacks.push(data);
+  });
+
+  $rootScope.$on('deletestack', function(event, data){
+    $scope.stacks = $scope.stacks.filter(function(ele){
+      return data !== ele._id;
+    });
+  });
 });
