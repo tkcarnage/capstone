@@ -1,37 +1,33 @@
-
-<div class="inner" layout="column" layout-align="top center" layout-fill>
-  <form class="loginBox md-whiteframe" name="loginForm" layout="column" ng-submit="loginForm.$valid && sendLogin(login)">
-    <md-toolbar>
-      <h2 class="md-toolbar-tools">Login</h2>
-    </md-toolbar>
-    <md-content class="md-padding" layout="column">
-      <md-input-container>
-        <label>Email Address</label>
-        <input name="email" ng-model="login.email" ng-pattern="/^.+@.+\..+$/" required>
-        <div ng-messages="loginForm.email.$error">
-            <div ng-message="required">Email is required.</div>
-            <div ng-message="pattern">This must be a valid e-mail address.</div>
-        </div>
-    </md-input-container>
-    <md-input-container>
-        <label>Password</label>
-        <input name="password" type="password" ng-model="login.password" required>
-        <div ng-messages="loginForm.password.$error">
-        <div ng-message="required">Password is required.</div>
-        </div>
-    </md-input-container>
-        <div layout="row" layout-align="center center" style="padding-top:20px;">
-        <md-button class="md-raised md-primary" type="submit" ng-disabled="loginForm.$invalid">Login</md-button>
-        <span flex></span>
-        <md-button ui-sref="signup" md-no-ink>Sign Up</md-button>
-        </div>
-    </md-content>
-   </form>
-   <br>
-   <alert type="danger" ng-show="error">
-     {{ error }}
-    </alert>
+<div class='inner'>
+    <div layout="column" layout-align="top center" layout-fill>
+        <form class="loginBox md-whiteframe-2dp" name="loginForm" layout="column" ng-submit="loginForm.$valid && sendLogin(login)">
+            <md-toolbar>
+                <h2 class="md-toolbar-tools">Login</h2>
+            </md-toolbar>
+            <md-content class="md-padding" layout="column">
+                <md-input-container>
+                    <label>Email Address</label>
+                    <input name="email" ng-model="login.email" ng-pattern="/^.+@.+\..+$/" required>
+                    <div ng-messages="loginForm.email.$error">
+                        <div ng-message="required">Email is required.</div>
+                        <div ng-message="pattern">This must be a valid e-mail address.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>Password</label>
+                    <input name="password" type="password" ng-model="login.password" required>
+                    <div ng-messages="loginForm.password.$error">
+                        <div ng-message="required">Password is required.</div>
+                    </div>
+                </md-input-container>
+                <div layout="row" layout-align="center center" style="padding-top:20px;">
+                    <md-button class="md-raised md-primary" type="submit" ng-disabled="loginForm.$invalid">Login</md-button>
+                    <span flex></span>
+                    <md-button ui-sref="signup" md-no-ink>Sign Up</md-button>
+                </div>
+            </md-content>
+        </form>
+        <br>
+        <alert type="danger" ng-show="error">{{ error }}</alert>
+    </div>
 </div>
-
-
-
