@@ -33,14 +33,6 @@ var schema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
-    },
-    emailAlert: {
-        type: Boolean,
-        default: false
-    },
-    phoneAlert: {
-        type: Boolean,
-        default: false
     }
 });
 
