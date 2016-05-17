@@ -25,8 +25,8 @@
 
 </head>
 <body ng-app="FullstackGeneratedApp">
-    <navbar ng-if="location.path() !== '/'"></navbar>
-    <sidebar ng-if="location.path() !== '/'" class="col-md-2"></sidebar>
-    <div id="main" ng-class="{'col-md-10': location.path() !== '/'}" ui-view></div>
+    <navbar ng-if="location.path() !== '/' && location.path() !== '/signup'"></navbar>
+    <sidebar ng-if="location.path() !== '/' && location.path() !== '/signup'" class="col-md-2"></sidebar>
+    <div id="main" ng-class="{'col-md-10': location.path() !== '/' && location.path() !== '/signup'}" ui-view></div>
 </body>
 </html>
