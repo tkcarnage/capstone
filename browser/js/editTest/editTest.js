@@ -138,6 +138,7 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
 
         });
         if (cancelTest) return;
+
         TestFactory.runTest($scope.test)
         .then(function(resData) {
             for (var i = 0; i < funcArray.length; i++) {
@@ -150,10 +151,12 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
                 }
             }
             $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
-            return TestFactory.saveResults($scope.results,test._id);
+            return TestFactory.saveResults($scope.results, $scope.test._id);
             // need to add the test id to the results object
         })
-        .then($scope.showResults)
+        .then(function(result) {
+            $scope.showResults();
+        })
         .catch($log.error);
     };
 

@@ -36,6 +36,10 @@ var testSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Test'
 	},
+  result: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Result'
+  },
 	response: {
 		type: String,
 		default: null

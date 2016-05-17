@@ -83,6 +83,7 @@ app.factory('TestFactory', function($http, $log) {
         },
         saveResults: function(results, test_id) {
             results.test = test_id;
+            console.log("RESULTS", results);
             return $http.post('/api/results',results)
             .then(res => res.data);
         }
@@ -207,6 +208,7 @@ $scope.runTest = function() {
         TestFactory.runTest($scope.test)
         .then(function(resData) {
             for (var i = 0; i < funcArray.length; i++) {
+                console.log(i + " TH TEST BEING PUSHED YO");
                 try {
                     $scope.results.validatorResults.push(!!funcArray[i](resData));
                 }
@@ -215,16 +217,17 @@ $scope.runTest = function() {
                     return;
                 }
             }
+            console.log('VALIDATOR RESULTS', $scope.results.validatorResults);
             $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
+            console.log("FINAL RESULT", $scope.results.finalResult);
         })
         .then($scope.showResults);
     };
 
-    $scope.testName="Another Test Title";
 
-    $scope.showResults = function(ev) {
-        $mdDialog.testName = 'Some test name';
-        console.log('showResults is running');
+     $scope.showResults = function(ev) {
+        $mdDialog.test = $scope.test;
+        $mdDialog.results = $scope.results;
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
         $mdDialog.show({
             controller: DialogController,
@@ -236,8 +239,17 @@ $scope.runTest = function() {
         });
     };
 
-    function DialogController($scope, $mdDialog) {
-        $scope.testName = $mdDialog.testName;
+    $scope.viewPreviousResults  = function() {
+
+
+        //view previous results
+    }
+
+ function DialogController($scope, $mdDialog) {
+        $scope.test = $mdDialog.test;
+        $scope.results = $mdDialog.results;
+        console.log('$scope.test:', $scope.test);
+        console.log('$scope.results', $scope.results);
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -248,9 +260,5 @@ $scope.runTest = function() {
             $mdDialog.hide(answer);
         };
     }
-
-
-
-
 
 });
