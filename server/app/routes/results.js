@@ -10,7 +10,7 @@ module.exports = router;
 router.post('/', Auth.assertAuthenticated, function(req,res,next) {
     var result;
     var test;
-    console.log(req.body,"*****");
+    var finalResult = req.body.finalResult;
     Result.create(req.body)
     .then(function(resultDocument) {
         result = resultDocument;
@@ -26,6 +26,8 @@ router.post('/', Auth.assertAuthenticated, function(req,res,next) {
     })
     .then(function() {
       test.result = result;
+      if (finalResult) { test.body.result = 'Passing'; }
+      else { test.body.result = 'Failing'; }
       console.log("TEST RESULT", test.result);
       return test.save()
     })

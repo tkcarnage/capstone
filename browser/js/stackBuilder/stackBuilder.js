@@ -28,23 +28,27 @@ app.factory('StackBuilderFactory', function($http, TestBuilderFactory) {
     };
 });
 
-app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBuilderFactory, $rootScope) {
+app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBuilderFactory, $rootScope, TestBuilderFactory) {
     $scope.tests = tests;
     $scope.stack = {};
     $scope.stack.user = $rootScope.user;
     $scope.stack.userId = $rootScope.user._id;
     $scope.stack.tests = [];
+
+
     $scope.submitStack = function () {
+        console.log("SCOPE STACK", $scope.stack);
         StackBuilderFactory.create($scope.stack)
         .then(stack => $state.go('stackView', {stackId: stack._id}))
         .catch($log.error);
     };
     $scope.addToStack = function (test) {
         let copyOfTest = _.cloneDeep(test);
-        copyOfTest.name = copyOfTest.name + '(' + $scope.stack.name + ')';
+        copyOfTest.name = copyOfTest.name + '_' + $scope.stack.name;
         $scope.stack.tests.push(copyOfTest);
         $scope.$evalAsync();
     };
+
     $scope.removeFromStack = function (index) {
         $scope.stack.tests.splice(index, 1);
         $scope.$evalAsync();

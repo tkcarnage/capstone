@@ -11,6 +11,7 @@ app.config(function ($stateProvider) {
                 .then(res => res.data)
                 .then(test => {
                     test.validators = JSON.parse(test.validators);
+                    console.log(test.validators, typeof test.validators);
                     return test;
                 });
             }
@@ -109,11 +110,10 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
       else {
         TestFactory.getPreviousResults($scope.test)
         .then(function(result) {
-          if (result) {
-            alert(result.finalResult);
-            console.log("RESULT FOUND", result);
-          }
-        });
+          $scope.results = result;
+          $scope.showResults();
+        })
+        .catch($log.error);
       }
     };
 
@@ -132,6 +132,7 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
     };
 
     $scope.runTest = function() {
+        console.log($scope.test,'***');
         let funcArray = [];
         let cancelTest = false;
         $scope.results = {
