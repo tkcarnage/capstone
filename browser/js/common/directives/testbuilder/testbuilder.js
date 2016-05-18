@@ -23,8 +23,6 @@ app.factory('TestFactory', function($http, $log) {
 
     let makeRequest = function(test) {
 
-        console.log('makeRequest is making a request with this test:', test);
-
         let requestObj = {};
 
         requestObj.method = test.method;
@@ -37,7 +35,7 @@ app.factory('TestFactory', function($http, $log) {
             });
         }
         let testData;
-        if (typeof test.body.data === 'string') testData = JSON.parse(test.body.data);
+        if (typeof test.body.data === 'string') test.body.data = JSON.parse(test.body.data);
         testData = test.body.data;
 
         if (test.body.bodytype === 'raw') {
@@ -82,7 +80,6 @@ app.factory('TestFactory', function($http, $log) {
         },
         saveResults: function(results, test_id) {
             results.test = test_id;
-            console.log("RESULTS", results);
             return $http.post('/api/results',results)
             .then(res => res.data);
         },
@@ -214,6 +211,7 @@ $scope.runTest = function() {
         if (cancelTest) return;
         TestFactory.runTest($scope.test)
         .then(function(resData) {
+            console.log('resData:', resData);
             for (var i = 0; i < funcArray.length; i++) {
                 console.log(i + " TH TEST BEING PUSHED YO");
                 try {

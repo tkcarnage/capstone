@@ -9,7 +9,7 @@
       </md-card-title-text>
     <div layout-align="start end" layout="row">
     <div ng-repeat="test in stack.tests">
-      <md-button class="md-fab" ng-class="{'md-primary': test.body.result=='Passing', 'md-accent': test.body.result=='New', 'md-warn': test.body.result=='Failing'}" ui-sref="testeditor({testId: test._id})">
+      <md-button class="md-fab" ng-class="{'md-accent': test.body.result=='Passing', 'md-primary': test.body.result=='New', 'md-warn': test.body.result=='Failing'}" ui-sref="testeditor({testId: test._id})">
       </md-button>
     </div>
     </div>
@@ -17,10 +17,10 @@
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
       <md-button ui-sref='stackView({stackId: stack._id})'>Stack Details</md-button>
-      <md-button>Run Tests</md-button>
-        <md-button class="md-icon-button" ng-click="showConfirm(stack)">
-          <md-icon>delete</md-icon>
-        </md-button>
+      <md-button ng-click='runTests(stack)'>Run Tests</md-button>
+      <md-button class="md-icon-button" ng-click="showConfirm(stack)">
+        <md-icon>delete</md-icon>
+      </md-button>
     </md-card-actions>
     </div>
         </div>

@@ -29,7 +29,7 @@ var customPrimary = {
         'A700': '#49708c'
     };
     $mdThemingProvider
-        .definePalette('customPrimary', 
+        .definePalette('customPrimary',
                         customPrimary);
 
     var customAccent = {
@@ -49,27 +49,27 @@ var customPrimary = {
         'A700': '#e6f6ea'
     };
     $mdThemingProvider
-        .definePalette('customAccent', 
+        .definePalette('customAccent',
                         customAccent);
 
     var customWarn = {
-        '50': '#ffd280',
-        '100': '#ffc966',
-        '200': '#ffc04d',
-        '300': '#ffb733',
-        '400': '#ffae1a',
-        '500': '#ffae1a',
-        '600': '#e69500',
-        '700': '#cc8400',
-        '800': '#b37300',
-        '900': '#996300',
-        'A100': '#ffdb99',
-        'A200': '#ffe4b3',
-        'A400': '#ffedcc',
-        'A700': '#805300'
+        '50': '#ffe5e5',
+        '100': '#ffcccc',
+        '200': '#ffb3b3',
+        '300': '#ff9999',
+        '400': '#ff8080',
+        '500': '#ff6666',
+        '600': '#ff4c4c',
+        '700': '#ff3333',
+        '800': '#ff1919',
+        '900': '#ff0000',
+        'A100': '#ffffff',
+        'A200': '#ffffff',
+        'A400': '#ffffff',
+        'A700': '#e50000'
     };
     $mdThemingProvider
-        .definePalette('customWarn', 
+        .definePalette('customWarn',
                         customWarn);
 
     var customBackground = {
@@ -89,7 +89,7 @@ var customPrimary = {
         'A700': '#bfbfbf'
     };
     $mdThemingProvider
-        .definePalette('customBackground', 
+        .definePalette('customBackground',
                         customBackground);
 
    $mdThemingProvider.theme('default')
@@ -98,7 +98,7 @@ var customPrimary = {
             'hue-1' : '50',
             'hue-2' : '200',
             'hue-3' : '300'
-       }) 
+       })
        .accentPalette('customAccent')
        .warnPalette('customWarn')
        .backgroundPalette('customBackground')
