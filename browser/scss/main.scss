@@ -47,7 +47,7 @@ body {
 
 md-icon {
   width : 2.8rem;
-  height: 2.8rem;  
+  height: 2.8rem;
 }
 
 .md-button.md-small {
@@ -75,7 +75,6 @@ md-icon {
   background: #87D69B;
   color: white;
   text-align: center;
-  padding-top: 40px;
   display: block;
   cursor: move;
 }
@@ -143,8 +142,15 @@ md-icon {
   opacity: 0.8;
 }
 
+.draglist > li > div{
+  word-wrap: break-word;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
+}
+
 @import 'directives/main';
-@import 'home/main'; 
+@import 'home/main';
 @import 'about/main';
 @import 'login/main';
 @import 'directives/sidebar';
