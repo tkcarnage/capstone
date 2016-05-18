@@ -132,7 +132,6 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
     };
 
     $scope.runTest = function() {
-        console.log($scope.test,'***');
         let funcArray = [];
         let cancelTest = false;
         $scope.results = {
@@ -180,8 +179,6 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
     function DialogController($scope, $mdDialog) {
         $scope.test = $mdDialog.test;
         $scope.results = $mdDialog.results;
-        console.log('$scope.test:', $scope.test);
-        console.log('$scope.results', $scope.results);
         $scope.hide = function() {
             $mdDialog.hide();
         };

@@ -14,7 +14,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('homeCtrl', function ($scope, user, stacks, $rootScope) {
+app.controller('homeCtrl', function ($scope, user, stacks, $rootScope, StackBuilderFactory, $log) {
   $scope.user = user;
   $scope.stacks = stacks;
 
@@ -26,5 +26,11 @@ app.controller('homeCtrl', function ($scope, user, stacks, $rootScope) {
     $scope.stacks = $scope.stacks.filter(function(ele){
       return data !== ele._id;
     });
+  });
+
+ $rootScope.$on('testUpdate', function(event, data){
+    StackBuilderFactory.getUserStacks($scope.user)
+    .then(stacks => $scope.stacks = stacks)
+    .catch($log.error);
   });
 });

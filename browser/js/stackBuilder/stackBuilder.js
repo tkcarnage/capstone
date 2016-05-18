@@ -16,7 +16,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.factory('StackBuilderFactory', function($http, $rootScope) {
+app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactory) {
     var obj = {};
         var storedStacks = [];
         obj.getStacks = function(){

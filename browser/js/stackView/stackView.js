@@ -67,7 +67,7 @@ var data = [],
     height - (margin.top + margin.bottom)) / 2,
     // set colors - didnt bother to test this I like blue anyways
     color = d3.scale.ordinal()
-        .range(["#ededed", "#00cc00", "#cc0000", "#ADD6FB", "#D6EBFD"]);
+        .range(["#ededed", "#cc0000", "#00cc00"]);
 
 // build data array and bind hover events
 $.each($.find('[data-chart]'), function (i, el) {
