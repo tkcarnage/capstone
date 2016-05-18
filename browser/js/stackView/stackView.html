@@ -22,7 +22,7 @@
             </thead>
             <tbody md-body>
               <tr md-row md-select="test" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="test in stack.tests | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                <td md-cell>{{test.name || "Untitled"}}</td>a
+                <td md-cell>{{test.name || "Untitled"}}</td>
                 <td md-cell>{{test.method}}</td>
                 <td md-cell>{{test.url}}</td>
                 <td md-cell>{{test.body.result}}</td>
@@ -45,15 +45,18 @@
             <span>Stack Performance</span>
           </div>
         </md-toolbar>
-        <ul data-charts>
-          <li data-chart="newPercent" data-name="new">{{newTests.length}} new tests</li>
-          <li data-chart="failPercent" data-name="pass">{{passTests.length}} passing tests</li>
-          <li data-chart="passPercent" data-name="fail">{{failTests.length}} failing tests</li>
-        </ul>
         <div id="stackinfopanel">
-          <h4>Last run: <em>{{stack.lastRun || "New" }}</em></h4>
+          <div layout="row">
+            <h4 layout="left center">Last ran: {{stack.lastRun || "Never Ran" }}</h4>
+            <span flex></span>
+            <ul data-charts id="legend">
+              <li data-chart="newPercent" data-name="new"><strong>{{newTests.length}} new tests</li>
+              <li data-chart="failPercent" data-name="pass" id="passing">{{passTests.length}} passing tests</li>
+              <li data-chart="passPercent" data-name="fail" id="failing">{{failTests.length}} failing tests</li>
+            </ul>
+          </div>
         </div>
-        <div id="donut"></div>
+         <div id="donut" layout="row" layout-align="center center"></div>
 
       </md-card>
   </div>

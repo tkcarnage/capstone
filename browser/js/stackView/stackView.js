@@ -46,30 +46,9 @@ app.controller('StackViewCtrl', function($scope, $state, $log, stack, StackViewF
     $scope.newTests = StackViewFactory.getTestWithStatus($scope.stack.tests, "New");
     $scope.failTests = StackViewFactory.getTestWithStatus($scope.stack.tests, "Failing");
     $scope.passTests = StackViewFactory.getTestWithStatus($scope.stack.tests, "Passing");
-
     $scope.newPercent = StackViewFactory.getPercent($scope.newTests, $scope.stack.tests.length);
     $scope.failPercent = StackViewFactory.getPercent($scope.failTests, $scope.stack.tests.length);
     $scope.passPercent = StackViewFactory.getPercent($scope.passTests, $scope.stack.tests.length);
-
-
-    var data = [],
-    zoom = 20, // set zoom size in px
-    margin = { // optionally set margins
-        top: zoom,
-        right: zoom,
-        bottom: zoom,
-        left: zoom
-    },
-    // set height and width plus margin so zoomed area is not clipped
-    width = 400 - (margin.left + margin.right), // set width in pixels
-    height = width - (margin.top + margin.bottom), // height matches width
-    // set radius relative to width
-    radius = Math.min(
-    width - (margin.left + margin.right),
-    height - (margin.top + margin.bottom)) / 2,
-    // set colors - didnt bother to test this I like blue anyways
-    color = d3.scale.ordinal()
-        .range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
 
 var data = [],
     zoom = 20, // set zoom size in px
@@ -88,7 +67,7 @@ var data = [],
     height - (margin.top + margin.bottom)) / 2,
     // set colors - didnt bother to test this I like blue anyways
     color = d3.scale.ordinal()
-        .range(["#3399FF", "#5DAEF8", "#86C3FA", "#ADD6FB", "#D6EBFD"]);
+        .range(["#ededed", "#00cc00", "#cc0000", "#ADD6FB", "#D6EBFD"]);
 
 // build data array and bind hover events
 $.each($.find('[data-chart]'), function (i, el) {
@@ -110,7 +89,7 @@ $.each($.find('[data-chart]'), function (i, el) {
             .duration(300)
             .attr("d", arc);
 
-        centerText.text("");
+        centerText.text($scope.passTests.length + "/" + $scope.stack.tests.length + " passing");
     });
 });
 
@@ -159,7 +138,7 @@ var g = chart.selectAll(".arc")
     d3.select(this).select("path").transition()
         .duration(300)
         .attr("d", arc);
-    centerText.text("");
+    centerText.text($scope.passTests.length + "/" + $scope.stack.tests.length + " passing");
 })
     .style("cursor", "pointer")
     .on("click", function () {
@@ -170,6 +149,8 @@ var g = chart.selectAll(".arc")
 var centerText = chart.append("text")
     .attr("dy", ".35em")
     .style("text-anchor", "middle")
+    .text($scope.passTests.length + "/" + $scope.stack.tests.length + " passing");
+
 
 // set fill color and animate tween
 g.append("path")

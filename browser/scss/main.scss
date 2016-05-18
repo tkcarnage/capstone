@@ -72,7 +72,7 @@ md-icon {
 [ng-drag] {
   width: 100px;
   height: 100px;
-  background: rgba(255, 0, 0, 0.5);
+  background: #87D69B;
   color: white;
   text-align: center;
   padding-top: 40px;
@@ -87,7 +87,7 @@ md-icon {
   opacity: 0.5;
 }
 [ng-drop] {
-  background: rgba(0, 0, 0, 0.25);
+  background: #ededed;
   text-align: center;
   display: block;
   position: relative;
@@ -97,7 +97,7 @@ md-icon {
   float: left;
 }
 [ng-drop].drag-enter {
-  border: solid 5px red;
+  border: solid 5px #D3D3D3;
 }
 [ng-drop] span.title {
   display: block;
@@ -122,6 +122,25 @@ md-icon {
   margin: 25px;
   padding: 10px;
   border: #ededed solid 1px ;
+}
+
+#legend {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  font-weight: bold;
+}
+
+#passing {
+  color: #00cc00;
+}
+
+#failing {
+  color: #cc0000;
+}
+
+.stackbutton:hover {
+  opacity: 0.8;
 }
 
 @import 'directives/main';
