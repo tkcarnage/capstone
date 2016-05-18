@@ -16,7 +16,7 @@ app.config(function ($stateProvider) {
 });
 
 
-app.factory('StackBuilderFactory', function($http, $rootScope) {
+app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactory) {
     var obj = {};
         var storedStacks = [];
         obj.getStacks = function(){
@@ -31,6 +31,8 @@ app.factory('StackBuilderFactory', function($http, $rootScope) {
         };
 
         obj.create = function(stackObj) {
+            console.log(stackObj);
+            console.log(stackObj.tests, typeof stackObj.tests,'****');
             let newTests = stackObj.tests.map(test => TestBuilderFactory.create(test));
             return Promise.all(newTests)
             .then(savedTests => stackObj.tests = savedTests)
@@ -62,18 +64,20 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
 
 
     $scope.submitStack = function () {
-        console.log("SCOPE STACK", $scope.stack);
+        $scope.modifiedTests = [];
+        $scope.modifiedTests = $scope.stack.tests.map(function(test) {
+            test.name = test.name + '_' + $scope.stack.name;
+        });
         StackBuilderFactory.create($scope.stack)
         .then(stack => $state.go('stackView', {stackId: stack._id}))
         .catch($log.error);
     };
     $scope.addToStack = function (test) {
-        let copyOfTest = _.cloneDeep(test);
-        copyOfTest.name = copyOfTest.name + '_' + $scope.stack.name;
-        $scope.stack.tests.push(copyOfTest);
+        $scope.stack.tests.push(test);
         $scope.$evalAsync();
     };
-    $scope.removeFromStack = function (obj) {
+    $scope.removeFromStack = function (obj) {   
+        console.log("REMOTE THIS: ", obj);
         $scope.stack.tests = $scope.stack.tests.filter(function(el){
             return el !== obj;
         });
