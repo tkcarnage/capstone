@@ -18,6 +18,14 @@ app.factory('StackViewFactory', function($http) {
             return $http.put('/api/stacks/' + obj._id, obj)
             .then (response => response.data);
         },
+        getTestWithStatus: function (arr, status) {
+            return arr.filter(function(ele){
+                return ele.body.result === status;
+            });
+        },
+        getPercent: function(arr, totallen) {
+            return (arr.length / totallen) * 100;
+        }
     };
 });
 
@@ -34,6 +42,16 @@ app.controller('StackViewCtrl', function($scope, $state, $log, stack, StackViewF
         .catch($log.error);
     };
 
+
+    $scope.newTests = StackViewFactory.getTestWithStatus($scope.stack.tests, "New");
+    $scope.failTests = StackViewFactory.getTestWithStatus($scope.stack.tests, "Failing");
+    $scope.passTests = StackViewFactory.getTestWithStatus($scope.stack.tests, "Passing");
+
+    $scope.newPercent = StackViewFactory.getPercent($scope.newTests, $scope.stack.tests.length);
+    $scope.failPercent = StackViewFactory.getPercent($scope.failTests, $scope.stack.tests.length);
+    $scope.passPercent = StackViewFactory.getPercent($scope.passTests, $scope.stack.tests.length);
+
+
     var data = [],
     zoom = 20, // set zoom size in px
     margin = { // optionally set margins
@@ -44,7 +62,7 @@ app.controller('StackViewCtrl', function($scope, $state, $log, stack, StackViewF
     },
     // set height and width plus margin so zoomed area is not clipped
     width = 400 - (margin.left + margin.right), // set width in pixels
-    height = width - (margin.top + margin.bottom), // height matches width 
+    height = width - (margin.top + margin.bottom), // height matches width
     // set radius relative to width
     radius = Math.min(
     width - (margin.left + margin.right),
@@ -63,7 +81,7 @@ var data = [],
     },
     // set height and width plus margin so zoomed area is not clipped
     width = 400 - (margin.left + margin.right), // set width in pixels
-    height = width - (margin.top + margin.bottom), // height matches width 
+    height = width - (margin.top + margin.bottom), // height matches width
     // set radius relative to width
     radius = Math.min(
     width - (margin.left + margin.right),
@@ -77,7 +95,7 @@ $.each($.find('[data-chart]'), function (i, el) {
     var obj = {}, $el = $(el);
     $el.addClass($el.data('name'));
     obj['name'] = $el.data('name');
-    obj['value'] = $el.data('chart');
+    obj['value'] = $scope[$el.data('chart')];
     data.push(obj);
     $el.on('mouseover', function () {
         d3.select("[id='b-" + i + "']")
@@ -173,6 +191,7 @@ function tweenPie(b) {
         return arc(i(t));
     };
 }
+
 
 
 });
