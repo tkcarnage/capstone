@@ -27,7 +27,7 @@
                 <td md-cell>{{test.url}}</td>
                 <td md-cell>{{test.body.result}}</td>
                 <td md-cell>
-                  <md-button class="md-small md-primary md-raised md-hue-3" ui-sref="testeditor({testId: test._id})">details</md-button>
+                  <md-button class="md-small md-primary md-raised md-hue-3 stackbutton" ui-sref="testeditor({testId: test._id})">details</md-button>
                 </td>
               </tr>
             </tbody>
@@ -51,8 +51,8 @@
             <span flex></span>
             <ul data-charts id="legend">
               <li data-chart="newPercent" data-name="new">{{newTests.length}} new tests</li>
-              <li data-chart="failPercent" data-name="pass" id="passing">{{passTests.length}} passing tests</li>
               <li data-chart="passPercent" data-name="fail" id="failing">{{failTests.length}} failing tests</li>
+              <li data-chart="failPercent" data-name="pass" id="passing">{{passTests.length}} passing tests</li>
             </ul>
           </div>
         </div>

@@ -67,7 +67,7 @@ var data = [],
     height - (margin.top + margin.bottom)) / 2,
     // set colors - didnt bother to test this I like blue anyways
     color = d3.scale.ordinal()
-        .range(["#ededed", "#cc0000", "#00cc00"]);
+        .range(["#ededed", "#00cc00", "#cc0000"]);
 
 // build data array and bind hover events
 $.each($.find('[data-chart]'), function (i, el) {
@@ -132,7 +132,7 @@ var g = chart.selectAll(".arc")
     d3.select(this).select("path").transition()
         .duration(300)
         .attr("d", arcOver);
-    centerText.text(d3.select(this).datum().data.name);
+    // centerText.text(d3.select(this).datum().data.name);
 })
     .on("mouseout", function (d) {
     d3.select(this).select("path").transition()
