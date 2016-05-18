@@ -13,7 +13,6 @@
                 <th md-column><span>Name</span></th>
                 <th md-column><span>Method</span></th>
                 <th md-column><span>URL</span></th>
-                <th md-column><span>Expected Status</span></th>
                 <th md-column><span>Status</span></th>
                 <th md-column>
                   <md-icon>info</md-icon>
@@ -23,10 +22,9 @@
             </thead>
             <tbody md-body>
               <tr md-row md-select="test" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="test in stack.tests | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                <td md-cell>{{test.name || "Untitled"}}</td>
+                <td md-cell>{{test.name || "Untitled"}}</td>a
                 <td md-cell>{{test.method}}</td>
                 <td md-cell>{{test.url}}</td>
-                <td md-cell>{{test.expectedStatus || "Status not set" }}</td>
                 <td md-cell>{{test.body.result}}</td>
                 <td md-cell>
                   <md-button class="md-small md-primary md-raised md-hue-3" ui-sref="testeditor({testId: test._id})">details</md-button>
@@ -52,6 +50,9 @@
           <li data-chart="failPercent" data-name="pass">{{passTests.length}} passing tests</li>
           <li data-chart="passPercent" data-name="fail">{{failTests.length}} failing tests</li>
         </ul>
+        <div id="stackinfopanel">
+          <h4>Last run: <em>{{stack.lastRun || "New" }}</em></h4>
+        </div>
         <div id="donut"></div>
 
       </md-card>
