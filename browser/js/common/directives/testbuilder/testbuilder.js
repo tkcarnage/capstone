@@ -88,6 +88,7 @@ app.factory('TestFactory', function($http, $log) {
         },
         getPreviousResults: function(test) {
             console.log(test);
+            if (!test.result) { return false; }
             return $http.get('/api/results/' + test.result)
             .then(res => res.data);
         }

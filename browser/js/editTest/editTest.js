@@ -105,16 +105,16 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
     };
 
     $scope.viewPreviousResults  = function() {
-      TestFactory.getPreviousResults($scope.test)
+      if (!$scope.test.result) { alert ("NO RESULT TO SHOW"); }
+      else {
+        TestFactory.getPreviousResults($scope.test)
         .then(function(result) {
-        if (result) {
-          alert(result.finalResult);
-          console.log("RESULT FOUND", result);
-        } else {
-            alert("NO RESULTS TO SHOW");
+          if (result) {
+            alert(result.finalResult);
+            console.log("RESULT FOUND", result);
           }
         });
-        //view previous results
+      }
     };
 
     $scope.showResults = function(ev) {
