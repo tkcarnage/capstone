@@ -3,7 +3,8 @@
         <div class="md-whiteframe-2dp">
             <md-toolbar class="md-primary md-hue-1">
                 <div class="md-toolbar-tools ">
-                    <span>Create a Test</span>
+                    <span ng-show="!test.created">Create a Test</span>
+                    <span ng-show="test.created">Edit Test</span>
                 </div>
             </md-toolbar>
             <md-content layout-padding>
