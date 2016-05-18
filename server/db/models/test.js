@@ -41,19 +41,20 @@ var testSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Test'
 	},
+  result: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Result'
+  },
 	response: {
-		type: Number,
+		type: String,
 		default: null
 	},
 	headers: {
 		type: Object,
 	},
-  expectedStatus: {
-    type: String
-  },
-  resultStatus: {
-    type: String
-  },
+    validators: {
+        type: String //name of the validator, function string of the validator
+    },
 	body: {
 		bodytype: {
 			type: String,
@@ -72,6 +73,5 @@ var testSchema = new mongoose.Schema({
 		}
 	},
 });
-
 
 mongoose.model('Test', testSchema);

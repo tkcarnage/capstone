@@ -8,34 +8,32 @@ app.config(function ($stateProvider) {
         resolve: {
             test: function($http, $stateParams) {
                 return $http.get('/api/tests/' + $stateParams.testId)
-                .then( res => res.data);
+                .then(res => res.data)
+                .then(test => {
+                    test.validators = JSON.parse(test.validators);
+                    console.log(test.validators, typeof test.validators);
+                    return test;
+                });
             }
         }
     });
 });
 
 
-app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $rootScope, $state, $log){
+app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $rootScope, $state, $log, TestFactory, $mdDialog, $mdMedia){
     $scope.test = test;
-    $scope.test.body.data = JSON.parse($scope.test.body.data);
+    if (typeof $scope.test.body.data === 'string')  $scope.test.body.data = JSON.parse($scope.test.body.data);
     $scope.test.user = $rootScope.user;
-    // $scope.test.name = 'somename';
-    // $scope.$digest();
-    // console.log($scope.test.user);
-    // $scope.test.url = 'http://';
-    // $scope.test.params = test.params || [];
-    // $scope.test.headers = [];
-    // $scope.test.body = {};
-    // $scope.test.body.data = [];
-    // $scope.test.method = "GET";
     $scope.showParams = false;
     $scope.showHeaders = false;
     $scope.showBody = false;
+    $scope.showValidators = false;
     $scope.numParams = 0;
     $scope.numHeaders = 0;
     $scope.numBodyObj = 0;
     $scope.addForm = function(index, type){
-        if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0 || index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
+        if (type === 'validator') $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
+        else if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0 || index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
             if (type === "params") {
                 $scope.numParams++;
                 $scope.test.params.push({});
@@ -60,7 +58,6 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
         }
         $scope.showParams = !$scope.showParams;
         console.log($scope.test.params);
-        $scope.evalAsync;
     };
 
     $scope.displayHeaders = function(){
@@ -70,7 +67,6 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
         }
         $scope.showHeaders = !$scope.showHeaders;
         console.log($scope.test.headers);
-        $scope.evalAsync;
     };
 
     $scope.displayBody = function(){
@@ -79,7 +75,13 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
             $scope.numBodyObj++;
         }
         $scope.showBody = !$scope.showBody;
-        $scope.evalAsync;
+    };
+
+    $scope.displayValidators = function(){
+        if ($scope.test.validators.length === 0) {
+            $scope.addForm(0,"validator");
+        }
+        $scope.showValidators = !$scope.showValidators;
     };
 
     $scope.composeURL = function() {
@@ -96,11 +98,99 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
         $scope.test.url = $scope.test.url.slice(0,$scope.test.url.length - 1);
     };
 
-    $scope.submitTest = function(){
+    $scope.saveTest = function(){
         $scope.test.url = $scope.test.url;
         TestBuilderFactory.edit($scope.test)
         .then(() => $state.go('allTests'))
         .catch($log.error);
     };
+
+    $scope.viewPreviousResults  = function() {
+      if (!$scope.test.result) { alert ("NO RESULT TO SHOW"); }
+      else {
+        TestFactory.getPreviousResults($scope.test)
+        .then(function(result) {
+          $scope.results = result;
+          $scope.showResults();
+        })
+        .catch($log.error);
+      }
+    };
+
+    $scope.showResults = function(ev) {
+        $mdDialog.test = $scope.test;
+        $mdDialog.results = $scope.results;
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'js/common/directives/testbuilder/testResults.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: useFullScreen
+        });
+    };
+
+    $scope.runTest = function() {
+        console.log($scope.test,'***');
+        let funcArray = [];
+        let cancelTest = false;
+        $scope.results = {
+            validatorResults: [],
+            lastRun: Date.now()
+        };
+        $scope.test.validators.forEach(function (elem) {
+            try {
+                if (elem.func.length > 23) {
+                    funcArray.push(eval('(' + elem.func + ')'));
+                }
+            }
+            catch(err) {
+                alert('There was an error parsing the ' + elem.name + ' validator function. Refactor that function and try again.');
+                cancelTest = true;
+            }
+
+        });
+        if (cancelTest) return;
+
+        TestFactory.runTest($scope.test)
+        .then(function(resData) {
+            for (var i = 0; i < funcArray.length; i++) {
+                try {
+                    $scope.results.validatorResults.push(!!funcArray[i](resData));
+                }
+                catch (err){
+                    alert('The following error occured while running the ' + $scope.test.validators[i].name + ' validator function: ' + err.message + '. Refactor that function and try again.');
+                    return;
+                }
+            }
+            $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
+            return TestFactory.saveResults($scope.results, $scope.test._id);
+            // need to add the test id to the results object
+        })
+        .then(function(test) {
+            // console.log("TEST ID,", test._id);
+            $scope.test.result = test.result._id;
+            console.log("TEST RESULTS", test.result._id);
+            $scope.showResults();
+        })
+        .catch($log.error);
+    };
+
+    function DialogController($scope, $mdDialog) {
+        $scope.test = $mdDialog.test;
+        $scope.results = $mdDialog.results;
+        console.log('$scope.test:', $scope.test);
+        console.log('$scope.results', $scope.results);
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
+    }
 
 });

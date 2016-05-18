@@ -15,6 +15,7 @@ app.config(function ($stateProvider) {
     });
 });
 
+
 app.factory('StackBuilderFactory', function($http, $rootScope) {
     var obj = {};
         var storedStacks = [];
@@ -30,7 +31,10 @@ app.factory('StackBuilderFactory', function($http, $rootScope) {
         };
 
         obj.create = function(stackObj) {
-            return $http.post('/api/stacks', stackObj)
+            let newTests = stackObj.tests.map(test => TestBuilderFactory.create(test));
+            return Promise.all(newTests)
+            .then(savedTests => stackObj.tests = savedTests)
+            .then( () => $http.post('/api/stacks', stackObj))
             .then(res => {
                 $rootScope.$emit('createstack', res.data);
                 return res.data;
@@ -49,26 +53,30 @@ app.factory('StackBuilderFactory', function($http, $rootScope) {
     return obj;
 });
 
-app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBuilderFactory, $rootScope) {
+app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBuilderFactory, $rootScope, TestBuilderFactory) {
     $scope.tests = tests;
     $scope.stack = {};
     $scope.stack.user = $rootScope.user;
     $scope.stack.userId = $rootScope.user._id;
     $scope.stack.tests = [];
+
+
     $scope.submitStack = function () {
+        console.log("SCOPE STACK", $scope.stack);
         StackBuilderFactory.create($scope.stack)
         .then(stack => $state.go('stackView', {stackId: stack._id}))
         .catch($log.error);
     };
     $scope.addToStack = function (test) {
-        $scope.stack.tests.push(test);
+        let copyOfTest = _.cloneDeep(test);
+        copyOfTest.name = copyOfTest.name + '_' + $scope.stack.name;
+        $scope.stack.tests.push(copyOfTest);
         $scope.$evalAsync();
     };
     $scope.removeFromStack = function (obj) {
         $scope.stack.tests = $scope.stack.tests.filter(function(el){
             return el !== obj;
         });
-            
         $scope.$evalAsync();
     };
     $scope.onDropComplete = function (index, obj, evt) {

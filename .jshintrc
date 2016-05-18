@@ -4,6 +4,7 @@
   "esversion": 6,
   "predef": [
               "app",
-              "angular"
+              "angular",
+              "alert"
     ]
 }
