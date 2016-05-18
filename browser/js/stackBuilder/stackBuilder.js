@@ -15,17 +15,42 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.factory('StackBuilderFactory', function($http, TestBuilderFactory) {
 
-    return {
-        create: function(stackObj) {
+app.factory('StackBuilderFactory', function($http, $rootScope) {
+    var obj = {};
+        var storedStacks = [];
+        obj.getStacks = function(){
+            return storedStacks;
+        };
+        obj.getUserStacks = function(user){
+            return $http.get('/api/stacks?userId=' + user._id) //TEST $stateParams.id
+            .then(response => {
+                angular.copy(response.data, storedStacks);
+                return storedStacks;
+            });
+        };
+
+        obj.create = function(stackObj) {
             let newTests = stackObj.tests.map(test => TestBuilderFactory.create(test));
             return Promise.all(newTests)
             .then(savedTests => stackObj.tests = savedTests)
             .then( () => $http.post('/api/stacks', stackObj))
-            .then(res => res.data);
-        }
-    };
+            .then(res => {
+                $rootScope.$emit('createstack', res.data);
+                return res.data;
+            });
+        };
+        obj.delete = function(stackObj) {
+            return $http.delete('/api/stacks/' + stackObj._id)
+            .then(res => {
+                storedStacks = storedStacks.filter(function(ele){
+                    return ele._id !== res.data;
+                });
+                $rootScope.$emit('deletestack', res.data);
+                return res.data;
+            });
+        };
+    return obj;
 });
 
 app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBuilderFactory, $rootScope, TestBuilderFactory) {
@@ -48,9 +73,17 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
         $scope.stack.tests.push(copyOfTest);
         $scope.$evalAsync();
     };
-
-    $scope.removeFromStack = function (index) {
-        $scope.stack.tests.splice(index, 1);
+    $scope.removeFromStack = function (obj) {
+        $scope.stack.tests = $scope.stack.tests.filter(function(el){
+            return el !== obj;
+        });
         $scope.$evalAsync();
+    };
+    $scope.onDropComplete = function (index, obj, evt) {
+        var otherObj = $scope.stack.tests[index];
+        var otherIndex = $scope.stack.tests.indexOf(obj);
+        $scope.stack.tests[index] = obj;
+        $scope.stack.tests[otherIndex] = otherObj;
+        console.log($scope.stack.tests);
     };
 });

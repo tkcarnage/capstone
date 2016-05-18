@@ -1,41 +1,59 @@
-<section id="stackbuilder">
-    <div class="row">
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-10">
-            <div class="inner">
-                <md-content>
-                    <div class="container-fluid">
-                        <h1>Welcome to the StackBuilder Page</h1>
-                        <p>Here are the available tests for your stack:</p>
-                        <ul ng-repeat='test in tests'>
-                            <li>{{test.name}}</li>
-                            <button class="btn btn-xs" ng-click="addToStack(test)"><i class="glyphicon glyphicon-plus">Add</i></button>
-                        </ul>
-                        <p>Here are your selected tests for your stack</p>
-                        <ol ng-repeat='test in stack.tests'>
-                            <li>{{test.name}}</li>
-                            <button class="btn btn-xs" ng-click="removeFromStack($index)"><i class="glyphicon glyphicon-remove">Remove</i></button>
-                        </ol>
-                        <div class="container reqeditor col-md-10">
-                            <form class="form-inline">
-                                <form name="formInput">
-                                    <div class="form-group reqeditor">
-                                        <input type="text" class="form-control input-lg" id="name" placeholder="Enter name of stack" ng-model="stack.name">
-                                        <hr>
-                                        <button class="btn btn-default btn-lg">Try</button>
-                                        <button type="submit" class="btn btn-success btn-lg" ng-click="submitStack()">Save</button>
-                                        {{test}}
+<section id="stackcreator">
+    <div class='inner'>
+        <div class="md-whiteframe-2dp">
+            <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools ">
+                    <span>Create a Stack</span>
+                </div>
+            </md-toolbar>
+            <md-content layout-padding>
+                <div layout="column" ng-cloak class="md-inline-form">
+                    <form name="stackForm">
+                        <md-content layout-padding>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                <label>Stack Name</label>
+                                    <input name="name" ng-model="stack.name" required>
+                                    <div ng-messages="stackForm.name.$error">
+                                        <div ng-message="required">Stack name is required.</div>
                                     </div>
-                                </form>
-                            </form>
+                                </md-input-container>
+                            </div>
+                        <div layout-gt-sm="row">
+                            <div layout-gt-sm="column">
+                                <h4>Tests available for your stack</h4>
+                                <span ng-repeat='test in tests'>
+                                <md-button class="btn btn-xs" ng-click="addToStack(test)" ng-disabled="stack.tests.indexOf(test) !== -1"><md-icon class="material-icons">add</md-icon>Add {{test.name}}, {{test.method}}, {{test.url}}</md-button>
+                                </span>
+                            </div>
+                            <span flex></span>
+                            <div layout-gt-sm="column">
+                                <h4 ng-show="stack.tests.length">Tests in your stack</h4>
+                                <span ng-repeat='test in stack.tests'>
+                                    <md-button class="btn btn-xs" ng-click="removeFromStack(test)"><md-icon class="material-icons">delete</md-icon>Remove {{test.name}}</md-button>
+                                </span>
+                            </div>
+                        </div>  
+                        <div class="row text-center">
+                            <ul class="draglist">
+                                <li ng-repeat="test in stack.tests" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
+                                    <div ng-drag="true" ng-drag-data="test" ng-class="test.name">
+                                        {{test.name}}
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                </md-content>
+                        <div layout-gt-sm="row">
+                            <h4><strong>{{stack.tests.length}}</strong> tests currently in stack</h4>
+                            <span flex></span>
+                            <md-button class="md-raised md-primary stackbutton">Run Stack</md-button>
+                            <md-button type="submit" class="md-raised md-accent stackbutton" ng-click="submitStack()">Save Stack</md-button>
+                        </div>
+                        </md-content>
+                    </form>
+                </div>
             </div>
-        </div>
+        </md-content>
     </div>
-
+</div>
 </section>

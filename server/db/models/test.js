@@ -1,6 +1,11 @@
 var mongoose = require('mongoose');
 
 var testSchema = new mongoose.Schema({
+	created: {
+		type: Boolean,
+		enum: [true, false],
+		default: false,
+	},
 	name: {
 		type: String,
 		default: null,

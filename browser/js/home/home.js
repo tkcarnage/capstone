@@ -5,20 +5,26 @@ app.config(function ($stateProvider) {
         controller: 'homeCtrl',
         resolve: {
             user: function(AuthService) {
-                console.log("Getting user");
                 return AuthService.getLoggedInUser();
             },
-            stacks: function($http, user) {
-                console.log("Getting stack", user);
-                return $http.get('/api/stacks?userId=' + user._id) //TEST $stateParams.id
-                .then(response => response.data);
+            stacks: function($http, user, StackBuilderFactory) {
+                return StackBuilderFactory.getUserStacks(user);
             }
         }
     });
 });
 
-app.controller('homeCtrl', function ($scope, $state, user, stacks, SidebarFactory, SignupFactory, $rootScope) {
-    $scope.user = user;
-    $scope.stacks = stacks;
+app.controller('homeCtrl', function ($scope, user, stacks, $rootScope) {
+  $scope.user = user;
+  $scope.stacks = stacks;
 
+  $rootScope.$on('createstack', function(event, data){
+    $scope.stacks.push(data);
+  });
+
+  $rootScope.$on('deletestack', function(event, data){
+    $scope.stacks = $scope.stacks.filter(function(ele){
+      return data !== ele._id;
+    });
+  });
 });

@@ -1,22 +1,5 @@
-<!-- <div>
-	<div class="inner">
-		<div ng-repeat="test in allTests">
-			<button ui-sref="testeditor({testId: test._id})">
-			  {{test.name}}
-			  {{test.result}}
-			</button>
-		</div>
-	</div>
-</div> -->
+
   <div layout="column">
-
-<!--     <md-toolbar class="md-whiteframe-1dp md-primary md-hue-1">
-      <div class="md-toolbar-tools">
-        <div class="md-title">All Tests</div>
-      </div>
-    </md-toolbar> -->
-
-
 
       <md-card>
 
@@ -37,8 +20,7 @@
               <tr md-row>
                 <th md-column md-order-by="name"><span>Name</span></th>
                 <th md-column md-order-by="method"><span>Method</span></th>
-                <th md-column md-order-by="name"><span>URL</span></th>
-                <th md-column md-order-by="expectedStatus"><span>Expected Status</span></th>
+                <th md-column md-order-by="url"><span>URL</span></th>
                 <th md-column md-order-by="resultStatus"><span>Status</span></th>
                 <th md-column>
                   <md-icon>info</md-icon>
@@ -51,7 +33,6 @@
                 <td md-cell>{{test.name || "Untitled"}}</td>
                 <td md-cell>{{test.method}}</td>
                 <td md-cell>{{test.url}}</td>
-                <td md-cell>{{test.expectedStatus || "Status not set" }}</td>
                 <td md-cell>{{test.body.result}}</td>
                 <td md-cell>
                   <md-button class="md-small md-primary md-raised md-hue-3" ui-sref="testeditor({testId: test._id})">details</md-button>

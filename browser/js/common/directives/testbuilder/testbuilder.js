@@ -186,6 +186,7 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 
 	$scope.saveTest = function(){
 		$scope.test.url = $scope.test.url;
+		$scope.test.created = true;
 		TestBuilderFactory.create($scope.test)
         .then(() => $state.go('allTests'))
         .catch($log.error);
