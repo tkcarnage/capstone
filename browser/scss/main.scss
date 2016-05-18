@@ -118,6 +118,12 @@ md-icon {
   margin: 0 auto;
 }
 
+#stackinfopanel {
+  margin: 25px;
+  padding: 10px;
+  border: #ededed solid 1px ;
+}
+
 @import 'directives/main';
 @import 'home/main'; 
 @import 'about/main';

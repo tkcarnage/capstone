@@ -13,7 +13,6 @@
                 <th md-column><span>Name</span></th>
                 <th md-column><span>Method</span></th>
                 <th md-column><span>URL</span></th>
-                <th md-column><span>Expected Status</span></th>
                 <th md-column><span>Status</span></th>
                 <th md-column>
                   <md-icon>info</md-icon>
@@ -26,7 +25,6 @@
                 <td md-cell>{{test.name || "Untitled"}}</td>
                 <td md-cell>{{test.method}}</td>
                 <td md-cell>{{test.url}}</td>
-                <td md-cell>{{test.expectedStatus || "Status not set" }}</td>
                 <td md-cell>{{test.body.result}}</td>
                 <td md-cell>
                   <md-button class="md-small md-primary md-raised md-hue-3" ui-sref="testeditor({testId: test._id})">details</md-button>
@@ -48,11 +46,14 @@
           </div>
         </md-toolbar>
         <ul data-charts>
-          <li data-chart="10" data-name="one">one</li>
-          <li data-chart="20" data-name="two">two</li>
-          <li data-chart="30" data-name="three">three</li>
-          <li data-chart="40" data-name="four">four</li>
+          <li ng-hide="true" data-chart="10" data-name="one">one</li>
+          <li ng-hide="true" data-chart="20" data-name="two">two</li>
+          <li ng-hide="true" data-chart="30" data-name="three">three</li>
+          <li ng-hide="true" data-chart="40" data-name="four">four</li>
         </ul>
+        <div id="stackinfopanel">
+          <h4>Last run: <em>{{stack.lastRun || "New" }}</em></h4>
+        </div>
         <div id="donut"></div>
 
       </md-card>
