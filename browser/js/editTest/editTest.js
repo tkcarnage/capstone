@@ -104,6 +104,19 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
         .catch($log.error);
     };
 
+    $scope.viewPreviousResults  = function() {
+      TestFactory.getPreviousResults($scope.test)
+        .then(function(result) {
+        if (result) {
+          alert(result.finalResult);
+          console.log("RESULT FOUND", result);
+        } else {
+            alert("NO RESULTS TO SHOW");
+          }
+        });
+        //view previous results
+    };
+
     $scope.showResults = function(ev) {
         $mdDialog.test = $scope.test;
         $mdDialog.results = $scope.results;
@@ -154,7 +167,10 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
             return TestFactory.saveResults($scope.results, $scope.test._id);
             // need to add the test id to the results object
         })
-        .then(function(result) {
+        .then(function(test) {
+            // console.log("TEST ID,", test._id);
+            $scope.test.result = test.result._id;
+            console.log("TEST RESULTS", test.result._id);
             $scope.showResults();
         })
         .catch($log.error);

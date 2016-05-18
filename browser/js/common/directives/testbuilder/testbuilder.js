@@ -79,12 +79,16 @@ app.factory('TestFactory', function($http, $log) {
             //Construct and send the $http request
             return makeRequest(test)
             .catch($log.error);
-            //Parsing the response
         },
         saveResults: function(results, test_id) {
             results.test = test_id;
             console.log("RESULTS", results);
             return $http.post('/api/results',results)
+            .then(res => res.data);
+        },
+        getPreviousResults: function(test) {
+            console.log(test);
+            return $http.get('/api/results/' + test.result)
             .then(res => res.data);
         }
     };
@@ -114,6 +118,7 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 	$scope.numParams = 0;
 	$scope.numHeaders = 0;
 	$scope.numBodyObj = 0;
+    $scope.isNewTest = true;
 	$scope.addForm = function(index, type){
 		if (type === 'validator') $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
         else if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0 || index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
@@ -238,12 +243,6 @@ $scope.runTest = function() {
             fullscreen: useFullScreen
         });
     };
-
-    $scope.viewPreviousResults  = function() {
-
-
-        //view previous results
-    }
 
  function DialogController($scope, $mdDialog) {
         $scope.test = $mdDialog.test;

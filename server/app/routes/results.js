@@ -26,9 +26,10 @@ router.post('/', Auth.assertAuthenticated, function(req,res,next) {
     })
     .then(function() {
       test.result = result;
-      console.log("TEST", test);
-      res.send(test);
+      console.log("TEST RESULT", test.result);
+      return test.save()
     })
+    .then(test => res.send(test))
     .catch(next);
 });
 
