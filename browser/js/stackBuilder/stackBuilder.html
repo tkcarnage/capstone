@@ -13,10 +13,10 @@
                             <div layout-gt-sm="row">
                                 <md-input-container class="md-block" flex-gt-sm>
                                 <label>Stack Name</label>
-                                    <input name="name" ng-model="stack.name" md-maxlength='10'required>
+                                    <input name="name" ng-model="stack.name" md-maxlength='15'required>
                                     <div ng-messages="stackForm.name.$error">
                                         <div ng-message="required">Stack name is required.</div>
-                                        <div ng-message='md-maxlength'>Stack name must be 10 or fewer characters</div>
+                                        <div ng-message='md-maxlength'>Stack name must be 15 or fewer characters</div>
                                     </div>
                                 </md-input-container>
                             </div>
@@ -24,7 +24,7 @@
                             <div layout-gt-sm="column">
                                 <h4>Tests available for your stack</h4>
                                 <span ng-repeat='test in tests'>
-                                <md-button class="btn btn-xs" ng-click="addToStack(test)" ng-disabled="stack.tests.indexOf(test) !== -1"><md-icon class="material-icons">add</md-icon>{{test.name}} |  {{test.method}} |  {{test.url}}</md-button>
+                                <md-button class="btn btn-xs" ng-click="addToStack(test)" ng-disabled="stack.tests.indexOf(test) !== -1 || stack.tests.length > 9"><md-icon class="material-icons">add</md-icon>{{test.name}} |  {{test.method}} |  {{test.url}}</md-button>
                                 </span>
                             </div>
                             <span flex></span>
