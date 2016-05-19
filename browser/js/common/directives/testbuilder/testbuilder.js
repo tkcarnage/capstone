@@ -113,33 +113,29 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 	$scope.showHeaders = false;
 	$scope.showBody = false;
     $scope.showValidators = false;
-	$scope.numParams = 0;
-	$scope.numHeaders = 0;
-	$scope.numBodyObj = 0;
+	// $scope.numParams = 0;
+	// $scope.numHeaders = 0;
+	// $scope.numBodyObj = 0;
+ //    $scope.numValidators = 0;
     $scope.isNewTest = true;
 	$scope.addForm = function(index, type){
-		if (type === 'validator') $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
-        else if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0 || index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
-			if (type === "params") {
-				$scope.numParams++;
-				$scope.test.params.push({});
-			}
-			else if (type === "headers") {
-				$scope.numHeaders++;
-				$scope.test.headers.push({});
-			}
-			else if (type === "body") {
-        $scope.numBodyObj++;
-				$scope.test.body.data.push({});
-			}
-		}
-		$scope.$evalAsync();
-	};
+		// if (type === 'validator') $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
+        console.log("index", index, "type", type);
+        if (type !== 'body' && (index === $scope.test[type].length - 1 || $scope.test[type].length === 0) ) {
+            if (type === "params") $scope.test.params.push({});
+            if (type === "headers") $scope.test.headers.push({});
+            if (type === "validators") $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
+        }
+        else if (index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
+            $scope.test.body.data.push({});
+        }
+    $scope.$evalAsync();
+};
 
 	$scope.showForm = function(){
 		if ($scope.test.params.length === 0) {
 			$scope.addForm(0,"params");
-			$scope.numParams++;
+			// $scope.numParams++;
 		}
 		$scope.showParams = !$scope.showParams;
 	};
@@ -147,7 +143,7 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 	$scope.displayHeaders = function(){
 		if ($scope.test.headers.length === 0) {
 			$scope.addForm(0,"headers");
-			$scope.numHeaders++;
+			// $scope.numHeaders++;
 		}
 		$scope.showHeaders = !$scope.showHeaders;
 	};
@@ -155,14 +151,14 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 	$scope.displayBody = function(){
         if ($scope.test.body.data.length === 0) {
 			$scope.addForm(0,"body");
-			$scope.numBodyObj++;
+			// $scope.numBodyObj++;
 		}
 		$scope.showBody = !$scope.showBody;
 	};
 
     $scope.displayValidators = function(){
         if ($scope.test.validators.length === 0) {
-            $scope.addForm(0,"validator");
+            $scope.addForm(0,"validators");
         }
         $scope.showValidators = !$scope.showValidators;
     };
