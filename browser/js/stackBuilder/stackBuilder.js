@@ -56,7 +56,9 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
 });
 
 app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBuilderFactory, $rootScope, TestBuilderFactory) {
-    $scope.tests = tests;
+    $scope.tests = tests.filter(function(test){
+        return !test.stack;
+    });
     $scope.stack = {};
     $scope.stack.user = $rootScope.user;
     $scope.stack.userId = $rootScope.user._id;

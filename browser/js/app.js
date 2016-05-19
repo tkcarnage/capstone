@@ -23,7 +23,7 @@ var customPrimary = {
         '700': '#6e97b3',
         '800': '#5e8bab',
         '900': '#527e9d',
-        'A100': '#f4f7fa',
+        'A100': '#C2C2C2',
         'A200': '#ffffff',
         'A400': '#ffffff',
         'A700': '#49708c'
@@ -97,7 +97,7 @@ var customPrimary = {
             'default' : '500',
             'hue-1' : '50',
             'hue-2' : '200',
-            'hue-3' : '300'
+            'hue-3' : 'A100'
        })
        .accentPalette('customAccent')
        .warnPalette('customWarn')
