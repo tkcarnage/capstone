@@ -34,7 +34,7 @@ app.on('window-all-closed', function() {
 
 function createWindow () {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 900, height: 600});
+    mainWindow = new BrowserWindow({width: 1200, height: 1080, "node-integration": false});
 
     // and load the index.html of the app.
     mainWindow.loadURL('http://localhost:1337/');
@@ -46,7 +46,7 @@ function createWindow () {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
-};
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
