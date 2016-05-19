@@ -24,6 +24,7 @@
     "tests"
   ],
   "dependencies": {
-    "ngDraggable": "~0.1.8"
+    "ngDraggable": "~0.1.8",
+    "angular-ui-ace": "bower"
   }
 }
