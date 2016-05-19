@@ -64,10 +64,10 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
 
 
     $scope.submitStack = function () {
-        $scope.modifiedTests = [];
-        $scope.modifiedTests = $scope.stack.tests.map(function(test) {
-            test.name = test.name + '_' + $scope.stack.name;
-        });
+        // $scope.modifiedTests = [];
+        // $scope.modifiedTests = $scope.stack.tests.map(function(test) {
+        //     test.name = test.name + '_' + $scope.stack.name;
+        // });
         StackBuilderFactory.create($scope.stack)
         .then(stack => $state.go('stackView', {stackId: stack._id}))
         .catch($log.error);
