@@ -93,7 +93,8 @@ app.factory('TestFactory', function($http, $log) {
 });
 
 app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope, $log, AuthService, TestFactory, $mdDialog, $mdMedia){
-	$scope.test = {};
+	
+    $scope.test = {};
 	$scope.test.name = 'newTest';
     AuthService.getLoggedInUser()
     .then(function(user){
