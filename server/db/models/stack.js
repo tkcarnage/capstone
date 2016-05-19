@@ -1,4 +1,7 @@
+'use strict';
+
 const mongoose = require('mongoose');
+const Test = mongoose.model('Test');
 
 var stackSchema = new mongoose.Schema({
 	name: String,
@@ -8,39 +11,26 @@ var stackSchema = new mongoose.Schema({
 	lastRun: {
 		type: Date,
 		default: null
-	},
-	// use this model prop to direct the CRON job
-	// the properties in frequency correspond to CRON timing properties
-	// but on the front-end, we simply show "hourly" or "every day at 10:52 P.M."
-	autorun: { //
-		status: {
-			type: Boolean,
-		},
-		frequency: {
-			minute: {
-				type: String, // (0-59, but user only sees time input field, so no need to validate generated data)
-				default: '*', // asterisk covers all cases in CRON
-			},
-			hour: {
-				type: String, // (0-23, see above)
-				default: '*', // see above
-			},
-			dayofmonth: { // (1-31, see above)
-				type: String,
-				default: '*', // see above
-			},
-			month: {
-				type: String, // (1-12, see above)
-				default: '*', // see above
-			},
-			dayofweek: {
-				type: String, // (0-6, Sunday is 0, see above)
-				default: '*', // see above
-			},
-		},
-
 	}
 });
 
-mongoose.model('Stack', stackSchema);
+stackSchema.methods.deleteTests = function() {
+	let self = this;
+	Test.remove({_id: {$in: this.tests}})
+	.then(function() {
+		return self;
+	});
+};
 
+stackSchema.methods.associateTests = function() {
+
+	let savePromises = this.tests.map(test => {
+		test.stack = this._id;
+		test.save();
+	});
+
+	Promise.all(savePromises)
+	.then( () => this);
+};
+
+mongoose.model('Stack', stackSchema);

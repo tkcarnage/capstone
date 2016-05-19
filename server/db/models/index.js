@@ -3,8 +3,8 @@
 // anywhere the User model needs to be used.
 require('./user');
 require('./index');
-require('./stack');
 require('./test');
+require('./stack');
 require('./result');
 // require('./project'); //after MVP
 
