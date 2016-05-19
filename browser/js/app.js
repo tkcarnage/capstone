@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'ngMaterial', 'ngMessages', 'md.data.table', 'ngDraggable']);
+window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'ngMaterial', 'ngMessages', 'md.data.table', 'ngDraggable' , 'ui.ace']);
 
 app.config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) {
 
