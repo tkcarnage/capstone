@@ -56,7 +56,7 @@
                             </md-content>
                             <md-content layout-padding>
                                 <div layout-gt-sm="row">
-                                    <md-button class="md-raised md-accent stackbutton" id="params" ng-click="showForm()">Add Query Parameters</md-button>
+                                    <md-button class="md-raised md-accent stackbutton" id="params" ng-click="showForm()"><span ng-hide="showParams">Add</span><span ng-show="showParams">Hide</span> Query Parameters</md-button>
                                 </div>
                                 <div ng-repeat="param in test.params track by $index" ng-show="showParams" class="keyvalForms">
                                     <div layout-gt-sm="row">
@@ -73,7 +73,7 @@
                             </md-content>
                             <md-content layout-padding>
                                 <div layout-gt-sm="row">
-                                    <md-button class="md-raised md-accent stackbutton" id="params" ng-click="displayHeaders()">Add Headers</md-button>
+                                    <md-button class="md-raised md-accent stackbutton" id="params" ng-click="displayHeaders()"><span ng-hide="showHeaders">Add</span><span ng-show="showHeaders">Hide</span> Headers</md-button>
                                 </div>
                                 <div ng-repeat="header in test.headers track by $index" ng-show="showHeaders">
                                     <div layout-gt-sm="row">
@@ -90,7 +90,7 @@
                             </md-content>
                             <md-content layout-padding>
                                 <div layout-gt-sm="row">
-                                    <md-button class="md-raised md-accent stackbutton" id="params" ng-click="displayBody()">Add Request Body</md-button>
+                                    <md-button class="md-raised md-accent stackbutton" id="params" ng-click="displayBody()"><span ng-hide="showBody">Add</span><span ng-show="showBody">Hide</span> Request Body</md-button>
                                 </div>
                                     <md-radio-group ng-model="test.body.bodytype" ng-show="showBody">
                                         <md-radio-button value="x-www-form-urlencoded" class="md-primary">x-www-form-urlencoded</md-radio-button>
@@ -114,7 +114,7 @@
                                 <h4>Validator Functions</h4>
                                 <p>After the test request is sent, the resulting response object will be passed in to each validator function as the only parameter. Every validator function must return a boolean: true if the test should pass or false if the test should fail.</p>
                                 <div layout-gt-sm="row">
-                                    <md-button class="md-raised md-accent stackbutton" id="validators" ng-click="displayValidators()">Add validators</md-button>
+                                    <md-button class="md-raised md-accent stackbutton" id="validators" ng-click="displayValidators()"><span ng-hide="showValidators">Add</span><span ng-show="showValidators">Hide</span> validators</md-button>
                                 </div>
                                 <div ng-repeat="validator in test.validators track by $index" ng-show="showValidators">
                                     <div layout-gt-sm="row">
@@ -124,8 +124,10 @@
                                         </md-input-container>
                                     </div>
                                     <div layout-gt-sm="row">
-                                        <md-input-container class="md-block" flex="100">
-                                            <textarea aria-label="validatoreditor" ng-click="addForm($index, 'validators')" ng-model="test.validators[$index].func"></textarea>
+                                        <md-input-container class="md-block" flex="40">
+                                            <div ui-ace aria-label="validatoreditor" ng-click="addForm($index, 'validators')" ng-model="test.validators[$index].func">
+                                                
+                                            </div>
                                         </md-input-container>
                                     </div>
                                 </div>
