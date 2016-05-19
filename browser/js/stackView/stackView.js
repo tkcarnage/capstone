@@ -31,6 +31,8 @@ app.factory('StackViewFactory', function($http) {
     };
 });
 
+// console.log($);
+
 app.controller('StackViewCtrl', function($scope, $state, $log, stack, StackViewFactory) {
     console.log(stack);
     $scope.stack = stack;
@@ -95,6 +97,9 @@ $.each($.find('[data-chart]'), function (i, el) {
         centerText.text($scope.passTests.length + "/" + $scope.stack.tests.length + " passing");
     });
 });
+// $('body').css('background-color', 'blue');
+
+// console.log($);
 
 // build chart
 var chart = d3.select("#donut")
