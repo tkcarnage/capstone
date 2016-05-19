@@ -117,6 +117,8 @@ app.run(function ($rootScope, AuthService, $state, $location) {
         return state.data && state.data.authenticate;
     };
 
+    // var d3 = require('path/to/d3.js');
+
     // $stateChangeStart is an event fired
     // whenever the process of changing a state begins.
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
