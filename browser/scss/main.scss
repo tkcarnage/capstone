@@ -33,6 +33,7 @@ body {
   background-color: #ededed;
   height: 100%;
   padding: 0px;
+  padding-top: 70px;
 }
 
 .inner {
@@ -139,6 +140,10 @@ md-icon {
 
 .stackbutton:hover {
   opacity: 0.8;
+}
+
+.runhover:hover {
+  color: #7fa3bc;
 }
 
 .draglist > li > div{

@@ -23,7 +23,7 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
             return storedStacks;
         };
         obj.getUserStacks = function(user){
-            return $http.get('/api/stacks?userId=' + user._id) //TEST $stateParams.id
+            return $http.get('/api/stacks?userId=' + user._id)
             .then(response => {
                 angular.copy(response.data, storedStacks);
                 return storedStacks;
@@ -66,10 +66,6 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
 
 
     $scope.submitStack = function () {
-        // $scope.modifiedTests = [];
-        // $scope.modifiedTests = $scope.stack.tests.map(function(test) {
-        //     test.name = test.name + '_' + $scope.stack.name;
-        // });
         StackBuilderFactory.create($scope.stack)
         .then(stack => $state.go('stackView', {stackId: stack._id}))
         .catch($log.error);
