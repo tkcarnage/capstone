@@ -47,7 +47,10 @@
         </md-toolbar>
         <div id="stackinfopanel">
           <div layout="row">
-            <h4 layout="left center">Last ran: May 17, 2016</h4>
+            <div layout="column">
+              <h5 layout="left center">Last Ran: {{stack.lastRun || "Hasn't run yet"}}</h5>
+              <md-button class="md-raised md-accent stackbutton" ng-click='runTests(stack)'>Run stack</md-button>
+            </div>
             <span flex></span>
             <ul data-charts id="legend">
               <li data-chart="newPercent" data-name="new">{{newTests.length}} new tests</li>
