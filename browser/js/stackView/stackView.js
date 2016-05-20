@@ -5,7 +5,6 @@ app.config(function ($stateProvider) {
         controller: 'StackViewCtrl',
         resolve: {
             stack: function($http, $stateParams) {
-                console.log("In resolve block here is stackId", $stateParams.stackId);
                 return $http.get('/api/stacks/' + $stateParams.stackId)
                 .then(res => res.data);
             }
@@ -20,7 +19,6 @@ app.factory('StackViewFactory', function($http) {
             .then (response => response.data);
         },
         getTestWithStatus: function (arr, status) {
-            console.log(arr);
             return arr.filter(function(ele){
                 return ele.body.result === status;
             });
@@ -31,10 +29,7 @@ app.factory('StackViewFactory', function($http) {
     };
 });
 
-// console.log($);
-
 app.controller('StackViewCtrl', function($scope, $state, $log, stack, StackViewFactory) {
-    console.log(stack);
     $scope.stack = stack;
     $scope.removeFromStack = function (index) {
         $scope.stack.tests.splice(index, 1);

@@ -9,7 +9,7 @@ app.directive('stackCard', function() {
   };
 });
 
-app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactory, $mdDialog, TestFactory, $log) {
+app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactory, $mdDialog, TestFactory, $log, StackViewFactory) {
 
   $scope.showConfirm = function(stack) {
       var confirm = $mdDialog.confirm()
@@ -25,7 +25,16 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
   };
 
   $scope.runTests = function(stack) {
-    stack.tests.forEach(test => {
+    let tests = stack.tests.slice();
+
+    // Recursive function that shifts a test off of the tests array with each recursive call until the array is empty
+    let runTests = function(tests) {
+      if (!tests.length) {
+        stack.lastRun = new Date();
+        return StackViewFactory.edit(stack)
+        .catch($log.error);
+      }
+      let test = tests.shift();
       let funcArray = [];
       let cancelTest = false;
       let results = {
@@ -65,8 +74,12 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
           stack: stack
         };
         $rootScope.$emit('testUpdate', dataObj);
+        runTests(tests);
+
       })
       .catch($log.error);
-    });
+    };
+
+    runTests(tests);
   };
 });
