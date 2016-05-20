@@ -19,6 +19,8 @@ app.directive('testbuilder', function(){
 
 app.factory('TestFactory', function($http, $log) {
 
+    let responsePool = {};
+
     let parseResponse = function(response) {};
 
     let makeRequest = function(test) {
@@ -88,12 +90,18 @@ app.factory('TestFactory', function($http, $log) {
             if (!test.result) { return false; }
             return $http.get('/api/results/' + test.result)
             .then(res => res.data);
+        },
+        addToResponsePool: function(data) {
+            responsePool[data.name] = data.response;
+        },
+        clearResponsePool: function() {
+            responsePool = {};
         }
     };
 });
 
 app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope, $log, AuthService, TestFactory, $mdDialog, $mdMedia){
-	
+
     $scope.test = {};
 	$scope.test.name = 'newTest';
     AuthService.getLoggedInUser()
