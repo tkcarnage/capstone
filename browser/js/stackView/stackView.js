@@ -30,6 +30,7 @@ app.factory('StackViewFactory', function($http) {
 });
 
 app.controller('StackViewCtrl', function($scope, $rootScope, $state, $log, stack, StackViewFactory, TestFactory) {
+
     $scope.stack = stack;
     $scope.removeFromStack = function (index) {
         $scope.stack.tests.splice(index, 1);
