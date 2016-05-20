@@ -21,9 +21,37 @@ app.factory('TestFactory', function($http, $log) {
 
     let responsePool = {};
 
-    let parseResponse = function(response) {};
+    responsePool.getValue = function(key) {
+        let keys = key.split('.');
+        return keys.reduce(function (currentKey, nextKey) {
+            return currentKey[nextKey];
+        }, responsePool);
+    };
+
+    let interpolate = function(input) {
+
+        if (typeof input === 'string') {
+            let strings = input.split('}}');
+            let replacements = strings.map(subString => subString.split("{{")[0])
+            .map(subString => responsePool.getValue(subString));
+            return strings.map((subString, idx) => subString.replace("{{", replacements[idx]));
+        }
+
+        else if (Array.isArray(input)) {
+            input.forEach(interpolate);
+        }
+
+        else if (typeof input === 'object') {
+            for (let key in input) {
+                input[key] = interpolate(input[key]);
+            }
+        }
+        return input;
+    };
 
     let makeRequest = function(test) {
+
+        console.log('test in makeRequest:', test);
 
         let requestObj = {};
 
@@ -76,7 +104,11 @@ app.factory('TestFactory', function($http, $log) {
 
     return {
         runTest: function(test) {
+
+            let interpolatedTest = interpolate(test);
+
             //Construct and send the $http request
+            // return makeRequest(interpolatedTest)
             return makeRequest(test)
             .catch($log.error);
         },
