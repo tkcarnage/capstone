@@ -34,7 +34,7 @@ app.on('window-all-closed', function() {
 
 function createWindow () {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 1200, height: 1080, "node-integration": false, minWidth: 900});
+    mainWindow = new BrowserWindow({width: 1200, height: 1080, "node-integration": false, minWidth: 1200});
 
     // and load the index.html of the app.
     mainWindow.loadURL('http://localhost:1337/');

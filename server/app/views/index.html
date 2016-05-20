@@ -32,8 +32,8 @@
 </head>
 <body ng-app="FullstackGeneratedApp">
     <navbar ng-if="location.path() !== '/' && location.path() !== '/signup'"></navbar>
-    <sidebar ng-if="location.path() !== '/' && location.path() !== '/signup'" class="col-md-2"></sidebar>
-    <div id="main" ng-class="{'col-md-10': location.path() !== '/' && location.path() !== '/signup'}" ui-view></div>
+    <sidebar ng-if="location.path() !== '/' && location.path() !== '/signup'" class="col-xs-2"></sidebar>
+    <div id="main" ng-class="{'col-xs-10': location.path() !== '/' && location.path() !== '/signup'}" ui-view></div>
     <script> 
     var cwDirectory = process.cwd();
     // window.$ = window.jQuery = require('/Users/Nate/Documents/capstoneproject/capstone/node_modules/jQuery/lib/node-jquery.js');
