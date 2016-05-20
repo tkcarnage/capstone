@@ -29,13 +29,15 @@ app.controller('homeCtrl', function ($scope, user, stacks, $rootScope, StackBuil
   });
 
   $rootScope.$on('testUpdate', function(event, dataObj){
+
       var updatedStack = $scope.stacks.filter(function(stack) {
         return stack._id == dataObj.stack._id;
       })[0];
-      console.log("UPDATED STACK", updatedStack);
+
       var updatedTest = updatedStack.tests.filter(function(test) {
         return test._id == dataObj.test._id;
       })[0];
+
       updatedTest.body.result = dataObj.test.body.result;
   });
 });
