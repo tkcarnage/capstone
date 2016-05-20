@@ -19,5 +19,4 @@ module.exports = function (app) {
     app.use(app.getValue('log'));
 
     require('./authentication')(app);
-
 };
