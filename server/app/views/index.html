@@ -29,7 +29,7 @@
     <script src="/main.js" defer></script>
 
 </head>
-<body ng-app="FullstackGeneratedApp">
+<body ng-app="Newman">
     <navbar ng-if="location.path() !== '/' && location.path() !== '/signup'"></navbar>
     <sidebar ng-if="location.path() !== '/' && location.path() !== '/signup'" class="col-xs-2"></sidebar>
     <div class="main" ng-class="{'col-xs-10': location.path() !== '/' && location.path() !== '/signup', 'gradientbackground': location.path() === '/' || location.path() === '/signup'}"ui-view></div>
