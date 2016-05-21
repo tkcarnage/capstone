@@ -1,4 +1,6 @@
 sidebar {
+  overflow-y: visible;
+  overflow-x: hidden;
   z-index: 5;
   padding: 64px 0px 0px 0px !important;
   background-color: #5e8bab;
@@ -61,3 +63,8 @@ a, a:hover, a:active, a:visited {
   background-color: #2c5c74;
   border: 0px;
 }
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
