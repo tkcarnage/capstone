@@ -17,25 +17,36 @@ app.directive('testbuilder', function(){
 
 app.factory('TestFactory', function($http, $log) {
 
-    let responsePool = {}; //test1:
+    let ResponsePool = function() {};
 
-    responsePool.getValue = function(key) { //test1.data.userId
-        console.log('getValue called with:', key);
+    ResponsePool.prototype.getValue = function(key) { //test1.data.userId
+        console.log('responsePool.getValue called with:', key);
         let keys = key.split('.'); //['test1', 'data', 'objectId']
         return keys.reduce(function (currentKey, nextKey) { //responsePool[test1] > test1[data] > data[userId]
             return currentKey[nextKey];
         }, responsePool);
     };
 
+    let responsePool = new ResponsePool();
+
     let interpolate = function(input) {
 
         console.log('interpolate has been called with this input:', input);
 
         if (typeof input === 'string') { //'http://mysite.com/users/{{test1.data.userId}}/posts/{{test2.data.postId}}'
+            if (input.indexOf('{{') === -1) return input;
+            let newVals = [];
 
-            //David's code here
+            input.split("}}")
+            .forEach(function(elem) {
+                if (elem.indexOf("{{") !== -1) {
+                    let slicePoint = elem.indexOf("{{");
+                    let sliced = elem.slice(slicePoint);
+                    newVals.push(elem.replace(sliced, responsePool.getValue(sliced.substring(2))));
+                } else newVals.push(elem);
+            });
 
-            return input; //'http://mysite.com/users/123/posts/456'
+            return newVals.join(''); //'http://mysite.com/users/123/posts/456'
         }
 
         else if (Array.isArray(input)) {
@@ -121,7 +132,6 @@ app.factory('TestFactory', function($http, $log) {
             .then(res => res.data);
         },
         getPreviousResults: function(test) {
-            console.log(test);
             if (!test.result) { return false; }
             return $http.get('/api/results/' + test.result)
             .then(res => res.data);
@@ -130,7 +140,7 @@ app.factory('TestFactory', function($http, $log) {
             responsePool[data.name] = data.response;
         },
         clearResponsePool: function() {
-            responsePool = {};
+            responsePool = new ResponsePool();
         }
     };
 });
