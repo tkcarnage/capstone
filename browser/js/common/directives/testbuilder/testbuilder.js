@@ -19,10 +19,10 @@ app.directive('testbuilder', function(){
 
 app.factory('TestFactory', function($http, $log) {
 
-    let responsePool = {};
+    let responsePool = {}; //test1:
 
-    responsePool.getValue = function(key) {
-        let keys = key.split('.');
+    responsePool.getValue = function(key) { //test1.response.data.objectId
+        let keys = key.split('.'); //['test1', 'response', 'data', 'objectId']
         return keys.reduce(function (currentKey, nextKey) {
             return currentKey[nextKey];
         }, responsePool);
