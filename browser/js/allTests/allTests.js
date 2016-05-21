@@ -72,24 +72,8 @@ app.controller('allTestsCtrl', function ($log, $mdEditDialog, $mdDialog, $q, $st
   };
 
   $scope.deletetests = function () {
-    // var deleted = $scope.selected.map(function(test){
-    //   return TestBuilderFactory.delete(test);
-    // });
-
-    // return  Promise.all(3);
-
-    console.log('$scope.selected:', $scope.selected);
-
     let deletePromises = $scope.selected.map(test => TestBuilderFactory.delete(test));
-    console.log("delete****: ", deletePromises);
     return Promise.all(deletePromises)
-  //   return  Promise.all(3);
-  // };
-   // return Promise.all($scope.selected.map(function(test){
-   //      return TestBuilderFactory.delete(test);
-   //    }))
-   //  .then(() => console.log("ALL TESTS WERE DELTED"))
-   //  .catch($log.error);
     .then(function(val){
       console.log(val);
       $scope.getTests();
