@@ -2,8 +2,6 @@
   <md-toolbar class="md-primary md-hue-1">
     <div class="md-toolbar-tools ">
       <span>{{stack.name}}</span>
-      <span flex></span>
-      <md-button>Run tests</md-button>
     </div>
   </md-toolbar>
   <div class="progressDiv">
@@ -40,6 +38,7 @@
       <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
         <thead ng-if="!options.decapitate" md-head md-on-reorder="logOrder">
           <tr md-row>
+            <th md-column><span>#</span></th>
             <th md-column><span>Name</span></th>
             <th md-column><span>Method</span></th>
             <th md-column><span>URL</span></th>
@@ -52,6 +51,7 @@
         </thead>
         <tbody md-body>
           <tr md-row md-select="test" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="test in stack.tests | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+            <td md-cell>{{stack.tests.indexOf(test) + 1}}</td>
             <td md-cell>{{test.name || "Untitled"}}</td>
             <td md-cell>{{test.method}}</td>
             <td md-cell>{{test.url}}</td>

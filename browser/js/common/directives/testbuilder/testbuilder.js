@@ -114,14 +114,8 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 	$scope.showHeaders = false;
 	$scope.showBody = false;
     $scope.showValidators = false;
-	// $scope.numParams = 0;
-	// $scope.numHeaders = 0;
-	// $scope.numBodyObj = 0;
- //    $scope.numValidators = 0;
     $scope.isNewTest = true;
 	$scope.addForm = function(index, type){
-		// if (type === 'validator') $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
-        console.log("index", index, "type", type);
         if (type !== 'body' && (index === $scope.test[type].length - 1 || $scope.test[type].length === 0) ) {
             if (type === "params") $scope.test.params.push({});
             if (type === "headers") $scope.test.headers.push({});

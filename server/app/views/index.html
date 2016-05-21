@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="http://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css">
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script src="/lodash/index.js"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> -->
     <script src="/angular/angular.js"></script>
     <script src="/angular-animate/angular-animate.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.js"></script>
@@ -36,9 +35,7 @@
     <div id="main" ng-class="{'col-xs-10': location.path() !== '/' && location.path() !== '/signup'}" ui-view></div>
     <script> 
     var cwDirectory = process.cwd();
-    // window.$ = window.jQuery = require('/Users/Nate/Documents/capstoneproject/capstone/node_modules/jQuery/lib/node-jquery.js');
     window.$ = window.jQuery = require(cwDirectory + '/node_modules/jQuery/lib/node-jquery.js');
-    console.log("DIRNAME", __dirname);
     </script>
 </body>
 </html>

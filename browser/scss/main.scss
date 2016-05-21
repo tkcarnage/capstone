@@ -146,6 +146,10 @@ md-icon {
   color: #7fa3bc;
 }
 
+.opacityhover:hover {
+  opacity: 0.8;
+}
+
 .draglist > li > div{
   word-wrap: break-word;
   text-align: center;
@@ -319,6 +323,17 @@ margin-bottom: 25px;
   margin: 50px auto 0;
 }
 
+.gradientbackground {
+  background-color: green;
+}
+
+.signupimage {
+  width: 150px;
+}
+
+.loginimage {
+  width: 200px;
+}
 
 @import 'directives/main';
 @import 'home/main';
