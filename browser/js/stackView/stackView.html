@@ -19,7 +19,7 @@
   </div>
   <div class="statRightHolder">
     <ul>
-      <li><h3>May 17, 2016</h3><span>Last ran</span></li>
+      <li><h4><span ng-show="dateString.indexOf('1969') === -1">{{dateString}}</span><span ng-show="dateString.indexOf('1969') !== -1">(Hasn't run yet)</span></h4><h5>Last ran</h5></li>
     </ul>
 
     <ul class="statsLeft">

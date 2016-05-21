@@ -27,7 +27,7 @@ body {
   float: right;
 }
 
-#main {
+.main {
   overflow-y: visible;
   overflow-x: hidden;
   background-color: #ededed;
@@ -324,7 +324,11 @@ margin-bottom: 25px;
 }
 
 .gradientbackground {
-  background-color: green;
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #90AFC5, #c2d3df); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #90AFC5, #c2d3df); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #90AFC5, #c2d3df); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #90AFC5, #c2d3df); /* Standard syntax */
 }
 
 .signupimage {

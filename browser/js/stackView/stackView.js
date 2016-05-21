@@ -108,8 +108,8 @@ app.controller('StackViewCtrl', function($scope, $rootScope, $state, $log, stack
   //     .catch($log.error);
   //   });
   // };
-
-
+var dateObj = new Date($scope.stack.lastRun);
+$scope.dateString = dateObj.toString();
 
 
 });
