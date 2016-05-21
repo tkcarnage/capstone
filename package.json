@@ -1,11 +1,12 @@
 {
-  "name": "FullstackGeneratedApp",
+  "name": "Newman",
   "version": "1.0.0",
-  "description": "A generated project at Fullstack Academy",
+  "description": "A desktop app sequencing HTTP tests on API endpoints",
   "main": "server/start.js",
   "scripts": {
     "start": "nodemon --watch server -e js,html server/start.js",
-    "postinstall": "gulp build"
+    "postinstall": "gulp build",
+    "build": "electron-packager . "
   },
   "engines": {
     "node": ">=4.0.0"
@@ -67,5 +68,8 @@
     "socket.io": "^1.3.4",
     "socket.io-client": "^1.3.5",
     "supertest": "^0.15.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^7.0.2"
   }
 }
