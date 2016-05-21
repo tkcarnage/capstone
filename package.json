@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --watch server -e js,html server/start.js",
     "postinstall": "gulp build",
-    "build": "electron-packager . "
+    "build": "electron-packager . Newman"
   },
   "engines": {
     "node": ">=4.0.0"
