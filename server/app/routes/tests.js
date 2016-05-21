@@ -47,6 +47,7 @@ router.get('/', Auth.assertAuthenticated, function(req, res, next) {
 
 router.delete('/:testid', Auth.assertAuthenticated, function(req, res, next){
    const testid = req.params.testid;
-   Test.findById(testid).remove().exec()
+   Test.findByIdAndRemove(testid)
+   .then((value) => res.json(value))
    .catch(next);
 });
