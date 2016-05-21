@@ -36,7 +36,7 @@
                             </div>
                         </div>
                             <div class="row text-center">
-                                <h4 ng-show="stack.tests.length > 1">Drag tests into the desired order</h4>
+                                <md-toolbar class="whitetext" ng-show="stack.tests.length > 1" layout="row" layout-align="center center">Drag tests into the desired order</md-toolbar>
                                 <ul class="draglist">
                                     <li ng-repeat="test in stack.tests" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
                                         <div ng-drag="true" ng-drag-data="test" ng-class="test.name">
@@ -48,13 +48,14 @@
                         <div layout-gt-sm="row">
                             <h4><strong>{{stack.tests.length}}</strong> tests currently in stack</h4>
                             <span flex></span>
-                            <md-button type="submit" class="md-raised md-accent stackbutton" ng-click="submitStack()">Save Stack</md-button>
+                            <md-button type="submit" class="md-raised md-accent stackbutton" ng-click="intermediary()">Save Stack</md-button>
                         </div>
                         </md-content>
                     </form>
                 </div>
             </div>
         </md-content>
+        <md-progress-linear class="md-accent" ng-show="toggle" md-mode="query"></md-progress-linear>
     </div>
 </div>
 </section>
