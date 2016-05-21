@@ -30,6 +30,7 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
     // Recursive function that shifts a test off of the tests array with each recursive call until the array is empty
     let runTests = function(tests) {
       if (!tests.length) {
+        TestFactory.clearResponsePool();
         stack.lastRun = new Date();
         return StackViewFactory.edit(stack)
         .catch($log.error);
@@ -58,6 +59,11 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
       .then(function(resData) {
 
         test.response = JSON.stringify(resData);
+
+        TestFactory.addToResponsePool({
+          name: test.name,
+          response: resData
+        });
 
         for (var i = 0; i < funcArray.length; i++) {
             try {

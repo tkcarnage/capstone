@@ -11,7 +11,6 @@ app.config(function ($stateProvider) {
                 .then(res => res.data)
                 .then(test => {
                     test.validators = JSON.parse(test.validators);
-                    console.log(test.validators, typeof test.validators);
                     return test;
                 });
             }

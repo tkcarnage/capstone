@@ -8,8 +8,6 @@ app.config(function ($stateProvider) {
     });
 });
 
-
-
 app.directive('testbuilder', function(){
   return {
     restrict: 'E',
@@ -19,9 +17,56 @@ app.directive('testbuilder', function(){
 
 app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
 
-    let parseResponse = function(response) {};
+    let ResponsePool = function() {};
+
+    ResponsePool.prototype.getValue = function(key) { //test1.data.userId
+        console.log('responsePool.getValue called with:', key);
+        let keys = key.split('.'); //['test1', 'data', 'objectId']
+        return keys.reduce(function (currentKey, nextKey) { //responsePool[test1] > test1[data] > data[userId]
+            return currentKey[nextKey];
+        }, responsePool);
+    };
+
+    let responsePool = new ResponsePool();
+
+    let interpolate = function(input) {
+
+        console.log('interpolate has been called with this input:', input);
+
+        if (typeof input === 'string') { //'http://mysite.com/users/{{test1.data.userId}}/posts/{{test2.data.postId}}'
+            if (input.indexOf('{{') === -1) return input;
+            let newVals = [];
+
+            input.split("}}")
+            .forEach(function(elem) {
+                if (elem.indexOf("{{") !== -1) {
+                    let slicePoint = elem.indexOf("{{");
+                    let sliced = elem.slice(slicePoint);
+                    newVals.push(elem.replace(sliced, responsePool.getValue(sliced.substring(2))));
+                } else newVals.push(elem);
+            });
+
+            return newVals.join(''); //'http://mysite.com/users/123/posts/456'
+        }
+
+        else if (Array.isArray(input)) {
+            return input.map(interpolate);
+        }
+
+        else if (typeof input === 'object') {
+            for (let key in input) {
+                input[key] = interpolate(input[key]);
+            }
+            return input;
+        }
+
+        else return input;
+    };
 
     let makeRequest = function(test) {
+
+        console.log('test in makeRequest:', test);
+        console.log('the response pool looks like this: ', responsePool);
 
         let requestObj = {};
 
@@ -74,8 +119,11 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
 
     return {
         runTest: function(test) {
+
+            let interpolatedTest = interpolate(test);
+
             //Construct and send the $http request
-            return makeRequest(test)
+            return makeRequest(interpolatedTest)
             .catch($log.error);
         },
         saveResults: function(results, test) {
@@ -88,10 +136,15 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
             .catch($log.error);
         },
         getPreviousResults: function(test) {
-            console.log(test);
             if (!test.result) { return false; }
             return $http.get('/api/results/' + test.result)
             .then(res => res.data);
+        },
+        addToResponsePool: function(data) {
+            responsePool[data.name] = data.response;
+        },
+        clearResponsePool: function() {
+            responsePool = new ResponsePool();
         }
     };
 });
