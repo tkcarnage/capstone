@@ -15,7 +15,7 @@ app.directive('testbuilder', function(){
   };
 });
 
-app.factory('TestFactory', function($http, $log) {
+app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
 
     let ResponsePool = function() {};
 
@@ -126,10 +126,14 @@ app.factory('TestFactory', function($http, $log) {
             return makeRequest(interpolatedTest)
             .catch($log.error);
         },
-        saveResults: function(results, test_id) {
-            results.test = test_id;
-            return $http.post('/api/results',results)
-            .then(res => res.data);
+        saveResults: function(results, test) {
+
+            results.test = test._id;
+
+            return TestBuilderFactory.edit(test)
+            .then(() => $http.post('/api/results', results))
+            .then(res => res.data)
+            .catch($log.error);
         },
         getPreviousResults: function(test) {
             if (!test.result) { return false; }
@@ -167,14 +171,8 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 	$scope.showHeaders = false;
 	$scope.showBody = false;
     $scope.showValidators = false;
-	// $scope.numParams = 0;
-	// $scope.numHeaders = 0;
-	// $scope.numBodyObj = 0;
- //    $scope.numValidators = 0;
     $scope.isNewTest = true;
 	$scope.addForm = function(index, type){
-		// if (type === 'validator') $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
-        console.log("index", index, "type", type);
         if (type !== 'body' && (index === $scope.test[type].length - 1 || $scope.test[type].length === 0) ) {
             if (type === "params") $scope.test.params.push({});
             if (type === "headers") $scope.test.headers.push({});
@@ -261,9 +259,8 @@ $scope.runTest = function() {
         if (cancelTest) return;
         TestFactory.runTest($scope.test)
         .then(function(resData) {
-            console.log('resData:', resData);
+            $scope.test.response = JSON.stringify(resData);
             for (var i = 0; i < funcArray.length; i++) {
-                console.log(i + " TH TEST BEING PUSHED YO");
                 try {
                     $scope.results.validatorResults.push(!!funcArray[i](resData));
                 }
@@ -272,9 +269,8 @@ $scope.runTest = function() {
                     return;
                 }
             }
-            console.log('VALIDATOR RESULTS', $scope.results.validatorResults);
             $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
-            console.log("FINAL RESULT", $scope.results.finalResult);
+
         })
         .then($scope.showResults);
     };
@@ -297,8 +293,6 @@ $scope.runTest = function() {
  function DialogController($scope, $mdDialog) {
         $scope.test = $mdDialog.test;
         $scope.results = $mdDialog.results;
-        console.log('$scope.test:', $scope.test);
-        console.log('$scope.results', $scope.results);
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -309,5 +303,4 @@ $scope.runTest = function() {
             $mdDialog.hide(answer);
         };
     }
-
 });

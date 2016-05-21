@@ -1,44 +1,71 @@
+<md-card>
+  <md-toolbar class="md-primary md-hue-1">
+    <div class="md-toolbar-tools ">
+      <span>{{stack.name}}</span>
+    </div>
+  </md-toolbar>
+  <div class="progressDiv">
+  <div class="statChartHolder">
+    <div class="progress-pie-chart"><!--Pie Chart -->
+      <div class="ppc-progress">
+        <div class="ppc-progress-fill"></div>
+      </div>
+      <div class="ppc-percents">
+        <div class="pcc-percents-wrapper">
+          <span>%</span>
+        </div>
+      </div>
+    </div><!--End Chart -->
+  </div>
+  <div class="statRightHolder">
+    <ul>
+      <li><h4><span ng-show="dateString.indexOf('1969') === -1">{{dateString}}</span><span ng-show="dateString.indexOf('1969') !== -1">(Hasn't run yet)</span></h4><h5>Last ran</h5></li>
+    </ul>
 
-  <div layout="row">
-      <md-card flex="70">
-        <md-toolbar class="md-primary md-hue-1">
-          <div class="md-toolbar-tools ">
-            <span>{{stack.name}}</span>
-          </div>
-        </md-toolbar>
-        <md-table-container>
-          <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
-            <thead ng-if="!options.decapitate" md-head md-on-reorder="logOrder">
-              <tr md-row>
-                <th md-column><span>Name</span></th>
-                <th md-column><span>Method</span></th>
-                <th md-column><span>URL</span></th>
-                <th md-column><span>Status</span></th>
-                <th md-column>
-                  <md-icon>info</md-icon>
-                  <span>Details</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody md-body>
-              <tr md-row md-select="test" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="test in stack.tests | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
-                <td md-cell>{{test.name || "Untitled"}}</td>
-                <td md-cell>{{test.method}}</td>
-                <td md-cell>{{test.url}}</td>
-                <td md-cell>{{test.body.result}}</td>
-                <td md-cell>
-                  <md-button class="md-small md-primary md-raised md-hue-3 stackbutton" ui-sref="testeditor({testId: test._id})">details</md-button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </md-table-container>
+    <ul class="statsLeft">
+      <li><h3>{{passTests.length}}</h3><span>Passing Tests</span></li>
+      <li><h3>{{failTests.length}}</h3><span>Failing Tests</span></li>
+    </ul>
+    <ul class="statsRight">
+      <li><h3>{{newTests.length}}</h3> <span>New Tests</span></li>
+      <li><h3>{{passTests.length + failTests.length + newTests.length}}</h3> <span>Total Tests</span></li>
+    </ul>
+  </div>
 
-        <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{tests.count}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="logPagination"></md-table-pagination>
-      </md-card>
+</div>
 
+    <md-table-container>
+      <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
+        <thead ng-if="!options.decapitate" md-head md-on-reorder="logOrder">
+          <tr md-row>
+            <th md-column><span>#</span></th>
+            <th md-column><span>Name</span></th>
+            <th md-column><span>Method</span></th>
+            <th md-column><span>URL</span></th>
+            <th md-column><span>Status</span></th>
+            <th md-column>
+              <md-icon>info</md-icon>
+              <span>Details</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="test" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="test in stack.tests | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+            <td md-cell>{{stack.tests.indexOf(test) + 1}}</td>
+            <td md-cell>{{test.name || "Untitled"}}</td>
+            <td md-cell>{{test.method}}</td>
+            <td md-cell>{{test.url}}</td>
+            <td md-cell>{{test.body.result}}</td>
+            <td md-cell>
+              <md-button class="md-small md-primary md-raised md-hue-3 stackbutton" ui-sref="testeditor({testId: test._id})">details</md-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
 
-      <md-card flex="30" style="padding: 0">
+<!-- 
+      <md-card style="padding: 0">
 
         <md-toolbar class="md-primary md-hue-1">
           <div class="md-toolbar-tools">
@@ -47,7 +74,10 @@
         </md-toolbar>
         <div id="stackinfopanel">
           <div layout="row">
-            <h4 layout="left center">Last ran: May 17, 2016</h4>
+            <div layout="column">
+              <h5 layout="left center">Last Ran: {{stack.lastRun || "Hasn't run yet"}}</h5>
+              <md-button class="md-raised md-accent stackbutton" ng-click='runTests(stack)'>Run stack</md-button>
+            </div>
             <span flex></span>
             <ul data-charts id="legend">
               <li data-chart="newPercent" data-name="new">{{newTests.length}} new tests</li>
@@ -58,5 +88,6 @@
         </div>
          <div id="donut" layout="row" layout-align="center center"></div>
 
-      </md-card>
-  </div>
+       </md-card> -->
+     </md-card>
+   </div>

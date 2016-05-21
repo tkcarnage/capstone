@@ -1,7 +1,12 @@
+<div layout="row" layout-align="center center">
+    <span flex></span>
+    <a ui-sref="login"><img src="/logo.png" class="signupimage"></img></a>
+    <span flex></span>
+</div>
 <div class='inner'>
     <div layout="column" layout-align="top center" layout-fill>
         <form class="loginBox md-whiteframe-2dp" name="signupForm" layout="column" ng-submit="signupForm.$valid && createUser(signup)">
-            <md-toolbar>
+            <md-toolbar class="md-accent">
                 <h2 class="md-toolbar-tools">Sign Up</h2>
             </md-toolbar>
             <md-content class="md-padding" layout="column">

@@ -58,6 +58,8 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
       TestFactory.runTest(test)
       .then(function(resData) {
 
+        test.response = JSON.stringify(resData);
+
         TestFactory.addToResponsePool({
           name: test.name,
           response: resData
@@ -73,7 +75,7 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
             }
         }
         results.finalResult = results.validatorResults.every(validatorResult => validatorResult);
-        return TestFactory.saveResults(results, test._id);
+        return TestFactory.saveResults(results, test);
       })
       .then(updatedTest => {
         let dataObj = {

@@ -27,12 +27,13 @@ body {
   float: right;
 }
 
-#main {
+.main {
   overflow-y: visible;
   overflow-x: hidden;
   background-color: #ededed;
   height: 100%;
   padding: 0px;
+  padding-top: 70px;
 }
 
 .inner {
@@ -141,6 +142,14 @@ md-icon {
   opacity: 0.8;
 }
 
+.runhover:hover {
+  color: #7fa3bc;
+}
+
+.opacityhover:hover {
+  opacity: 0.8;
+}
+
 .draglist > li > div{
   word-wrap: break-word;
   text-align: center;
@@ -149,6 +158,186 @@ md-icon {
 }
 
 .ace_editor { height: 200px; }
+
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+.progressDiv {
+width: 100%;
+background: #ffffff;
+height: 325px;
+margin-bottom: 0px;
+display: inline-block;
+border-bottom: 1px solid #C2C2C2;
+}
+
+.statChartHolder {
+width: 35%;
+height: 90%;
+position: relative;
+border-right: 1px solid #ccc;
+top: 15px;
+    display: inline-block;
+}
+
+.statRightHolder {
+display: inline-block;
+height: 90%;
+width: 64%;
+position: relative;
+top: -32px;
+margin: 0;
+}
+.statRightHolder ul {
+list-style: none;
+    margin: 0;
+}
+.statRightHolder li {
+border-bottom: 1px solid #ccc;
+height: 85px;
+width: 95%;
+position: relative;
+top: -60px;
+}
+.statRightHolder h3 {
+display: inline-block;
+margin-right: 15px;
+color: #B6B5B5;
+font-weight: 300;
+font-size: 38px;
+}
+.statRightHolder span {
+display: inline-block;
+color: #B6B5B5;
+font-size: 21px;
+font-weight: 300;
+}
+
+.statsLeft {
+    list-style:none;
+    display:inline-block;
+    width:45%;
+}
+.statsLeft li {
+width: 100%;
+height: 14px;
+border: none;
+top: 5px;
+margin-bottom: 25px;
+}
+.statsLeft h3{
+    font-size:17px;
+    display: inline-block;
+}
+.statsLeft span{
+    font-size: 17px;
+    display:inline-block;
+}
+.statsRight {
+width: 45%;
+display: inline-block;
+position: absolute;
+}
+.statsRight li {
+width: 100%;
+height: 14px;
+border: none;
+top: 5px;
+margin-bottom: 25px;
+}
+.statsRight h3{
+    font-size:17px;
+    display: inline-block;
+}
+.statsRight span{
+    font-size: 17px;
+    display:inline-block;
+}
+/* Pie Chart */
+.progress-pie-chart {
+  width:200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #E5E5E5;
+  position: relative;
+}
+.progress-pie-chart.gt-50 {
+  background-color: #81CE97;
+}
+
+.ppc-progress {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+  width: 200px;
+  height: 200px;
+  clip: rect(0, 200px, 200px, 100px);
+}
+.ppc-progress .ppc-progress-fill {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+  width: 200px;
+  height: 200px;
+  clip: rect(0, 100px, 200px, 0);
+  background: #81CE97;
+  transform: rotate(60deg);
+}
+.gt-50 .ppc-progress {
+  clip: rect(0, 100px, 200px, 0);
+}
+.gt-50 .ppc-progress .ppc-progress-fill {
+  clip: rect(0, 200px, 200px, 100px);
+  background: #E5E5E5;
+}
+
+.ppc-percents {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 173.91304px/2);
+  top: calc(50% - 173.91304px/2);
+  width: 173.91304px;
+  height: 173.91304px;
+  background: #fff;
+  text-align: center;
+  display: table;
+}
+.ppc-percents span {
+  display: block;
+  font-size: 2.6em;
+  font-weight: bold;
+  color: #81CE97;
+}
+
+.pcc-percents-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.progress-pie-chart {
+  margin: 50px auto 0;
+}
+
+.gradientbackground {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #90AFC5, #c2d3df); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #90AFC5, #c2d3df); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #90AFC5, #c2d3df); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #90AFC5, #c2d3df); /* Standard syntax */
+}
+
+.signupimage {
+  width: 150px;
+}
+
+.loginimage {
+  width: 200px;
+}
 
 @import 'directives/main';
 @import 'home/main';

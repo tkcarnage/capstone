@@ -153,6 +153,9 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
 
         TestFactory.runTest($scope.test)
         .then(function(resData) {
+
+            $scope.test.response = JSON.stringify(resData);
+
             for (var i = 0; i < funcArray.length; i++) {
                 try {
                     $scope.results.validatorResults.push(!!funcArray[i](resData));
@@ -163,7 +166,7 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
                 }
             }
             $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
-            return TestFactory.saveResults($scope.results, $scope.test._id);
+            return TestFactory.saveResults($scope.results, $scope.test);
             // need to add the test id to the results object
         })
         .then(function(test) {
