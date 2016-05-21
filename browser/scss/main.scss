@@ -339,6 +339,11 @@ margin-bottom: 25px;
   width: 200px;
 }
 
+.whitetext {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';

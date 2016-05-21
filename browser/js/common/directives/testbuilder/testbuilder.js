@@ -151,6 +151,13 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
 
 app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope, $log, AuthService, TestFactory, $mdDialog, $mdMedia){
 
+  $scope.toggle = false;
+  $scope.setToggle = function(){
+    $scope.toggle = !$scope.toggle;
+    $scope.$evalAsync();
+    };
+
+
     $scope.test = {};
 	$scope.test.name = 'newTest';
     AuthService.getLoggedInUser()
@@ -228,6 +235,11 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 		$scope.test.url  = $scope.test.url + finalString;
 		$scope.test.url = $scope.test.url.slice(0,$scope.test.url.length - 1);
 	};
+
+    $scope.intermediary = function(){
+        $scope.setToggle();
+        window.setTimeout($scope.saveTest, 800);
+    };
 
 	$scope.saveTest = function(){
 		$scope.test.url = $scope.test.url;
