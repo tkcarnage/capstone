@@ -56,6 +56,9 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
       if (cancelTest) return;
       TestFactory.runTest(test)
       .then(function(resData) {
+
+        test.response = JSON.stringify(resData);
+
         for (var i = 0; i < funcArray.length; i++) {
             try {
                 results.validatorResults.push(!!funcArray[i](resData));
@@ -66,7 +69,7 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
             }
         }
         results.finalResult = results.validatorResults.every(validatorResult => validatorResult);
-        return TestFactory.saveResults(results, test._id);
+        return TestFactory.saveResults(results, test);
       })
       .then(updatedTest => {
         let dataObj = {

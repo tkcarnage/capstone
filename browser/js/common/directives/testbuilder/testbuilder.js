@@ -17,7 +17,7 @@ app.directive('testbuilder', function(){
   };
 });
 
-app.factory('TestFactory', function($http, $log) {
+app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
 
     let parseResponse = function(response) {};
 
@@ -78,10 +78,14 @@ app.factory('TestFactory', function($http, $log) {
             return makeRequest(test)
             .catch($log.error);
         },
-        saveResults: function(results, test_id) {
-            results.test = test_id;
-            return $http.post('/api/results',results)
-            .then(res => res.data);
+        saveResults: function(results, test) {
+
+            results.test = test._id;
+
+            return TestBuilderFactory.edit(test)
+            .then(() => $http.post('/api/results', results))
+            .then(res => res.data)
+            .catch($log.error);
         },
         getPreviousResults: function(test) {
             console.log(test);
@@ -93,7 +97,7 @@ app.factory('TestFactory', function($http, $log) {
 });
 
 app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope, $log, AuthService, TestFactory, $mdDialog, $mdMedia){
-	
+
     $scope.test = {};
 	$scope.test.name = 'newTest';
     AuthService.getLoggedInUser()
@@ -208,9 +212,8 @@ $scope.runTest = function() {
         if (cancelTest) return;
         TestFactory.runTest($scope.test)
         .then(function(resData) {
-            console.log('resData:', resData);
+            $scope.test.response = JSON.stringify(resData);
             for (var i = 0; i < funcArray.length; i++) {
-                console.log(i + " TH TEST BEING PUSHED YO");
                 try {
                     $scope.results.validatorResults.push(!!funcArray[i](resData));
                 }
@@ -219,9 +222,8 @@ $scope.runTest = function() {
                     return;
                 }
             }
-            console.log('VALIDATOR RESULTS', $scope.results.validatorResults);
             $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
-            console.log("FINAL RESULT", $scope.results.finalResult);
+
         })
         .then($scope.showResults);
     };
@@ -244,8 +246,6 @@ $scope.runTest = function() {
  function DialogController($scope, $mdDialog) {
         $scope.test = $mdDialog.test;
         $scope.results = $mdDialog.results;
-        console.log('$scope.test:', $scope.test);
-        console.log('$scope.results', $scope.results);
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -256,5 +256,4 @@ $scope.runTest = function() {
             $mdDialog.hide(answer);
         };
     }
-
 });
