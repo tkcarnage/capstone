@@ -5,6 +5,7 @@
   "predef": [
               "app",
               "angular",
-              "alert"
+              "alert",
+              "_"
     ]
 }

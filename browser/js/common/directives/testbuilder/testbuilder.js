@@ -114,7 +114,9 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
     return {
         runTest: function(test) {
 
-            let interpolatedTest = interpolate(test);
+            let copyOfTest = _.cloneDeep(test);
+
+            let interpolatedTest = interpolate(copyOfTest);
 
             //Construct and send the $http request
             return makeRequest(interpolatedTest)
@@ -135,7 +137,6 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
             .then(res => res.data);
         },
         addToResponsePool: function(data) {
-            console.log('addToResponsePool called with:', data);
             responsePool[data.name] = data.response;
         },
         clearResponsePool: function() {
