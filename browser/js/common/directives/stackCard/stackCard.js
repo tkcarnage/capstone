@@ -30,7 +30,7 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
     });
   };
 
-  $scope.runTests = function(stack) { 
+  $scope.runTests = function(stack) {
     $scope.setToggle();
     let tests = stack.tests.slice();
 
@@ -81,7 +81,7 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
                 return;
             }
         }
-        results.finalResult = results.validatorResults.every(validatorResult => validatorResult);
+        if (results.validatorResults.length) results.finalResult = results.validatorResults.every(validatorResult => validatorResult);
         return TestFactory.saveResults(results, test);
       })
       .then(updatedTest => {

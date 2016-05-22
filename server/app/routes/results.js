@@ -21,15 +21,14 @@ router.post('/', Auth.assertAuthenticated, function(req,res,next) {
     .then(function(testDocument) {
       test = testDocument;
       if (test.result) {
-        return Result.findByIdAndRemove(test.result)
+        return Result.findByIdAndRemove(test.result);
       }
     })
     .then(function() {
       test.result = result;
       if (finalResult) { test.body.result = 'Passing'; }
       else { test.body.result = 'Failing'; }
-      console.log("TEST RESULT", test.result);
-      return test.save()
+      return test.save();
     })
     .then(test => res.send(test))
     .catch(next);
