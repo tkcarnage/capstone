@@ -1,5 +1,6 @@
-app.factory('TestBuilderFactory', function($http){
+app.factory('TestBuilderFactory', function($http, AuthService){
 	var testobj = {};
+
 	testobj.create = function(obj){
         console.log("OBJ", obj);
         if(obj._id) delete obj._id;
@@ -20,5 +21,17 @@ app.factory('TestBuilderFactory', function($http){
         console.log('TestBuilderFactory.delete was called');
         return $http.delete('/api/tests/' + obj._id)
     };
-	return testobj;
+
+    testobj.allTests = function() {
+        console.log("GETYOTESTS");
+        return AuthService.getLoggedInUser()
+            .then(function(user) {
+                return $http.get('/api/tests?userId=' + user._id);
+            })
+            .then(function(response) {
+                return response.data;
+            });
+    };
+
+    return testobj;
 });

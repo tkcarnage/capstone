@@ -48,16 +48,11 @@ app.controller('allTestsCtrl', function ($log, $mdEditDialog, $mdDialog, $q, $st
 
   $scope.tests = allTests;
   $scope.getTests = function() {
-    console.log("GETYOTESTS");
-    return AuthService.getLoggedInUser()
-                .then(function(user) {
-                    return $http.get('/api/tests?userId=' + user._id);
-                })
-                .then(function(response) {
-                    $scope.tests = response.data;
-                    console.log("RESCOPED: ", $scope.tests);
-                    $scope.$evalAsync();
-                });
+    TestBuilderFactory.allTests()
+    .then(function(data) {
+      $scope.tests = data;
+      $scope.$evalAsync();
+    });
   };
 
   $scope.toggleLimitOptions = function () {
