@@ -22,6 +22,12 @@
                                     </md-input-container>
                                 </div>
                             </md-content>
+                            <md-content layout-padding ng-show='stackTests && stackTests.length'>
+                                <h4>Responses from previous tests in this stack:</h4>
+                                <section ng-repeat="test in stackTests" layout="row" layout-sm="column" layout-align="start center" layout-wrap>
+                                    <md-button class="md-raised md-primary tolowercase" ng-click="viewPreviousResults(test)">{{test.name}}</md-button>
+                                </section>
+                            </md-content>
                             <md-content layout-padding>
                                 <div layout-gt-sm="row">
                                     <md-input-container class="md-block" flex="25">
@@ -126,14 +132,14 @@
                                     <div layout-gt-sm="row">
                                         <md-input-container class="md-block" flex="40">
                                             <div ui-ace aria-label="validatoreditor" ng-click="addForm($index, 'validators')" ng-model="test.validators[$index].func">
-                                                
+
                                             </div>
                                         </md-input-container>
                                     </div>
                                 </div>
                             </md-content>
                             <section layout="row" layout-sm="column" layout-align="end end" layout-wrap>
-                                <md-button ng-disabled="isNewTest" ng-click="viewPreviousResults()" class="md-raised md-primary" ng-class="{'stackbutton': !isNewTest}">View Previous Results</md-button>
+                                <md-button ng-disabled="isNewTest" ng-click="viewPreviousResults(test)" class="md-raised md-primary" ng-class="{'stackbutton': !isNewTest}">View Previous Results</md-button>
                                 <md-button ng-disabled="testForm.$invalid" ng-click="runTest()" class="md-raised md-accent stackbutton">Run test</md-button>
                                 <md-button ng-disabled="testForm.$invalid || testForm.$pristine" ng-click="intermediary(); testForm.$setPristine()" class="md-raised md-primary" ng-class="{'stackbutton': testForm.$valid}">Save test</md-button>
                             </section>

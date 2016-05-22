@@ -20,7 +20,6 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
     let ResponsePool = function() {};
 
     ResponsePool.prototype.getValue = function(key) { //test1.data.userId
-        console.log('responsePool.getValue called with:', key);
         let keys = key.split('.'); //['test1', 'data', 'objectId']
         return keys.reduce(function (currentKey, nextKey) { //responsePool[test1] > test1[data] > data[userId]
             return currentKey[nextKey];
@@ -30,8 +29,6 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
     let responsePool = new ResponsePool();
 
     let interpolate = function(input) {
-
-        console.log('interpolate has been called with this input:', input);
 
         if (typeof input === 'string') { //'http://mysite.com/users/{{test1.data.userId}}/posts/{{test2.data.postId}}'
             if (input.indexOf('{{') === -1) return input;
@@ -64,9 +61,6 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
     };
 
     let makeRequest = function(test) {
-
-        console.log('test in makeRequest:', test);
-        console.log('the response pool looks like this: ', responsePool);
 
         let requestObj = {};
 
@@ -141,10 +135,23 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
             .then(res => res.data);
         },
         addToResponsePool: function(data) {
+            console.log('addToResponsePool called with:', data);
             responsePool[data.name] = data.response;
         },
         clearResponsePool: function() {
             responsePool = new ResponsePool();
+        },
+        getStackTests: function(viewedTest) {
+            if (!viewedTest.stack) return [];
+            return $http.get('/api/stacks/' + viewedTest.stack)
+            .then(res => res.data.tests)
+            .then(tests => {
+                let includeTest = true; //Will include only tests that precede the viewedTest in the stack
+                return tests.filter(test => {
+                    if (test._id === viewedTest._id) includeTest = false;
+                    return includeTest;
+                });
+            });
         }
     };
 });

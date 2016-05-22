@@ -18,9 +18,14 @@ app.config(function ($stateProvider) {
     });
 });
 
-
 app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $rootScope, $state, $log, TestFactory, $mdDialog, $mdMedia){
+
     $scope.test = test;
+
+    TestFactory.getStackTests(test)
+    .then(stackTests => $scope.stackTests = stackTests)
+    .catch($log.error);
+
     if (typeof $scope.test.body.data === 'string')  $scope.test.body.data = JSON.parse($scope.test.body.data);
     $scope.test.user = $rootScope.user;
     $scope.showParams = false;
@@ -104,39 +109,54 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
         .catch($log.error);
     };
 
-    $scope.viewPreviousResults  = function() {
-      if (!$scope.test.result) { alert ("NO RESULT TO SHOW"); }
+    $scope.viewPreviousResults  = function(test) {
+      if (!test.result) { alert ("NO RESULT TO SHOW"); }
       else {
-        TestFactory.getPreviousResults($scope.test)
+        TestFactory.getPreviousResults(test)
         .then(function(result) {
           $scope.results = result;
-          $scope.showResults();
+          $scope.showResults(test);
         })
         .catch($log.error);
       }
     };
 
-    $scope.showResults = function(ev) {
-        $mdDialog.test = $scope.test;
+    $scope.showResults = function(test) {
+        $mdDialog.test = test;
         $mdDialog.results = $scope.results;
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
         $mdDialog.show({
             controller: DialogController,
             templateUrl: 'js/common/directives/testbuilder/testResults.html',
             parent: angular.element(document.body),
-            targetEvent: ev,
+            //targetEvent: ev,
             clickOutsideToClose:true,
             fullscreen: useFullScreen
         });
     };
 
     $scope.runTest = function() {
+
+        //Populate the responsePool with results from earlier tests, if required
+        TestFactory.clearResponsePool();
+        console.log('$scope.testStacks:', $scope.stackTests);
+        $scope.stackTests.forEach(test => {
+            let data = {
+                name: test.name,
+                response: JSON.parse(test.response)
+            };
+            TestFactory.addToResponsePool(data);
+        });
+
         let funcArray = [];
         let cancelTest = false;
         $scope.results = {
             validatorResults: [],
             lastRun: Date.now()
         };
+        console.log('$scope.test.validators:', $scope.test.validators);
+        console.log('typeof $scope.test.validators:', typeof $scope.test.validators);
+        if (typeof $scope.test.validators === 'string') $scope.test.validators = JSON.parse($scope.test.validators);
         $scope.test.validators.forEach(function (elem) {
             try {
                 if (elem.func.length > 23) {
@@ -173,7 +193,7 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
             // console.log("TEST ID,", test._id);
             $scope.test.result = test.result._id;
             console.log("TEST RESULTS", test.result._id);
-            $scope.showResults();
+            $scope.showResults(test);
         })
         .catch($log.error);
     };
