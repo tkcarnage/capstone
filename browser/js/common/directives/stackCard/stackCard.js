@@ -30,7 +30,7 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
     });
   };
 
-  $scope.runTests = function(stack) { 
+  $scope.runTests = function(stack) {
     $scope.setToggle();
     let tests = stack.tests.slice();
 
@@ -49,6 +49,7 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
           validatorResults: [],
           lastRun: Date.now()
       };
+      if (typeof test.validators === 'string') test.validators = JSON.parse(test.validators);
       if (typeof test.validators === 'string') test.validators = JSON.parse(test.validators);
       test.validators.forEach(function (elem) {
         try {

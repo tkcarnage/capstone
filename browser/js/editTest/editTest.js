@@ -70,7 +70,6 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
             $scope.numHeaders++;
         }
         $scope.showHeaders = !$scope.showHeaders;
-        console.log($scope.test.headers);
     };
 
     $scope.displayBody = function(){
@@ -100,6 +99,16 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
         }
         $scope.test.url  = $scope.test.url + finalString;
         $scope.test.url = $scope.test.url.slice(0,$scope.test.url.length - 1);
+    };
+
+    $scope.setToggle = function(){
+        $scope.toggle = !$scope.toggle;
+        $scope.$evalAsync();
+    };
+
+    $scope.intermediary = function(){
+        $scope.setToggle();
+        window.setTimeout($scope.saveTest, 800);
     };
 
     $scope.saveTest = function(){
@@ -139,7 +148,6 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
 
         //Populate the responsePool with results from earlier tests, if required
         TestFactory.clearResponsePool();
-        console.log('$scope.testStacks:', $scope.stackTests);
         $scope.stackTests.forEach(test => {
             let data = {
                 name: test.name,
@@ -154,8 +162,6 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
             validatorResults: [],
             lastRun: Date.now()
         };
-        console.log('$scope.test.validators:', $scope.test.validators);
-        console.log('typeof $scope.test.validators:', typeof $scope.test.validators);
         if (typeof $scope.test.validators === 'string') $scope.test.validators = JSON.parse($scope.test.validators);
         $scope.test.validators.forEach(function (elem) {
             try {
@@ -192,7 +198,6 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
         .then(function(test) {
             // console.log("TEST ID,", test._id);
             $scope.test.result = test.result._id;
-            console.log("TEST RESULTS", test.result._id);
             $scope.showResults(test);
         })
         .catch($log.error);
