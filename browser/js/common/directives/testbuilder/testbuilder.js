@@ -20,9 +20,18 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
     let ResponsePool = function() {};
 
     ResponsePool.prototype.getValue = function(key) { //test1.data.userId
+        let currentTestName = this.currentTestName;
         let keys = key.split('.'); //['test1', 'data', 'objectId']
         return keys.reduce(function (currentKey, nextKey) { //responsePool[test1] > test1[data] > data[userId]
-            return currentKey[nextKey];
+
+            try {
+                return currentKey[nextKey];
+            }
+            catch(error) {
+                alert('Whoops! Newman couldn\'t interpolate "' + currentKey + '.' + nextKey + '" while running "' + currentTestName + '". Make sure you\'re interpolating the right value, and try to run the entire stack from the home page.');
+                return key;
+            }
+
         }, responsePool);
     };
 
@@ -113,6 +122,8 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
 
     return {
         runTest: function(test) {
+
+            responsePool.currentTestName = test.name;
 
             let interpolatedTest = interpolate(test);
 
@@ -288,8 +299,7 @@ $scope.runTest = function() {
                     return;
                 }
             }
-            $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
-
+            if ($scope.results.validatorResults.length) $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
         })
         .then($scope.showResults);
     };
