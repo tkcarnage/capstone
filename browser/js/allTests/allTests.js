@@ -7,6 +7,9 @@ app.config(function ($stateProvider) {
             allTests: function($http, $stateParams, AuthService) {
                 return AuthService.getLoggedInUser()
                 .then(function(user) {
+                  var currentDate = new Date();
+                  var time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+                  console.log("in allTests state", time);
                     return $http.get('/api/tests?userId=' + user._id);
                 })
                 .then(function(response) {

@@ -99,8 +99,16 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
 
     $scope.saveTest = function(){
         $scope.test.url = $scope.test.url;
+        var currentDate = new Date();
+        var time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
+        console.log("before TestBuilderFactory.create", time);
         TestBuilderFactory.edit($scope.test)
-        .then(() => $state.go('allTests'))
+        .then(() =>  {
+            currentDate = new Date();
+            var time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
+            console.log("going to new state", time);
+            $state.go('allTests')
+        })
         .catch($log.error);
     };
 

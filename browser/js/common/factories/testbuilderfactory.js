@@ -2,14 +2,27 @@ app.factory('TestBuilderFactory', function($http, AuthService){
 	var testobj = {};
 
 	testobj.create = function(obj){
-        console.log("OBJ", obj);
-        if(obj._id) delete obj._id;
-        if (typeof obj.validators != "string") {
-            obj.validators = JSON.stringify(obj.validators);
-            obj.body.data = JSON.stringify(obj.body.data);
+        // var currentDate = new Date();
+        // var time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
+        // console.log("just hit TestBuilderFactory.create", time);
+        var clonedObj = _.cloneDeep(obj);
+        // console.log("OBJ", obj);
+        if(clonedObj._id){delete clonedObj._id; }
+        if (clonedObj.validators) {
+            clonedObj.validators = JSON.stringify(clonedObj.validators);
         }
-		return $http.post('/api/tests/', obj)
-		.then(response => response.data);
+        // currentDate = new Date();
+        // time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
+        // console.log("just got done stringifying validators", time);
+        // console.log("clonedObj", clonedObj.body.data);
+        clonedObj.body.data = JSON.stringify(clonedObj.body.data);
+		return $http.post('/api/tests/', clonedObj)
+		.then(response =>  {
+            currentDate = new Date();
+            time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
+            console.log("jut about to exit TestBuilderFactory.create", time);
+            return response.data;
+        })
 	};
     testobj.edit = function(obj){
         obj.validators = JSON.stringify(obj.validators);
