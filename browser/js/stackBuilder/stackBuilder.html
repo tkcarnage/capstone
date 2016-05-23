@@ -13,10 +13,10 @@
                             <div layout-gt-sm="row">
                                 <md-input-container class="md-block" flex-gt-sm>
                                 <label>Sequence Name</label>
-                                    <input name="name" ng-model="stack.name" md-minlength='1' md-maxlength='15'required>
+                                    <input name="name" ng-model="stack.name" md-minlength='1' md-maxlength='20'required>
                                     <div ng-messages="stackForm.name.$error">
                                         <div ng-message="required">Sequence name is required.</div>
-                                        <div ng-message='md-maxlength'>Sequence name must be 15 or fewer characters</div>
+                                        <div ng-message='md-maxlength'>Sequence name must be 20 or fewer characters</div>
                                     </div>
                                 </md-input-container>
                             </div>
