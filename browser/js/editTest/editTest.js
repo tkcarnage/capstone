@@ -10,7 +10,10 @@ app.config(function ($stateProvider) {
                 return $http.get('/api/tests/' + $stateParams.testId)
                 .then(res => res.data)
                 .then(test => {
+                    console.log('type of validators', typeof test.validators, test.validators);
                     test.validators = JSON.parse(test.validators);
+                    if (typeof test.validators === 'string') { test.validators = JSON.parse(test.validators); }
+                    console.log('type of validators', typeof test.validators, test.validators);
                     return test;
                 });
             }
@@ -112,7 +115,6 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
     };
 
     $scope.saveTest = function(){
-        $scope.test.url = $scope.test.url;
         var currentDate = new Date();
         var time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
         console.log("before TestBuilderFactory.create", time);
