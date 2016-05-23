@@ -36,7 +36,6 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
             .then(savedTests => stackObj.tests = savedTests)
             .then( () => $http.post('/api/stacks', stackObj))
             .then(res => {
-                console.log('about to emit event');
                 $rootScope.$emit('createstack', res.data);
                 return res.data;
             });

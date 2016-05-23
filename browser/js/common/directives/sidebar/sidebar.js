@@ -20,9 +20,7 @@ app.controller('sidebarCtrl', function($scope, $log, $rootScope, StackBuilderFac
   });
 
   $rootScope.$on('createstack', function(event, data){
-    console.log('heard the event');
     $scope.stacks.push(data);
-    console.log('$scope.stacks:', $scope.stacks);
     $scope.$evalAsync();
   });
 
