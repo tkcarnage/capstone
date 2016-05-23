@@ -20,18 +20,23 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
     let ResponsePool = function() {};
 
     ResponsePool.prototype.getValue = function(key) { //test1.data.userId
-        console.log('responsePool.getValue called with:', key);
+        let currentTestName = this.currentTestName;
         let keys = key.split('.'); //['test1', 'data', 'objectId']
         return keys.reduce(function (currentKey, nextKey) { //responsePool[test1] > test1[data] > data[userId]
-            return currentKey[nextKey];
+
+            try {
+                return currentKey[nextKey];
+            }
+            catch(error) {
+                alert('Whoops! Newman couldn\'t interpolate "' + key + '" while running "' + currentTestName + '". Make sure you\'re interpolating the right value, and try to run the entire stack from the home page.');
+            }
+
         }, responsePool);
     };
 
     let responsePool = new ResponsePool();
 
     let interpolate = function(input) {
-
-        console.log('interpolate has been called with this input:', input);
 
         if (typeof input === 'string') { //'http://mysite.com/users/{{test1.data.userId}}/posts/{{test2.data.postId}}'
             if (input.indexOf('{{') === -1) return input;
@@ -64,9 +69,6 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
     };
 
     let makeRequest = function(test) {
-
-        console.log('test in makeRequest:', test);
-        console.log('the response pool looks like this: ', responsePool);
 
         let requestObj = {};
 
@@ -104,15 +106,21 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
             requestObj.headers['Content-Type'] = undefined;
         }
 
-        if (test.body.bodytype === 'form-data') {
-            return $http[requestObj.method.toLowerCase()](requestObj.url, formData, {
-                transformRequest: angular.identity,
-                headers: requestObj.headers
-            })
-            .then(response => response.data);
-        } else {
-            return $http(requestObj)
-            .then(response => response.data);
+        try {
+
+            if (test.body.bodytype === 'form-data') {
+                return $http[requestObj.method.toLowerCase()](requestObj.url, formData, {
+                    transformRequest: angular.identity,
+                    headers: requestObj.headers
+                })
+                .then(response => response.data);
+            } else {
+                return $http(requestObj)
+                .then(response => response.data);
+            }
+        }
+        catch(error) {
+            alert('Whoops! During ' + responsePool.currentTestName + ', you asked Newman to send a request to ' + requestObj.url + 'but that doesn\'t appear to be a valid address.');
         }
     };
 
@@ -120,11 +128,17 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
     return {
         runTest: function(test) {
 
-            let interpolatedTest = interpolate(test);
+            responsePool.currentTestName = test.name;
+
+            let copyOfTest = _.cloneDeep(test);
+
+            let interpolatedTest = interpolate(copyOfTest);
 
             //Construct and send the $http request
             return makeRequest(interpolatedTest)
-            .catch($log.error);
+            .catch(err => {
+                if (err.config.url) alert('Whoops! During ' + test.name + ', we tried to test ' + err.config.url + ' but it looks like this isn\'t a valid address.');
+            });
         },
         saveResults: function(results, test) {
 
@@ -145,11 +159,30 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
         },
         clearResponsePool: function() {
             responsePool = new ResponsePool();
+        },
+        getStackTests: function(viewedTest) {
+            if (!viewedTest.stack) return [];
+            return $http.get('/api/stacks/' + viewedTest.stack)
+            .then(res => res.data.tests)
+            .then(tests => {
+                let includeTest = true; //Will include only tests that precede the viewedTest in the stack
+                return tests.filter(test => {
+                    if (test._id === viewedTest._id) includeTest = false;
+                    return includeTest;
+                });
+            });
         }
     };
 });
 
 app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $rootScope, $log, AuthService, TestFactory, $mdDialog, $mdMedia){
+
+  $scope.toggle = false;
+  $scope.setToggle = function(){
+    $scope.toggle = !$scope.toggle;
+    $scope.$evalAsync();
+    };
+
 
     $scope.test = {};
 	$scope.test.name = 'newTest';
@@ -180,7 +213,7 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
             console.log("HIT THE FIRST IF");
             if (type === "params") $scope.test.params.push({});
             if (type === "headers") $scope.test.headers.push({});
-            if (type === "validators") $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
+            if (type === "validators") $scope.test.validators.push({name: 'validator' + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
         }
         else if (index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
             console.log("HITTING THE ELSE")
@@ -233,6 +266,11 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
 		$scope.test.url  = $scope.test.url + finalString;
 		$scope.test.url = $scope.test.url.slice(0,$scope.test.url.length - 1);
 	};
+
+    $scope.intermediary = function(){
+        $scope.setToggle();
+        window.setTimeout($scope.saveTest, 800);
+    };
 
 	$scope.saveTest = function(){
 		//$scope.test.url = $scope.test.url;

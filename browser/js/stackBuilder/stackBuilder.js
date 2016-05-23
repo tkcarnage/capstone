@@ -56,6 +56,13 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
 });
 
 app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBuilderFactory, $rootScope, TestBuilderFactory) {
+
+    $scope.toggle = false;
+    $scope.setToggle = function(){
+        $scope.toggle = !$scope.toggle;
+        $scope.$evalAsync();
+    };
+
     $scope.tests = tests.filter(function(test){
         return !test.stack;
     });
@@ -64,6 +71,11 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
     $scope.stack.userId = $rootScope.user._id;
     $scope.stack.tests = [];
 
+
+    $scope.intermediary = function(){
+        $scope.setToggle();
+        window.setTimeout($scope.submitStack, 800);
+    };
 
     $scope.submitStack = function () {
         StackBuilderFactory.create($scope.stack)

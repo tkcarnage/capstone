@@ -11,6 +11,12 @@ app.directive('stackCard', function() {
 
 app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactory, $mdDialog, TestFactory, $log, StackViewFactory) {
 
+  $scope.toggle = false;
+  $scope.setToggle = function(){
+    $scope.toggle = !$scope.toggle;
+    $scope.$evalAsync();
+  };
+
   $scope.showConfirm = function(stack) {
       var confirm = $mdDialog.confirm()
       .title("Confirm Deletion")
@@ -25,6 +31,7 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
   };
 
   $scope.runTests = function(stack) {
+    $scope.setToggle();
     let tests = stack.tests.slice();
 
     // Recursive function that shifts a test off of the tests array with each recursive call until the array is empty
@@ -42,6 +49,7 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
           validatorResults: [],
           lastRun: Date.now()
       };
+      if (typeof test.validators === 'string') test.validators = JSON.parse(test.validators);
       if (typeof test.validators === 'string') test.validators = JSON.parse(test.validators);
       test.validators.forEach(function (elem) {
         try {
@@ -84,11 +92,10 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
         };
         $rootScope.$emit('testUpdate', dataObj);
         runTests(tests);
-
       })
       .catch($log.error);
     };
-
     runTests(tests);
+    window.setTimeout($scope.setToggle, 800);
   };
 });
