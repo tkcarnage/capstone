@@ -28,7 +28,7 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
                 return currentKey[nextKey];
             }
             catch(error) {
-                alert('Whoops! Newman couldn\'t interpolate "' + currentKey + '.' + nextKey + '" while running "' + currentTestName + '". Make sure you\'re interpolating the right value, and try to run the entire stack from the home page.');
+                alert('Whoops! Newman couldn\'t interpolate "' + key + '" while running "' + currentTestName + '". Make sure you\'re interpolating the right value, and try to run the entire stack from the home page.');
             }
 
         }, responsePool);
@@ -120,7 +120,7 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
             }
         }
         catch(error) {
-            alert('Whoops! During ' + responsePool.currentTestName + ', you asked us to go to ' + requestObj.url + 'but that doesn\'t appear to be a valid address.');
+            alert('Whoops! During ' + responsePool.currentTestName + ', you asked Newman to send a request to ' + requestObj.url + 'but that doesn\'t appear to be a valid address.');
         }
     };
 
