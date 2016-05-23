@@ -96,6 +96,5 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
         var otherIndex = $scope.stack.tests.indexOf(obj);
         $scope.stack.tests[index] = obj;
         $scope.stack.tests[otherIndex] = otherObj;
-        console.log($scope.stack.tests);
     };
 });

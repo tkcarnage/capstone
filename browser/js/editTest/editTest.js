@@ -199,12 +199,10 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
                     return;
                 }
             }
-            $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
+            if ($scope.results.validatorResults.length) $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
             return TestFactory.saveResults($scope.results, $scope.test);
-            // need to add the test id to the results object
         })
         .then(function(test) {
-            // console.log("TEST ID,", test._id);
             $scope.test.result = test.result._id;
             $scope.showResults(test);
         })

@@ -82,7 +82,7 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
                 return;
             }
         }
-        results.finalResult = results.validatorResults.every(validatorResult => validatorResult);
+        if (results.validatorResults.length) results.finalResult = results.validatorResults.every(validatorResult => validatorResult);
         return TestFactory.saveResults(results, test);
       })
       .then(updatedTest => {
