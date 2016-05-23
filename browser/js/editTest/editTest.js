@@ -39,7 +39,7 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
     $scope.numHeaders = 0;
     $scope.numBodyObj = 0;
     $scope.addForm = function(index, type){
-        if (type === 'validator') $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
+        if (type === 'validator') $scope.test.validators.push({name: $scope.test.name + (Number($scope.test.validators.length) + 1).toString(), func: "(function(response) {\n\n});"});
         else if (index === $scope.test[type].length - 1 || $scope.test[type].length === 0 || index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
             if (type === "params") {
                 $scope.numParams++;
@@ -175,8 +175,8 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
         if (typeof $scope.test.validators === 'string') $scope.test.validators = JSON.parse($scope.test.validators);
         $scope.test.validators.forEach(function (elem) {
             try {
-                if (elem.func.length > 23) {
-                    funcArray.push(eval('(' + elem.func + ')'));
+                if (elem.func.length > 26) {
+                    funcArray.push(eval(elem.func));
                 }
             }
             catch(err) {
