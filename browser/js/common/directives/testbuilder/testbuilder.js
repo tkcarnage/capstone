@@ -130,7 +130,9 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
 
             responsePool.currentTestName = test.name;
 
-            let interpolatedTest = interpolate(test);
+            let copyOfTest = _.cloneDeep(test);
+
+            let interpolatedTest = interpolate(copyOfTest);
 
             //Construct and send the $http request
             return makeRequest(interpolatedTest)
