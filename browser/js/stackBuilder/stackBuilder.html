@@ -29,7 +29,7 @@
                             </div>
                             <span flex></span>
                             <div layout-gt-sm="column">
-                                <h4 ng-show="stack.tests.length">Tests in your stack</h4>
+                                <h4 ng-show="stack.tests.length">Tests in your sequence</h4>
                                 <span ng-repeat='test in stack.tests'>
                                     <md-button class="btn btn-xs opacityhover" ng-click="removeFromStack(test)"><md-icon class="material-icons">delete</md-icon> {{test.name}}</md-button>
                                 </span>
