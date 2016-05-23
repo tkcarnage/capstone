@@ -320,8 +320,7 @@ $scope.runTest = function() {
                     return;
                 }
             }
-            $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
-
+            if ($scope.results.validatorResults.length) $scope.results.finalResult = $scope.results.validatorResults.every(validatorResult => validatorResult);
         })
         .then($scope.showResults);
     };
