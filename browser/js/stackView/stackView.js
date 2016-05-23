@@ -60,56 +60,8 @@ app.controller('StackViewCtrl', function($scope, $rootScope, $state, $log, stack
       $('.ppc-progress-fill').css('transform','rotate('+ deg +'deg)');
       $('.ppc-percents span').html(percent+'%');
     });
-
-//
-    //running stack from here
-  //   $scope.runTests = function(stack) {
-  //   stack.tests.forEach(test => {
-  //     let funcArray = [];
-  //     let cancelTest = false;
-  //     let results = {
-  //         validatorResults: [],
-  //         lastRun: Date.now()
-  //     };
-  //     if (typeof test.validators === 'string') test.validators = JSON.parse(test.validators);
-  //     test.validators.forEach(function (elem) {
-  //       try {
-  //           if (elem.func.length > 23) {
-  //               funcArray.push(eval('(' + elem.func + ')'));
-  //           }
-  //       }
-  //       catch(err) {
-  //           alert('There was an error parsing the ' + elem.name + ' validator function. Refactor that function and try again.');
-  //           cancelTest = true;
-  //       }
-  //     });
-  //     if (cancelTest) return;
-  //     TestFactory.runTest(test)
-  //     .then(function(resData) {
-  //       for (var i = 0; i < funcArray.length; i++) {
-  //           try {
-  //               results.validatorResults.push(!!funcArray[i](resData));
-  //           }
-  //           catch (err){
-  //               alert('The following error occured while running the ' + test.validators[i].name + ' validator function: ' + err.message + '. Refactor that function and try again.');
-  //               return;
-  //           }
-  //       }
-  //       results.finalResult = results.validatorResults.every(validatorResult => validatorResult);
-  //       return TestFactory.saveResults(results, test._id);
-  //     })
-  //     .then(updatedTest => {
-  //       let dataObj = {
-  //         test: updatedTest,
-  //         stack: stack
-  //       };
-  //       $rootScope.$emit('testUpdate', dataObj);
-  //     })
-  //     .catch($log.error);
-  //   });
-  // };
-var dateObj = new Date($scope.stack.lastRun);
-$scope.dateString = dateObj.toString();
+    var dateObj = new Date($scope.stack.lastRun);
+    $scope.dateString = dateObj.toString();
 
 
 });

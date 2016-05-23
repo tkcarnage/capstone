@@ -213,7 +213,7 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
             console.log("HIT THE FIRST IF");
             if (type === "params") $scope.test.params.push({});
             if (type === "headers") $scope.test.headers.push({});
-            if (type === "validators") $scope.test.validators.push({name: 'validator' + (Number($scope.test.validators.length) + 1).toString(), func: "function(response) {\n\n}"});
+            if (type === "validators") $scope.test.validators.push({name: 'validator' + (Number($scope.test.validators.length) + 1).toString(), func: "(function(response) {\n\n});"});
         }
         else if (index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
             console.log("HITTING THE ELSE")
@@ -297,8 +297,8 @@ $scope.runTest = function() {
         };
         $scope.test.validators.forEach(function (elem) {
             try {
-                if (elem.func.length > 23) {
-                    funcArray.push(eval('(' + elem.func + ')'));
+                if (elem.func.length > 26) {
+                    funcArray.push(eval(elem.func));
                 }
             }
             catch(err) {

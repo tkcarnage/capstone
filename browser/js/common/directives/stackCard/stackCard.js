@@ -53,8 +53,8 @@ app.controller('StackCardCtrl', function ($scope, $rootScope, StackBuilderFactor
       if (typeof test.validators === 'string') test.validators = JSON.parse(test.validators);
       test.validators.forEach(function (elem) {
         try {
-            if (elem.func.length > 23) {
-                funcArray.push(eval('(' + elem.func + ')'));
+            if (elem.func.length > 26) {
+                funcArray.push(eval(elem.func));
             }
         }
         catch(err) {
