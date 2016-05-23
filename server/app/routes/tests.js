@@ -18,6 +18,9 @@ router.get('/:testid', Auth.assertAuthenticated, function(req,res,next) {
 router.post('/', Auth.assertAuthenticated, function(req,res,next) {
     Test.create(req.body)
     .then(function(test){
+        // var currentDate = new Date();
+        // var time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
+        // console.log("just about to exit TestBuilderFactory.create", time);
         res.json(test);
     })
     .catch(next);
@@ -47,6 +50,7 @@ router.get('/', Auth.assertAuthenticated, function(req, res, next) {
 
 router.delete('/:testid', Auth.assertAuthenticated, function(req, res, next){
    const testid = req.params.testid;
-   Test.findById(testid).remove().exec()
+   Test.findByIdAndRemove(testid)
+   .then((value) => res.json(value))
    .catch(next);
 });

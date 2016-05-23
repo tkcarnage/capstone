@@ -1,14 +1,21 @@
-app.factory('TestBuilderFactory', function($http){
+'use strict';
+
+app.factory('TestBuilderFactory', function($http, AuthService){
 	var testobj = {};
+
 	testobj.create = function(obj){
-        console.log("OBJ", obj);
-        if(obj._id) delete obj._id;
-        if (typeof obj.validators != "string") {
-            obj.validators = JSON.stringify(obj.validators);
-            obj.body.data = JSON.stringify(obj.body.data);
+        var clonedObj = _.cloneDeep(obj);
+        if(clonedObj._id){delete clonedObj._id; }
+        if (clonedObj.validators) {
+            clonedObj.validators = JSON.stringify(clonedObj.validators);
         }
-		return $http.post('/api/tests/', obj)
-		.then(response => response.data);
+        clonedObj.body.data = JSON.stringify(clonedObj.body.data);
+		return $http.post('/api/tests/', clonedObj)
+		.then(response =>  {
+            let currentDate = new Date();
+            let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
+            return response.data;
+        });
 	};
     testobj.edit = function(obj){
         obj.validators = JSON.stringify(obj.validators);
@@ -17,7 +24,18 @@ app.factory('TestBuilderFactory', function($http){
         .then(response => response.data);
     };
     testobj.delete = function(obj){
-        return $http.delete('/api/tests/' + obj._id);
+        return $http.delete('/api/tests/' + obj._id)
     };
-	return testobj;
+
+    testobj.allTests = function() {
+        return AuthService.getLoggedInUser()
+            .then(function(user) {
+                return $http.get('/api/tests?userId=' + user._id);
+            })
+            .then(function(response) {
+                return response.data;
+            });
+    };
+
+    return testobj;
 });
