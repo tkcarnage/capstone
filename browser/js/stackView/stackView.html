@@ -36,7 +36,7 @@
 
     <md-table-container>
       <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
-        <thead ng-if="!options.decapitate" md-head md-on-reorder="logOrder">
+        <thead ng-if="!options.decapitate" md-head>
           <tr md-row>
             <th md-column><span>#</span></th>
             <th md-column><span>Name</span></th>
@@ -50,7 +50,7 @@
           </tr>
         </thead>
         <tbody md-body>
-          <tr md-row md-select="test" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="test in stack.tests | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+          <tr md-row md-select="test" md-auto-select="options.autoSelect" ng-repeat="test in stack.tests | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
             <td md-cell>{{stack.tests.indexOf(test) + 1}}</td>
             <td md-cell>{{test.name || "Untitled"}}</td>
             <td md-cell>{{test.method}}</td>
@@ -64,7 +64,7 @@
       </table>
     </md-table-container>
 
-<!-- 
+<!--
       <md-card style="padding: 0">
 
         <md-toolbar class="md-primary md-hue-1">

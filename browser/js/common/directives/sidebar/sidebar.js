@@ -14,7 +14,6 @@ app.controller('sidebarCtrl', function($scope, $log, $rootScope, StackBuilderFac
     $scope.user = user;
   });
 
-
   StackBuilderFactory.getUserStacks($scope.user)
   .then(function(stacks){
     $scope.stacks = stacks;
@@ -22,6 +21,7 @@ app.controller('sidebarCtrl', function($scope, $log, $rootScope, StackBuilderFac
 
   $rootScope.$on('createstack', function(event, data){
     $scope.stacks.push(data);
+    $scope.$evalAsync();
   });
 
   $rootScope.$on('deletestack', function(event, data){

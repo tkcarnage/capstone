@@ -9,7 +9,6 @@ app.config(function ($stateProvider) {
                 .then(function(user) {
                   var currentDate = new Date();
                   var time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-                  console.log("in allTests state", time);
                     return $http.get('/api/tests?userId=' + user._id);
                 })
                 .then(function(response) {
@@ -75,20 +74,7 @@ app.controller('allTestsCtrl', function ($log, $mdEditDialog, $mdDialog, $q, $st
     .then(function(val){
       console.log(val);
       $scope.getTests();
-    })
-  }
-
-  $scope.logItem = function (item) {
-    console.log(item.name, 'was selected');
-  };
-
-  $scope.logOrder = function (order) {
-    console.log('order: ', order);
-  };
-
-  $scope.logPagination = function (page, limit) {
-    console.log('page: ', page);
-    console.log('limit: ', limit);
+    });
   };
 
   $scope.showConfirm = function(ev) {

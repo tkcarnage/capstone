@@ -31,8 +31,6 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
         };
 
         obj.create = function(stackObj) {
-            console.log(stackObj);
-            console.log(stackObj.tests, typeof stackObj.tests,'****');
             let newTests = stackObj.tests.map(test => TestBuilderFactory.create(test));
             return Promise.all(newTests)
             .then(savedTests => stackObj.tests = savedTests)
