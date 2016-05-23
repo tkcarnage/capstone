@@ -14,14 +14,16 @@ app.controller('sidebarCtrl', function($scope, $log, $rootScope, StackBuilderFac
     $scope.user = user;
   });
 
-
   StackBuilderFactory.getUserStacks($scope.user)
   .then(function(stacks){
     $scope.stacks = stacks;
   });
 
   $rootScope.$on('createstack', function(event, data){
+    console.log('heard the event');
     $scope.stacks.push(data);
+    console.log('$scope.stacks:', $scope.stacks);
+    $scope.$evalAsync();
   });
 
   $rootScope.$on('deletestack', function(event, data){

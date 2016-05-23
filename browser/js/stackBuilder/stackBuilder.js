@@ -31,13 +31,12 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
         };
 
         obj.create = function(stackObj) {
-            console.log(stackObj);
-            console.log(stackObj.tests, typeof stackObj.tests,'****');
             let newTests = stackObj.tests.map(test => TestBuilderFactory.create(test));
             return Promise.all(newTests)
             .then(savedTests => stackObj.tests = savedTests)
             .then( () => $http.post('/api/stacks', stackObj))
             .then(res => {
+                console.log('about to emit event');
                 $rootScope.$emit('createstack', res.data);
                 return res.data;
             });
@@ -86,7 +85,7 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
         $scope.stack.tests.push(test);
         $scope.$evalAsync();
     };
-    $scope.removeFromStack = function (obj) {   
+    $scope.removeFromStack = function (obj) {
         console.log("REMOTE THIS: ", obj);
         $scope.stack.tests = $scope.stack.tests.filter(function(el){
             return el !== obj;

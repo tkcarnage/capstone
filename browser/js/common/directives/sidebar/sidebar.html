@@ -2,7 +2,7 @@
     <div class="col-md-12 sidebarset md-accent">
         <a ui-sref="home"><div class="stacksections"><md-icon class="material-icons">home</md-icon> Home</div></a>
          <a ui-sref="allTests"><div class="stacksections "><md-icon class="material-icons">view_module</md-icon> All Tests</div></a>
-         <span ng-repeat="stack in stacks">
+         <span ng-repeat="stack in stacks track by $index">
            <a ui-sref="stackView({stackId: stack._id})"><div class="stacksections"><md-icon class="material-icons">layers</md-icon> {{stack.name}}</div></a>
          </span>
     </div>

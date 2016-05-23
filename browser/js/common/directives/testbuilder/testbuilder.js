@@ -161,7 +161,7 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
             responsePool = new ResponsePool();
         },
         getStackTests: function(viewedTest) {
-            if (!viewedTest.stack) return [];
+            if (!viewedTest.stack) return Promise.resolve([]);
             return $http.get('/api/stacks/' + viewedTest.stack)
             .then(res => res.data.tests)
             .then(tests => {
