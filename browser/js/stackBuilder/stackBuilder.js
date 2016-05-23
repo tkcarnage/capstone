@@ -31,8 +31,6 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
         };
 
         obj.create = function(stackObj) {
-            console.log(stackObj);
-            console.log(stackObj.tests, typeof stackObj.tests,'****');
             let newTests = stackObj.tests.map(test => TestBuilderFactory.create(test));
             return Promise.all(newTests)
             .then(savedTests => stackObj.tests = savedTests)
@@ -86,7 +84,7 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
         $scope.stack.tests.push(test);
         $scope.$evalAsync();
     };
-    $scope.removeFromStack = function (obj) {   
+    $scope.removeFromStack = function (obj) {
         console.log("REMOTE THIS: ", obj);
         $scope.stack.tests = $scope.stack.tests.filter(function(el){
             return el !== obj;
@@ -98,6 +96,5 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
         var otherIndex = $scope.stack.tests.indexOf(obj);
         $scope.stack.tests[index] = obj;
         $scope.stack.tests[otherIndex] = otherObj;
-        console.log($scope.stack.tests);
     };
 });

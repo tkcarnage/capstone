@@ -18,10 +18,6 @@ app.controller('homeCtrl', function ($scope, user, stacks, $rootScope, StackBuil
   $scope.user = user;
   $scope.stacks = stacks;
 
-  $rootScope.$on('createstack', function(event, data){
-    $scope.stacks.push(data);
-  });
-
   $rootScope.$on('deletestack', function(event, data){
     $scope.stacks = $scope.stacks.filter(function(ele){
       return data !== ele._id;
