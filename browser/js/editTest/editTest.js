@@ -213,6 +213,11 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
 
     function DialogController($scope, $mdDialog) {
         $scope.test = $mdDialog.test;
+        if (typeof $scope.test.validators === 'string') {
+            $scope.test.validators = JSON.parse($scope.test.validators);
+            console.log("MODIFIED DIALOG TESTS", $scope.test.validators);
+        }
+        console.log("DIALOG TESTS", $scope.test);
         $scope.results = $mdDialog.results;
         $scope.hide = function() {
             $mdDialog.hide();
