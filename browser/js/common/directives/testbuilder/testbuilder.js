@@ -69,7 +69,6 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
     };
 
     let makeRequest = function(test) {
-
         let requestObj = {};
 
         requestObj.method = test.method;
@@ -78,7 +77,7 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
         if (test.headers.length) {
             requestObj.headers = {};
             test.headers.forEach(header => {
-                if (header !== null) requestObj.headers[header.key] = requestObj.headers[header.value];
+                if (header !== null) requestObj.headers[header.key] = header.value;
             });
         }
         let testData;
@@ -91,8 +90,9 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
                 return dataObj;
             }, {});
         }
-
+        console.log("HEADERS SHOULD STILL BE HERE", test.headers);
         if (test.body.bodytype === 'x-www-form-urlencoded') {
+            console.log("SHOULD NOT BE SEEING THIS");
             requestObj.data = testData.reduce(function(dataArr, nextBodyPair) {
                 dataArr.push(nextBodyPair.key + '=' + nextBodyPair.value);
                 return dataArr;
@@ -101,20 +101,23 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
         }
         let formData;
         if (test.body.bodytype === 'form-data') {
+            console.log("SHOULD NOT BE SEEING THIS");
             formData = new FormData();
             testData.forEach(keyValuePair => formData.set(keyValuePair.key, keyValuePair.value));
             requestObj.headers['Content-Type'] = undefined;
         }
 
         try {
-
+            console.log("TRY BLOCK HIT", test);
             if (test.body.bodytype === 'form-data') {
+                console.log("IF STATEMENT SHOULD NOT BE HIT");
                 return $http[requestObj.method.toLowerCase()](requestObj.url, formData, {
                     transformRequest: angular.identity,
                     headers: requestObj.headers
                 })
                 .then(response => response.data);
             } else {
+                console.log("REQUEST OBJECT", requestObj);
                 return $http(requestObj)
                 .then(response => response.data);
             }

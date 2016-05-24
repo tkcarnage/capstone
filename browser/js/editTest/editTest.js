@@ -155,7 +155,7 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
     };
 
     $scope.runTest = function() {
-
+        console.log("HELLLLLO");
         //Populate the responsePool with results from earlier tests, if required
         TestFactory.clearResponsePool();
         $scope.stackTests.forEach(test => {
