@@ -4,6 +4,4 @@ npm-debug.log
 public
 .DS_Store
 coverage
-bower_components/ace-builds
-bower_components/angular-ui-ace
-bower_components/angular
+bower_components
