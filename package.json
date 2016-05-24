@@ -5,8 +5,7 @@
   "main": "server/start.js",
   "scripts": {
     "start": "nodemon --watch server -e js,html server/start.js",
-    "postinstall": "gulp build",
-    "build": "electron-packager . Newman --platform=darwin --arch=x64 --icon=./assets/desktopapp.icns"
+    "postinstall": "gulp build"
   },
   "engines": {
     "node": ">=4.0.0"
