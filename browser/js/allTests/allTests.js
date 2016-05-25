@@ -9,7 +9,7 @@ app.config(function ($stateProvider) {
                 .then(function(user) {
                   var currentDate = new Date();
                   var time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-                    return $http.get('/api/tests?userId=' + user._id);
+                    return $http.get('https://warm-lowlands-63755.herokuapp.com/api/tests?userId=' + user._id);
                 })
                 .then(function(response) {
                     return response.data;

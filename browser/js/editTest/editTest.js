@@ -7,7 +7,7 @@ app.config(function ($stateProvider) {
         controller: 'TestEditorCtrl',
         resolve: {
             test: function($http, $stateParams) {
-                return $http.get('/api/tests/' + $stateParams.testId)
+                return $http.get('https://warm-lowlands-63755.herokuapp.com/api/tests/' + $stateParams.testId)
                 .then(res => res.data)
                 .then(test => {
                     console.log('type of validators', typeof test.validators, test.validators);

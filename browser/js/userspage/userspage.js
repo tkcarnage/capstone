@@ -19,7 +19,7 @@ app.config(function ($stateProvider) {
 app.factory('UsersPageFactory', function($http) {
     return {
         saveChanges: function(user) {
-            return $http.put('/api/users/' + user._id, user)
+            return $http.put('https://warm-lowlands-63755.herokuapp.com/api/users/' + user._id, user)
             .then(res => res.data);
         }
     };

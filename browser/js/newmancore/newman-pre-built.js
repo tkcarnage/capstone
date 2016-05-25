@@ -80,14 +80,14 @@
             // Make request GET /session.
             // If it returns a user, call onSuccessfulLogin with the response.
             // If it returns a 401 response, we catch it and instead resolve to null.
-            return $http.get('/session').then(onSuccessfulLogin).catch(function () {
+            return $http.get('https://warm-lowlands-63755.herokuapp.com/session').then(onSuccessfulLogin).catch(function () {
                 return null;
             });
 
         };
 
         this.login = function (credentials) {
-            return $http.post('/login', credentials)
+            return $http.post('https://warm-lowlands-63755.herokuapp.com/login', credentials)
                 .then(onSuccessfulLogin)
                 .catch(function () {
                     return $q.reject({ message: 'Invalid login credentials.' });
@@ -95,7 +95,7 @@
         };
 
         this.logout = function () {
-            return $http.get('/logout').then(function () {
+            return $http.get('https://warm-lowlands-63755.herokuapp.com/logout').then(function () {
                 Session.destroy();
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
             });

@@ -5,7 +5,7 @@ app.config(function ($stateProvider) {
         controller: 'StackViewCtrl',
         resolve: {
             stack: function($http, $stateParams) {
-                return $http.get('/api/stacks/' + $stateParams.stackId)
+                return $http.get('https://warm-lowlands-63755.herokuapp.com/api/stacks/' + $stateParams.stackId)
                 .then(res => res.data);
             }
         }
@@ -15,7 +15,7 @@ app.config(function ($stateProvider) {
 app.factory('StackViewFactory', function($http) {
     return {
         edit: function(obj) {
-            return $http.put('/api/stacks/' + obj._id, obj)
+            return $http.put('https://warm-lowlands-63755.herokuapp.com/api/stacks/' + obj._id, obj)
             .then (response => response.data);
         },
         getTestWithStatus: function (arr, status) {

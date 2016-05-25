@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
                 return AuthService.getLoggedInUser();
             },
             tests: function($http, user) {
-                return $http.get('/api/tests?userId=' + user._id)
+                return $http.get('https://warm-lowlands-63755.herokuapp.com/api/tests?userId=' + user._id)
                 .then(res => res.data);
             }
         }
@@ -23,7 +23,7 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
             return storedStacks;
         };
         obj.getUserStacks = function(user){
-            return $http.get('/api/stacks?userId=' + user._id)
+            return $http.get('https://warm-lowlands-63755.herokuapp.com/api/stacks?userId=' + user._id)
             .then(response => {
                 angular.copy(response.data, storedStacks);
                 return storedStacks;
@@ -34,14 +34,14 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
             let newTests = stackObj.tests.map(test => TestBuilderFactory.create(test));
             return Promise.all(newTests)
             .then(savedTests => stackObj.tests = savedTests)
-            .then( () => $http.post('/api/stacks', stackObj))
+            .then( () => $http.post('https://warm-lowlands-63755.herokuapp.com/api/stacks', stackObj))
             .then(res => {
                 $rootScope.$emit('createstack', res.data);
                 return res.data;
             });
         };
         obj.delete = function(stackObj) {
-            return $http.delete('/api/stacks/' + stackObj._id)
+            return $http.delete('https://warm-lowlands-63755.herokuapp.com/api/stacks/' + stackObj._id)
             .then(res => {
                 storedStacks = storedStacks.filter(function(ele){
                     return ele._id !== res.data;

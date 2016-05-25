@@ -145,13 +145,13 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
             results.test = test._id;
 
             return TestBuilderFactory.edit(test)
-            .then(() => $http.post('/api/results', results))
+            .then(() => $http.post('https://warm-lowlands-63755.herokuapp.com/api/results', results))
             .then(res => res.data)
             .catch($log.error);
         },
         getPreviousResults: function(test) {
             if (!test.result) { return false; }
-            return $http.get('/api/results/' + test.result)
+            return $http.get('https://warm-lowlands-63755.herokuapp.com/api/results/' + test.result)
             .then(res => res.data);
         },
         addToResponsePool: function(data) {
@@ -162,7 +162,7 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
         },
         getStackTests: function(viewedTest) {
             if (!viewedTest.stack) return Promise.resolve([]);
-            return $http.get('/api/stacks/' + viewedTest.stack)
+            return $http.get('https://warm-lowlands-63755.herokuapp.com/api/stacks/' + viewedTest.stack)
             .then(res => res.data.tests)
             .then(tests => {
                 let includeTest = true; //Will include only tests that precede the viewedTest in the stack
