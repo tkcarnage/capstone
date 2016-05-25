@@ -18,7 +18,7 @@ var allowCrossDomain = function(req, res, next) {
 module.exports = function (app) {
 
     //Allows CORS requests
-    app.use(allowCrossDomain);
+    //app.use(allowCrossDomain);
 
     // Important to have this before any session middleware
     // because what is a session without a cookie?
