@@ -10,6 +10,8 @@
  so if you choose not to use any ES6 features, you can
  start your application from main.js.
 
+ SDFKJSHDFJKSDLHF:LKSDFJKL:SDFJKLSDJFKS:LDFJSD:KLFJKL:SDFJSD:KLFJSDL:KFJSDKL:FJSD:LKFJSDK:LFJKDSL:FJ:SKDLFJLSD:KFJ:SDKLFJDFKLS:J
+
 */
 
 require('babel-register');
@@ -59,4 +61,3 @@ require('./main');
 //         createWindow();
 //     }
 // });
-
