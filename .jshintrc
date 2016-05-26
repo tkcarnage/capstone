@@ -2,6 +2,7 @@
   "node": true,
   "browser": true,
   "esversion": 6,
+  "mocha": true,
   "predef": [
               "app",
               "angular",

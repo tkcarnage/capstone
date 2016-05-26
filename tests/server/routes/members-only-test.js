@@ -11,7 +11,7 @@ var clearDB = require('mocha-mongoose')(dbURI);
 var supertest = require('supertest');
 var app = require('../../../server/app');
 
-describe('Members Route', function () {
+xdescribe('Members Route', function () {
 
 	beforeEach('Establish DB connection', function (done) {
 		if (mongoose.connection.db) return done();
@@ -56,7 +56,7 @@ describe('Members Route', function () {
 			loggedInAgent.post('/login').send(userInfo).end(done);
 		});
 
-		it('should get with 200 response and with an array as the body', function (done) {
+		it('should get with 200 response with the updated user object', function (done) {
 			loggedInAgent.get('/api/members/secret-stash').expect(200).end(function (err, response) {
 				if (err) return done(err);
 				expect(response.body).to.be.an('array');

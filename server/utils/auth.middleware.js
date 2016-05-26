@@ -19,7 +19,11 @@ Auth.isSelf = function (req) {
 Auth.assert = function (assertion) {
   return function (req, res, next) {
     if (assertion(req)) next();
-    else next(new Error("Not Authenticated"));
+    else {
+        let err = new Error("Not Authenticated");
+        err.status = 401;
+        next(err);
+    }
   };
 };
 
