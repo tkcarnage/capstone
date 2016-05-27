@@ -14,6 +14,7 @@
 
 require('babel-register');
 require('./main');
+var path = require('path');
 
 var electron = require('electron');
 var app = electron.app;  // Module to control application life.
@@ -34,10 +35,13 @@ app.on('window-all-closed', function() {
 
 function createWindow () {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 1200, height: 1080, "node-integration": false, minWidth: 1200, icon: __dirname + "/desktopapp.png"});
+    mainWindow = new BrowserWindow({width: 1200, height: 1080, "node-integration": true, minWidth: 1200, icon: __dirname + "/desktopapp.png", webPreferences: {"web-security" : false}});
+    // mainWindow = new BrowserWindow({width: 1200, height: 1080, "node-integration": false, minWidth: 1200, icon: __dirname + "/desktopapp.png"});
+    // and load the index.html of the applicationp.
+    // mainWindow.loadURL('http://localhost:1337/');
+    mainWindow.loadURL('file://' + __dirname + '/app/views/index.html');
+    // mainWindow.loadURL(path.join('file://', __dirname, '/../../../node_modules/bootstrap/dist/css/bootstrap.css'));
 
-    // and load the index.html of the app.
-    mainWindow.loadURL('http://localhost:1337/');
     mainWindow.webContents.openDevTools();
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {

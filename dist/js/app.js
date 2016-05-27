@@ -13,7 +13,7 @@ var mainWindow;
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 500, height: 500, "web-preferences" : {"web-security" : false, nodeIntegration: "false"} });
 
   //electron connect to server process
   // client.create(mainWindow);
