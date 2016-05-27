@@ -1,5 +1,5 @@
 app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
-
+    console.log("this is the sidebar")
     return {
         restrict: 'E',
         scope: {},

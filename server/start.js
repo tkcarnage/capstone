@@ -35,7 +35,7 @@ app.on('window-all-closed', function() {
 
 function createWindow () {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 1200, height: 1080, "node-integration": true, minWidth: 1200, icon: __dirname + "/desktopapp.png", webPreferences: {"web-security" : false}});
+    mainWindow = new BrowserWindow({width: 1200, height: 1080, minWidth: 1200, icon: __dirname + "/desktopapp.png", webPreferences: {"web-security" : false, "nodeIntegration": true}});
     // mainWindow = new BrowserWindow({width: 1200, height: 1080, "node-integration": false, minWidth: 1200, icon: __dirname + "/desktopapp.png"});
     // and load the index.html of the applicationp.
     // mainWindow.loadURL('http://localhost:1337/');

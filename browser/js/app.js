@@ -1,6 +1,8 @@
 'use strict';
 window.app = angular.module('Newman', ['NewmanPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'ngMaterial', 'ngMessages', 'md.data.table', 'ngDraggable' , 'ui.ace']);
 
+console.log(app);
+
 app.config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) {
 
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)

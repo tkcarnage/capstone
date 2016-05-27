@@ -9,6 +9,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="/home/zausnerd/Documents/david/projects/capstone/node_modules/bootstrap/dist/css/bootstrap.css" /> -->
 <!--     <link rel="stylesheet" type="text/css" href="./../../../node_modules/bootstrap/dist/css/bootstrap.css" /> -->
     <!-- <script src="/lodash/index.js"></script> -->
+    <link rel="stylesheet" type = "text/css" href="/home/zausnerd/Documents/david/projects/capstone/node_modules/bootstrap/dist/css/bootstrap.css" />
     <script>
         var link = document.createElement('link')
         link.setAttribute('rel', 'stylesheet')
@@ -17,32 +18,42 @@
     </script>
     <link rel="stylesheet" href="http://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css">
     <!-- <link rel="stylesheet" type="text/css" href="./../../../style.css"/> -->
-    <script>
+    <!--<script>
         var link = document.createElement('link')
         link.setAttribute('rel', 'stylesheet')
         link.setAttribute('href', require('path').join(__dirname, './../../../public/style.css'))
         document.head.appendChild(link)
-    </script>
+    </script>-->
     <script>require('lodash')</script>
-
-    <script>
-        var srcArray = ['/angular/angular.js','/angular-animate/angular-animate.js',  '/angular-ui-router/release/angular-ui-router.js', '/angular-ui-bootstrap/ui-bootstrap.js', '/angular-ui-bootstrap/ui-bootstrap-tpls.js'];
+    <script type="text/javascript" src="/home/zausnerd/Documents/david/projects/capstone/node_modules/angular/angular.js"></script>
+    <script defer type="text/javascript" src="/home/zausnerd/Documents/david/projects/capstone/node_modules/angular-animate/angular-animate.js"></script>
+    <script defer type="text/javascript" src="/home/zausnerd/Documents/david/projects/capstone/node_modules/angular-ui-router/release/angular-ui-router.js" ></script>
+    <script defer type="text/javascript" src="/home/zausnerd/Documents/david/projects/capstone/node_modules/angular-ui-bootstrap/ui-bootstrap.js"></script>
+     <script defer type="text/javascript" src="/home/zausnerd/Documents/david/projects/capstone/node_modules/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- <script>
+        var srcArray = ['/angular-ui-bootstrap/ui-bootstrap-tpls.js'];
         var path = './../../../node_modules';
         srcArray.forEach((source) => {
-            var script = document.createElement('script')
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
             script.setAttribute('src', require('path').join(__dirname, path, source));
             document.head.appendChild(script);
         });
-    </script>
-     <script>
+    </script> -->
+
+     <script type="text/javascript" src="/home/zausnerd/Documents/david/projects/capstone/bower_components/electron-d3/dist/electron-d3.min.js"></script>
+      <script type="text/javascript" src="/home/zausnerd/Documents/david/projects/capstone/bower_components/ngDraggable/ngDraggable.js"></script>
+      <script type="text/javascript" src="/home/zausnerd/Documents/david/projects/capstone/bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+      <script type="text/javascript" src="/home/zausnerd/Documents/david/projects/capstone/bower_components/angular-ui-ace/ui-ace.js"></script>
+     <!--<script>
         var srcArray = ['/electron-d3/dist/electron-d3.min.js', '/ngDraggable/ngDraggable.js', '/ace-builds/src-min-noconflict/ace.js', '/angular-ui-ace/ui-ace.js'];
         var path = './../../../bower_components';
         srcArray.forEach((source) => {
             var script = document.createElement('script')
             script.setAttribute('src', require('path').join(__dirname, path, source));
-            document.head.appendChild(script);
-        });
-    </script>
+            document.head.appendChild(script)
+;        });
+    </script> -->
 
     <!-- '/electron-d3/dist/electron-d3.min.js'
     '/ngDraggable/ngDraggable.js' -->
@@ -64,25 +75,28 @@
     <script src="/electron-d3/dist/electron-d3.min.js"></script> -->
     <!-- <script type="text/javascript" src="/ace-builds/src-min-noconflict/ace.js"></script> -->
     <!-- <script type="text/javascript" src="/angular-ui-ace/ui-ace.js"></script> -->
-     <script defer>
+
+    <!-- <script src="public/main.js" defer></script> -->
+   <!--<script>
         var srcArray = ['/public/main.js'];
         var path = './../../..';
         srcArray.forEach((source) => {
             var script = document.createElement('script')
             script.setAttribute('src', require('path').join(__dirname, path, source));
+            // script.setAttribute('defer', true);
             document.head.appendChild(script);
         });
-    </script>
-    <!-- <script src="public/main.js" defer></script> -->
-
+    </script> -->
+    <script defer type="text/javascript" src="/home/zausnerd/Documents/david/projects/capstone/public/main.js"></script>
 </head>
 <body ng-app="Newman">
     <navbar ng-if="location.path() !== '/' && location.path() !== '/signup'"></navbar>
     <sidebar ng-if="location.path() !== '/' && location.path() !== '/signup'" class="col-xs-2"></sidebar>
-    <div class="main" ng-class="{'col-xs-10': location.path() !== '/' && location.path() !== '/signup', 'gradientbackground': location.path() === '/' || location.path() === '/signup'}"ui-view></div>
+    <div class="main" ng-class="{'col-xs-10': location.path() !== '/' && location.path() !== '/signup', 'gradientbackground': location.path() === '/' || location.path() === '/signup'}" ui-view></div>
     <script>
     var cwDirectory = process.cwd();
     window.$ = window.jQuery = require(cwDirectory + '/node_modules/jQuery/lib/node-jquery.js');
     </script>
 </body>
+
 </html>
