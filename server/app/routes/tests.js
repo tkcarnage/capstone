@@ -18,9 +18,6 @@ router.get('/:testid', Auth.assertAuthenticated, function(req,res,next) {
 router.post('/', Auth.assertAuthenticated, function(req,res,next) {
     Test.create(req.body)
     .then(function(test){
-        // var currentDate = new Date();
-        // var time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds()
-        // console.log("just about to exit TestBuilderFactory.create", time);
         res.json(test);
     })
     .catch(next);
