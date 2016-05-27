@@ -11,7 +11,7 @@ const clearDB = require('mocha-mongoose')(dbURI);
 const supertest = require('supertest');
 const app = require('../../../server/app');
 
-describe('User Routes', function () {
+describe('Users Route', function () {
 
     beforeEach('Establish DB connection', function (done) {
         if (mongoose.connection.db) return done();
@@ -69,7 +69,5 @@ describe('User Routes', function () {
                 done();
             });
         });
-
     });
-
 });
