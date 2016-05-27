@@ -40,7 +40,7 @@ describe('Tests Route', function () {
         .then(testInfo => Test.create(testInfo))
         .then(newTest => test = newTest)
         .then(() => console.log('made it to the end of the thens'))
-        // .then(() => done())
+        .then(() => done())
         .catch(console.error.bind(console));
     });
 
