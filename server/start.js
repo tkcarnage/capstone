@@ -34,10 +34,11 @@ app.on('window-all-closed', function() {
 
 function createWindow () {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 1200, height: 1080, "node-integration": false, minWidth: 1200, icon: __dirname + "/desktopapp.png"});
-    
+    mainWindow = new BrowserWindow({width: 1200, height: 1080, "node-integration": false, "web-security": false, minWidth: 1200, icon: __dirname + "/desktopapp.png"});
+
     // and load the index.html of the app.
-    mainWindow.loadURL('http://localhost:1337/');
+    // mainWindow.loadURL('file://' + __dirname + '/windows/main/main.html');
+    mainWindow.loadURL('file://' + __dirname + '/app/views/index.html');
     mainWindow.webContents.openDevTools();
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {

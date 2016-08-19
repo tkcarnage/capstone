@@ -13,7 +13,8 @@ var mainWindow;
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  //mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 800, height: 600, "web-preferences" : {"web-security" : false, nodeIntegration: "true"} });
 
   //electron connect to server process
   // client.create(mainWindow);
@@ -27,7 +28,7 @@ function createWindow () {
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
+    // in an array if your app supports multi window-all-closed, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
   });
