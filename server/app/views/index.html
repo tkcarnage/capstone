@@ -2,25 +2,36 @@
 <html lang="en">
 <head>
     <script>
-    var cwDirectory = process.cwd();
-    window.$ = window.jQuery = require(cwDirectory + '/node_modules/jQuery/lib/node-jquery.js');
-    var path = require('path');
-    var node_modulesPath = path.join(__dirname, '../../../../newman/node_modules');
-    require(path.join(node_modulesPath, '../server/main.js'));
-    require(path.join(node_modulesPath, '/angular/angular.min.js'));
-    require(path.join(node_modulesPath, '/lodash/index.js'));
-    require(path.join(node_modulesPath, '/angular-animate/angular-animate.js'));
-    require(path.join(node_modulesPath, '/angular-ui-router/release/angular-ui-router.js'));
-    require(path.join(node_modulesPath, '/angular-ui-bootstrap/ui-bootstrap.js'));
-    require(path.join(node_modulesPath, '/angular-ui-bootstrap/ui-bootstrap-tpls.js'));
+        var cwDirectory = process.cwd();
+        window.$ = window.jQuery = require(cwDirectory + '/node_modules/jQuery/lib/node-jquery.js');
+        var path = require('path');
+        var style = document.createElement('link');
+        var boot = document.createElement('link');
+        var node_modulesPath = path.join(__dirname, '../../../../newman/node_modules');
+        require(path.join(node_modulesPath, '/angular/angular.js'));
+        style.setAttribute('rel', 'stylesheet');
+        style.setAttribute('href', path.join(node_modulesPath, '../assets/form-1/assets/css/style.css'));
+        boot.setAttribute('rel', 'stylesheet');
+        boot.setAttribute('href', path.join(node_modulesPath, '../assets/form-1/assets/css/bootstrap.min.css'));
+        require(path.join(node_modulesPath, '../server/main.js'));
+        require(path.join(node_modulesPath, '/lodash/index.js'));
+        require(path.join(node_modulesPath, '/angular-animate/angular-animate.js'));
+        require(path.join(node_modulesPath, '/angular-ui-router/release/angular-ui-router.js'));
+        require(path.join(node_modulesPath, '/angular-ui-bootstrap/ui-bootstrap.js'));
+        require(path.join(node_modulesPath, '/angular-ui-bootstrap/ui-bootstrap-tpls.js'));
+        require(path.join(node_modulesPath, '/socket.io-client/socket.io.js'));
+        require(path.join(node_modulesPath, '../bower_components/ngDraggable/ngDraggable.js'));
+        require(path.join(node_modulesPath, '../bower_components/electron-d3/dist/electron-d3.min.js'));
+        require(path.join(node_modulesPath, '../bower_components/ace-builds/src-min-noconflict/ace.js'));
+        require(path.join(node_modulesPath, '../bower_components/angular-ui-ace/ui-ace.min.js'));
     </script>
     <base href="/" />
     <title>Newman</title>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" /> -->
     <link rel="stylesheet" href="http://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css">
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
     <!-- <script src="./node_modules/lodash/index.js"></script> -->
     <!-- <script src="./angular/angular.js"></script> -->
     <!-- <script src="./angular-animate/angular-animate.js"></script> -->
@@ -31,15 +42,14 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-    <script src="/socket.io-client/socket.io.js"></script>
     <script src="http://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.js"></script>
     <script src="https://cdn.jsdelivr.net/ace/1.2.3/min/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdn.jsdelivr.net/lodash/4.12.0/lodash.min.js"></script>
-    <script src="/ngDraggable/ngDraggable.js"></script>
-    <script src="/electron-d3/dist/electron-d3.min.js"></script>
-    <script type="text/javascript" src="/ace-builds/src-min-noconflict/ace.js"></script>
-    <script type="text/javascript" src="/angular-ui-ace/ui-ace.js"></script>
-    <script src="/main.js" defer></script>
+    <!-- <script src="https://cdn.jsdelivr.net/lodash/4.12.0/lodash.min.js"></script> -->
+    <!-- <script src="/ngDraggable/ngDraggable.js"></script> -->
+    <!-- <script src="/electron-d3/dist/electron-d3.min.js"></script> -->
+    <!-- <script type="text/javascript" src="/ace-builds/src-min-noconflict/ace.js"></script> -->
+    <!-- <script type="text/javascript" src="/angular-ui-ace/ui-ace.js"></script> -->
+    <!-- <script src="/main.js" defer></script> -->
 
 </head>
 <body ng-app="Newman">
