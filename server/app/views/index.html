@@ -13,7 +13,6 @@
         style.setAttribute('href', path.join(node_modulesPath, '../assets/form-1/assets/css/style.css'));
         boot.setAttribute('rel', 'stylesheet');
         boot.setAttribute('href', path.join(node_modulesPath, '../assets/form-1/assets/css/bootstrap.min.css'));
-        require(path.join(node_modulesPath, '../server/main.js'));
         require(path.join(node_modulesPath, '/lodash/index.js'));
         require(path.join(node_modulesPath, '/angular-animate/angular-animate.js'));
         require(path.join(node_modulesPath, '/angular-ui-router/release/angular-ui-router.js'));
@@ -44,6 +43,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
     <script src="http://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.js"></script>
     <script src="https://cdn.jsdelivr.net/ace/1.2.3/min/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script> require(path.join(node_modulesPath, '../public/main.js')); </script>
     <!-- <script src="https://cdn.jsdelivr.net/lodash/4.12.0/lodash.min.js"></script> -->
     <!-- <script src="/ngDraggable/ngDraggable.js"></script> -->
     <!-- <script src="/electron-d3/dist/electron-d3.min.js"></script> -->
