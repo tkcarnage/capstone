@@ -3,17 +3,15 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('testeditor', {
         url: '/editTest/:testId',
-        templateUrl: 'js/editTest/editTest.html',
+        templateUrl: process.cwd() + '/browser/js/editTest/editTest.html',
         controller: 'TestEditorCtrl',
         resolve: {
             test: function($http, $stateParams) {
-                return $http.get('/api/tests/' + $stateParams.testId)
+                return $http.get('http://localhost:1337/api/tests/' + $stateParams.testId)
                 .then(res => res.data)
                 .then(test => {
-                    console.log('type of validators', typeof test.validators, test.validators);
                     test.validators = JSON.parse(test.validators);
                     if (typeof test.validators === 'string') { test.validators = JSON.parse(test.validators); }
-                    console.log('type of validators', typeof test.validators, test.validators);
                     return test;
                 });
             }
@@ -146,7 +144,7 @@ app.controller('TestEditorCtrl', function($scope, test, TestBuilderFactory, $roo
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
         $mdDialog.show({
             controller: DialogController,
-            templateUrl: 'js/common/directives/testbuilder/testResults.html',
+            templateUrl: process.cwd() + '/browser/js/common/directives/testbuilder/testResults.html',
             parent: angular.element(document.body),
             //targetEvent: ev,
             clickOutsideToClose:true,

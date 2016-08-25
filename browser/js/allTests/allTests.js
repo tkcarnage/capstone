@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('allTests', {
         url: '/allTests',
-        templateUrl: 'js/allTests/allTests.html',
+        templateUrl: process.cwd() + '/browser/js/allTests/allTests.html',
         controller: 'allTestsCtrl',
         resolve: {
             allTests: function($http, $stateParams, AuthService) {
@@ -9,7 +9,7 @@ app.config(function ($stateProvider) {
                 .then(function(user) {
                   var currentDate = new Date();
                   var time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-                    return $http.get('/api/tests?userId=' + user._id);
+                    return $http.get('http://localhost:1337/api/tests?userId=' + user._id);
                 })
                 .then(function(response) {
                     return response.data;

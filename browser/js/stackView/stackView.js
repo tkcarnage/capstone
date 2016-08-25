@@ -1,11 +1,11 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('stackView', {
         url: '/stackView/:stackId',
-        templateUrl: 'js/stackView/stackView.html',
+        templateUrl: process.cwd() + '/browser/js/stackView/stackView.html',
         controller: 'StackViewCtrl',
         resolve: {
             stack: function($http, $stateParams) {
-                return $http.get('/api/stacks/' + $stateParams.stackId)
+                return $http.get('http://localhost:1337/api/stacks/' + $stateParams.stackId)
                 .then(res => res.data);
             }
         }
@@ -15,7 +15,7 @@ app.config(function ($stateProvider) {
 app.factory('StackViewFactory', function($http) {
     return {
         edit: function(obj) {
-            return $http.put('/api/stacks/' + obj._id, obj)
+            return $http.put('http://localhost:1337/api/stacks/' + obj._id, obj)
             .then (response => response.data);
         },
         getTestWithStatus: function (arr, status) {

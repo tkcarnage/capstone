@@ -3,7 +3,7 @@
 app.directive('sidebar', function () {
   return {
     restrict: 'E',
-    templateUrl: '/js/common/directives/sidebar/sidebar.html',
+    templateUrl: process.cwd() + '/browser/js/common/directives/sidebar/sidebar.html',
     controller: 'sidebarCtrl'
   };
 });
@@ -14,10 +14,12 @@ app.controller('sidebarCtrl', function($scope, $log, $rootScope, StackBuilderFac
     $scope.user = user;
   });
 
-  StackBuilderFactory.getUserStacks($scope.user)
-  .then(function(stacks){
-    $scope.stacks = stacks;
-  });
+  if ($scope.user) {
+    StackBuilderFactory.getUserStacks($scope.user)
+    .then(function(stacks){
+      $scope.stacks = stacks;
+    });
+  }
 
   $rootScope.$on('createstack', function(event, data){
     $scope.stacks.push(data);

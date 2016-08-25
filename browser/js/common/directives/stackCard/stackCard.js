@@ -4,7 +4,7 @@ app.directive('stackCard', function() {
     scope: {
       stack: '='
     },
-    templateUrl: 'js/common/directives/stackCard/stackCard.html',
+    templateUrl: process.cwd() + 'browser/js/common/directives/stackCard/stackCard.html',
     controller: 'StackCardCtrl'
   };
 });

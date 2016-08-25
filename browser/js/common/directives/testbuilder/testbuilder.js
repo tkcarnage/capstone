@@ -3,7 +3,7 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('testbuilder', {
         url: '/testbuilder',
-        templateUrl: 'js/common/directives/testbuilder/newTest.html',
+        templateUrl: process.cwd() + '/browser/js/common/directives/testbuilder/newTest.html',
         controller: 'TestbuilderCtrl'
     });
 });
@@ -11,7 +11,7 @@ app.config(function ($stateProvider) {
 app.directive('testbuilder', function(){
   return {
     restrict: 'E',
-    templateUrl: 'js/common/directives/testbuilder/testbuilder.html'
+    templateUrl: process.cwd() + '/browser/js/common/directives/testbuilder/testbuilder.html'
   };
 });
 
@@ -145,13 +145,13 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
             results.test = test._id;
 
             return TestBuilderFactory.edit(test)
-            .then(() => $http.post('/api/results', results))
+            .then(() => $http.post('http://localhost:1337/api/results', results))
             .then(res => res.data)
             .catch($log.error);
         },
         getPreviousResults: function(test) {
             if (!test.result) { return false; }
-            return $http.get('/api/results/' + test.result)
+            return $http.get('http://localhost:1337/api/results/' + test.result)
             .then(res => res.data);
         },
         addToResponsePool: function(data) {
@@ -162,7 +162,7 @@ app.factory('TestFactory', function($http, $log, TestBuilderFactory) {
         },
         getStackTests: function(viewedTest) {
             if (!viewedTest.stack) return Promise.resolve([]);
-            return $http.get('/api/stacks/' + viewedTest.stack)
+            return $http.get('http://localhost:1337/api/stacks/' + viewedTest.stack)
             .then(res => res.data.tests)
             .then(tests => {
                 let includeTest = true; //Will include only tests that precede the viewedTest in the stack
@@ -206,17 +206,12 @@ app.controller('TestbuilderCtrl', function($scope, $state, TestBuilderFactory, $
     $scope.showValidators = false;
     $scope.isNewTest = true;
 	$scope.addForm = function(index, type){
-        console.log("")
-        console.log(index, type, "***");
-        console.log($scope.test[type].length, "length");
         if (type !== 'body' && (index === $scope.test[type].length - 1 || $scope.test[type].length === 0) ) {
-            console.log("HIT THE FIRST IF");
             if (type === "params") $scope.test.params.push({});
             if (type === "headers") $scope.test.headers.push({});
             if (type === "validators") $scope.test.validators.push({name: 'validator' + (Number($scope.test.validators.length) + 1).toString(), func: "(function(response) {\n\n});"});
         }
         else if (index === $scope.test[type].data.length - 1 || $scope.test[type].data.length === 0) {
-            console.log("HITTING THE ELSE")
             $scope.test.body.data.push({});
         }
     $scope.$evalAsync();
@@ -332,7 +327,7 @@ $scope.runTest = function() {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
         $mdDialog.show({
             controller: DialogController,
-            templateUrl: 'js/common/directives/testbuilder/testResults.html',
+            templateUrl: process.cwd() + '/browser/js/common/directives/testbuilder/testResults.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true,

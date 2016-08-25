@@ -3,7 +3,7 @@
 <head>
     <script>
         var cwDirectory = process.cwd();
-        window.$ = window.jQuery = require(cwDirectory + '/node_modules/jQuery/lib/node-jquery.js');
+        //window.$ = window.jQuery = require(cwDirectory + '/node_modules/jQuery/lib/node-jquery.js');
         var path = require('path');
         var style = document.createElement('link');
         var boot = document.createElement('link');
@@ -13,7 +13,7 @@
         style.setAttribute('href', path.join(node_modulesPath, '../assets/form-1/assets/css/style.css'));
         boot.setAttribute('rel', 'stylesheet');
         boot.setAttribute('href', path.join(node_modulesPath, '../assets/form-1/assets/css/bootstrap.min.css'));
-        require(path.join(node_modulesPath, '/lodash/index.js'));
+        window._ = require(path.join(node_modulesPath, '/lodash/index.js'));
         require(path.join(node_modulesPath, '/angular-animate/angular-animate.js'));
         require(path.join(node_modulesPath, '/angular-ui-router/release/angular-ui-router.js'));
         require(path.join(node_modulesPath, '/angular-ui-bootstrap/ui-bootstrap.js'));
@@ -37,12 +37,13 @@
     <!-- <script src="./angular-ui-router/release/angular-ui-router.js"></script> -->
    <!--  <script src="./angular-ui-bootstrap/ui-bootstrap.js"></script> -->
     <!-- <script src="./angular-ui-bootstrap/ui-bootstrap-tpls.js"></script> -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<!--     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script> -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
     <script src="http://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.js"></script>
-    <script src="https://cdn.jsdelivr.net/ace/1.2.3/min/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"   integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8="   crossorigin="anonymous"></script>
+<!--     <script src="https://cdn.jsdelivr.net/ace/1.2.3/min/ace.js" type="text/javascript" charset="utf-8"></script> -->
     <script> require(path.join(node_modulesPath, '../public/main.js')); </script>
     <!-- <script src="https://cdn.jsdelivr.net/lodash/4.12.0/lodash.min.js"></script> -->
     <!-- <script src="/ngDraggable/ngDraggable.js"></script> -->
@@ -55,6 +56,6 @@
 <body ng-app="Newman">
     <navbar ng-if="location.path() !== '/' && location.path() !== '/signup'"></navbar>
     <sidebar ng-if="location.path() !== '/' && location.path() !== '/signup'" class="col-xs-2"></sidebar>
-    <div class="main" ng-class="{'col-xs-10': location.path() !== '/' && location.path() !== '/signup', 'gradientbackground': location.path() === '/' || location.path() === '/signup'}"ui-view></div>
+    <div class="main" ng-class="{'col-xs-10': location.path() !== '/' && location.path() !== '/signup', 'gradientbackground': location.path() === '/' || location.path() === '/signup'}" ui-view></div>
 </body>
 </html>

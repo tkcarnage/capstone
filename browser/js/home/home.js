@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('home', {
         url: '/home', //TEST :id and trailing slash
-        templateUrl: 'js/home/home.html',
+        templateUrl: process.cwd() + '/browser/js/home/home.html',
         controller: 'homeCtrl',
         resolve: {
             user: function(AuthService) {

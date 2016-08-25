@@ -1,14 +1,14 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('stackBuilder', {
         url: '/stackbuilder',
-        templateUrl: 'js/stackBuilder/stackBuilder.html',
+        templateUrl: process.cwd() + '/browser/js/stackBuilder/stackBuilder.html',
         controller: 'StackBuilderCtrl',
         resolve: {
             user: function(AuthService) {
                 return AuthService.getLoggedInUser();
             },
             tests: function($http, user) {
-                return $http.get('/api/tests?userId=' + user._id)
+                return $http.get('http://localhost:1337/api/tests?userId=' + user._id)
                 .then(res => res.data);
             }
         }
@@ -23,7 +23,7 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
             return storedStacks;
         };
         obj.getUserStacks = function(user){
-            return $http.get('/api/stacks?userId=' + user._id)
+            return $http.get('http://localhost:1337/api/stacks?userId=' + user._id)
             .then(response => {
                 angular.copy(response.data, storedStacks);
                 return storedStacks;
@@ -34,14 +34,14 @@ app.factory('StackBuilderFactory', function($http, $rootScope, TestBuilderFactor
             let newTests = stackObj.tests.map(test => TestBuilderFactory.create(test));
             return Promise.all(newTests)
             .then(savedTests => stackObj.tests = savedTests)
-            .then( () => $http.post('/api/stacks', stackObj))
+            .then( () => $http.post('http://localhost:1337/api/stacks', stackObj))
             .then(res => {
                 $rootScope.$emit('createstack', res.data);
                 return res.data;
             });
         };
         obj.delete = function(stackObj) {
-            return $http.delete('/api/stacks/' + stackObj._id)
+            return $http.delete('http://localhost:1337/api/stacks/' + stackObj._id)
             .then(res => {
                 storedStacks = storedStacks.filter(function(ele){
                     return ele._id !== res.data;
@@ -85,7 +85,6 @@ app.controller('StackBuilderCtrl', function($scope, $state, $log, tests, StackBu
         $scope.$evalAsync();
     };
     $scope.removeFromStack = function (obj) {
-        console.log("REMOTE THIS: ", obj);
         $scope.stack.tests = $scope.stack.tests.filter(function(el){
             return el !== obj;
         });

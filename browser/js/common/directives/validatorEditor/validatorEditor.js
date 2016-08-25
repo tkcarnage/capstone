@@ -3,7 +3,7 @@
 app.directive('validatorEditor', function() {
     return {
         restrict: 'E',
-        templateUrl: 'js/common/directives/validatorEditor/validatorEditor.html',
+        templateUrl: process.cwd() + '/browser/js/common/directives/validatorEditor/validatorEditor.html',
         controller: 'ValidatorEditorCtrl'
     };
 

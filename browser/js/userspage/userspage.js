@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('userspage', {
         url: '/userpage',
-        templateUrl: 'js/userspage/userspage.html',
+        templateUrl: process.cwd() + '/browser/js/userspage/userspage.html',
         // The following data.authenticate is read by an event listener
         // that controls access to this state. Refer to app.js.
         data: {
@@ -19,7 +19,7 @@ app.config(function ($stateProvider) {
 app.factory('UsersPageFactory', function($http) {
     return {
         saveChanges: function(user) {
-            return $http.put('/api/users/' + user._id, user)
+            return $http.put('http://localhost:1337/api/users/' + user._id, user)
             .then(res => res.data);
         }
     };
