@@ -1,57 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        var cwDirectory = process.cwd();
-        //window.$ = window.jQuery = require(cwDirectory + '/node_modules/jQuery/lib/node-jquery.js');
-        var path = require('path');
-        var style = document.createElement('link');
-        var boot = document.createElement('link');
-        var node_modulesPath = path.join(__dirname, '../../../../newman/node_modules');
-        require(path.join(node_modulesPath, '/angular/angular.js'));
-        style.setAttribute('rel', 'stylesheet');
-        style.setAttribute('href', path.join(__dirname, '/style.css'));
-        boot.setAttribute('rel', 'stylesheet');
-        boot.setAttribute('href', path.join(node_modulesPath, '../assets/form-1/assets/css/bootstrap.min.css'));
-        window._ = require(path.join(node_modulesPath, '/lodash/index.js'));
-        require(path.join(node_modulesPath, '/angular-animate/angular-animate.js'));
-        require(path.join(node_modulesPath, '/angular-ui-router/release/angular-ui-router.js'));
-        require(path.join(node_modulesPath, '/angular-ui-bootstrap/ui-bootstrap.js'));
-        require(path.join(node_modulesPath, '/angular-ui-bootstrap/ui-bootstrap-tpls.js'));
-        require(path.join(node_modulesPath, '/socket.io-client/socket.io.js'));
-        require(path.join(node_modulesPath, '../bower_components/ngDraggable/ngDraggable.js'));
-        require(path.join(node_modulesPath, '../bower_components/electron-d3/dist/electron-d3.min.js'));
-        require(path.join(node_modulesPath, '../bower_components/ace-builds/src-min-noconflict/ace.js'));
-        require(path.join(node_modulesPath, '../bower_components/angular-ui-ace/ui-ace.min.js'));
-    </script>
     <base href="/" />
     <title>Newman</title>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" /> -->
+    <link rel="stylesheet" type="text/css" href="https://warm-lowlands-63755.herokuapp.com/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="http://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css">
-    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
-    <!-- <script src="./node_modules/lodash/index.js"></script> -->
-    <!-- <script src="./angular/angular.js"></script> -->
-    <!-- <script src="./angular-animate/angular-animate.js"></script> -->
-    <!-- <script src="./angular-ui-router/release/angular-ui-router.js"></script> -->
-   <!--  <script src="./angular-ui-bootstrap/ui-bootstrap.js"></script> -->
-    <!-- <script src="./angular-ui-bootstrap/ui-bootstrap-tpls.js"></script> -->
-<!--     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="https://warm-lowlands-63755.herokuapp.com/style.css" />
+    <script src="https://warm-lowlands-63755.herokuapp.com/lodash/index.js"></script>
+    <script src="https://warm-lowlands-63755.herokuapp.com/angular/angular.js"></script>
+    <script src="https://warm-lowlands-63755.herokuapp.com/angular-animate/angular-animate.js"></script>
+    <script src="https://warm-lowlands-63755.herokuapp.com/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="https://warm-lowlands-63755.herokuapp.com/angular-ui-bootstrap/ui-bootstrap.js"></script>
+    <script src="https://warm-lowlands-63755.herokuapp.com/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+    <script src="https://warm-lowlands-63755.herokuapp.com/socket.io-client/socket.io.js"></script>
     <script src="http://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.js"></script>
-    <script   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"   integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8="   crossorigin="anonymous"></script>
-<!--     <script src="https://cdn.jsdelivr.net/ace/1.2.3/min/ace.js" type="text/javascript" charset="utf-8"></script> -->
-    <script> require(path.join(node_modulesPath, '../public/main.js')); </script>
-    <!-- <script src="https://cdn.jsdelivr.net/lodash/4.12.0/lodash.min.js"></script> -->
-    <!-- <script src="/ngDraggable/ngDraggable.js"></script> -->
-    <!-- <script src="/electron-d3/dist/electron-d3.min.js"></script> -->
-    <!-- <script type="text/javascript" src="/ace-builds/src-min-noconflict/ace.js"></script> -->
-    <!-- <script type="text/javascript" src="/angular-ui-ace/ui-ace.js"></script> -->
-    <!-- <script src="/main.js" defer></script> -->
-
+    <script src="https://cdn.jsdelivr.net/ace/1.2.3/min/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4.12.0/lodash.min.js"></script>
+    <script src="https://warm-lowlands-63755.herokuapp.com/ngDraggable/ngDraggable.js"></script>
+    <script src="https://warm-lowlands-63755.herokuapp.com/electron-d3/dist/electron-d3.min.js"></script>
+    <script type="text/javascript" src="https://warm-lowlands-63755.herokuapp.com/ace-builds/src-min-noconflict/ace.js"></script>
+    <script type="text/javascript" src="https://warm-lowlands-63755.herokuapp.com/angular-ui-ace/ui-ace.js"></script>
+    <script src="https://warm-lowlands-63755.herokuapp.com/main.js" defer></script>
 </head>
 <body ng-app="Newman">
     <navbar ng-if="location.path() !== '/' && location.path() !== '/signup'"></navbar>
