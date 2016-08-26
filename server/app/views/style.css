@@ -1,0 +1,441 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+* {
+  box-sizing: border-box; }
+
+a:active {
+  text-decoration: none; }
+
+body {
+  padding-bottom: 0px;
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh; }
+
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
+.main {
+  overflow-y: visible;
+  overflow-x: hidden;
+  background-color: #ededed;
+  height: 100%;
+  padding: 0px;
+  padding-top: 70px; }
+
+.inner {
+  padding: 25px;
+  padding-bottom: 10px; }
+
+.exit_to_app {
+  font-size: 2.8rem;
+  display: block; }
+
+md-icon {
+  width: 2.8rem;
+  height: 2.8rem; }
+
+.md-button.md-small {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  min-height: 20px;
+  vertical-align: top;
+  font-size: 10px;
+  padding: 0 0;
+  margin: 0; }
+
+[ng-drag] {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+[ng-drag] {
+  width: 100px;
+  height: 100px;
+  background: #87D69B;
+  color: white;
+  text-align: center;
+  display: block;
+  cursor: move; }
+
+[ng-drag].drag-over {
+  border: solid 1px red; }
+
+[ng-drag].dragging {
+  opacity: 0.5; }
+
+[ng-drop] {
+  background: #ededed;
+  text-align: center;
+  display: block;
+  position: relative;
+  padding: 20px;
+  width: 140px;
+  height: 140px;
+  float: left; }
+
+[ng-drop].drag-enter {
+  border: solid 5px #D3D3D3; }
+
+[ng-drop] span.title {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 20px;
+  margin-left: -100px;
+  margin-top: -10px; }
+
+[ng-drop] div {
+  position: relative;
+  z-index: 2; }
+
+.draglist {
+  display: inline-block;
+  margin: 0 auto; }
+
+#stackinfopanel {
+  margin: 25px;
+  padding: 10px;
+  border: #ededed solid 1px; }
+
+#legend {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px; }
+
+#passing {
+  color: #00cc00; }
+
+#failing {
+  color: #cc0000; }
+
+.stackbutton:hover {
+  opacity: 0.8; }
+
+.runhover:hover {
+  color: #7fa3bc; }
+
+.opacityhover:hover {
+  opacity: 0.8; }
+
+.draglist > li > div {
+  word-wrap: break-word;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px; }
+
+.ace_editor {
+  height: 200px; }
+
+.progressDiv {
+  width: 100%;
+  background: #ffffff;
+  height: 325px;
+  margin-bottom: 0px;
+  display: inline-block;
+  border-bottom: 1px solid #C2C2C2; }
+
+.statChartHolder {
+  width: 35%;
+  height: 90%;
+  position: relative;
+  border-right: 1px solid #ccc;
+  top: 15px;
+  display: inline-block; }
+
+.statRightHolder {
+  display: inline-block;
+  height: 90%;
+  width: 64%;
+  position: relative;
+  top: -32px;
+  margin: 0; }
+
+.statRightHolder ul {
+  list-style: none;
+  margin: 0; }
+
+.statRightHolder li {
+  border-bottom: 1px solid #ccc;
+  height: 85px;
+  width: 95%;
+  position: relative;
+  top: -60px; }
+
+.statRightHolder h3 {
+  display: inline-block;
+  margin-right: 15px;
+  color: #B6B5B5;
+  font-weight: 300;
+  font-size: 38px; }
+
+.statRightHolder span {
+  display: inline-block;
+  color: #B6B5B5;
+  font-size: 21px;
+  font-weight: 300; }
+
+.statsLeft {
+  list-style: none;
+  display: inline-block;
+  width: 45%; }
+
+.statsLeft li {
+  width: 100%;
+  height: 14px;
+  border: none;
+  top: 5px;
+  margin-bottom: 25px; }
+
+.statsLeft h3 {
+  font-size: 17px;
+  display: inline-block; }
+
+.statsLeft span {
+  font-size: 17px;
+  display: inline-block; }
+
+.statsRight {
+  width: 45%;
+  display: inline-block;
+  position: absolute; }
+
+.statsRight li {
+  width: 100%;
+  height: 14px;
+  border: none;
+  top: 5px;
+  margin-bottom: 25px; }
+
+.statsRight h3 {
+  font-size: 17px;
+  display: inline-block; }
+
+.statsRight span {
+  font-size: 17px;
+  display: inline-block; }
+
+/* Pie Chart */
+.progress-pie-chart {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #E5E5E5;
+  position: relative; }
+
+.progress-pie-chart.gt-50 {
+  background-color: #81CE97; }
+
+.ppc-progress {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+  width: 200px;
+  height: 200px;
+  clip: rect(0, 200px, 200px, 100px); }
+
+.ppc-progress .ppc-progress-fill {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 100px);
+  top: calc(50% - 100px);
+  width: 200px;
+  height: 200px;
+  clip: rect(0, 100px, 200px, 0);
+  background: #81CE97;
+  transform: rotate(60deg); }
+
+.gt-50 .ppc-progress {
+  clip: rect(0, 100px, 200px, 0); }
+
+.gt-50 .ppc-progress .ppc-progress-fill {
+  clip: rect(0, 200px, 200px, 100px);
+  background: #E5E5E5; }
+
+.ppc-percents {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - 173.91304px/2);
+  top: calc(50% - 173.91304px/2);
+  width: 173.91304px;
+  height: 173.91304px;
+  background: #fff;
+  text-align: center;
+  display: table; }
+
+.ppc-percents span {
+  display: block;
+  font-size: 2.6em;
+  font-weight: bold;
+  color: #81CE97; }
+
+.pcc-percents-wrapper {
+  display: table-cell;
+  vertical-align: middle; }
+
+.progress-pie-chart {
+  margin: 50px auto 0; }
+
+.gradientbackground {
+  background: red;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #90AFC5, #c2d3df);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #90AFC5, #c2d3df);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #90AFC5, #c2d3df);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #90AFC5, #c2d3df);
+  /* Standard syntax */ }
+
+.signupimage {
+  width: 150px; }
+
+.loginimage {
+  width: 200px; }
+
+.whitetext {
+  color: #ffffff !important;
+  font-weight: bold; }
+
+#about {
+  margin: 0 auto;
+  width: 90%; }
+  #about:after {
+    content: "";
+    display: table;
+    clear: both; }
+  #about p {
+    width: 40%;
+    margin: 0 auto;
+    text-align: justify;
+    font-size: 22px;
+    font-weight: 300;
+    float: left; }
+  #about .carousel {
+    float: right;
+    width: 55%;
+    overflow: hidden;
+    margin: 0 auto; }
+    #about .carousel .carousel-inner {
+      height: 500px !important; }
+    #about .carousel .carousel-control {
+      background: none; }
+    #about .carousel .carousel-indicators {
+      display: none; }
+    #about .carousel img {
+      max-width: 100%;
+      max-height: 500px;
+      display: block;
+      margin: 0 auto; }
+
+#login-form {
+  width: 60%;
+  margin: 0 auto; }
+
+.loginBox {
+  max-width: 90%;
+  width: 500px; }
+
+.stretch input {
+  width: 100%; }
+
+sidebar {
+  overflow-y: visible;
+  overflow-x: hidden;
+  z-index: 5;
+  padding: 64px 0px 0px 0px !important;
+  background-color: #5e8bab;
+  width: inherit;
+  height: 100vh; }
+
+sidebar .logo {
+  width: 100%;
+  padding: 15px; }
+
+sidebar section > * {
+  padding: 0 15px; }
+
+sidebar .menu-item {
+  transition: border-left, 0.2s; }
+
+sidebar .menu-item a {
+  color: #c8c8c8; }
+
+sidebar .menu-item a:hover {
+  color: white; }
+
+sidebar .menu-item.active, sidebar .menu-item:hover {
+  border-left: 3px solid #00bc8c; }
+
+.sidebartext {
+  color: #C2C2C2; }
+
+.white, .white a {
+  color: #FFF; }
+
+.sidebarset {
+  padding: 0px; }
+
+a .stacksections {
+  margin-top: 0px;
+  padding: 10px;
+  padding-top: 15px;
+  padding-left: 15px;
+  color: #FFF;
+  font-weight: bold; }
+
+a .stacksections:hover {
+  background-color: #527e9d;
+  text-decoration: none; }
+
+a .stacksections:active {
+  text-decoration: none;
+  background-color: #527e9d; }
+
+a, a:hover, a:active, a:visited {
+  text-decoration: none; }
+
+.stackbutton {
+  display: block;
+  float: left;
+  background-color: #2c5c74;
+  border: 0px; }
+
+::-webkit-scrollbar {
+  display: none; }
+
+.tolowercase {
+  text-transform: none; }
+
+navbar {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: 1000; }
+
+md-toolbar {
+  padding-right: 10px; }
+
+a:-webkit-any-link {
+  text-decoration: none !important; }
+
+.logo {
+  margin-left: 10px;
+  height: 30px; }
+
+.logo:hover {
+  opacity: 0.5; }
+
+.cardtitle {
+  color: #5e8bab; }

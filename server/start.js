@@ -18,7 +18,7 @@ require('./main');
 var electron = require('electron');
 var app = electron.app;  // Module to control application life.
 var BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
-
+var indexFile = `${__dirname}/app/views/index.html`;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
@@ -38,7 +38,7 @@ function createWindow () {
 
     // and load the index.html of the app.
     // mainWindow.loadURL('file://' + __dirname + '/windows/main/main.html');
-    mainWindow.loadURL('file://' + __dirname + '/app/views/index.html');
+    mainWindow.loadURL(`file:${indexFile}`);
     mainWindow.webContents.openDevTools();
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {

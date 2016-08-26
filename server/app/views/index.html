@@ -10,7 +10,7 @@
         var node_modulesPath = path.join(__dirname, '../../../../newman/node_modules');
         require(path.join(node_modulesPath, '/angular/angular.js'));
         style.setAttribute('rel', 'stylesheet');
-        style.setAttribute('href', path.join(node_modulesPath, '../assets/form-1/assets/css/style.css'));
+        style.setAttribute('href', path.join(__dirname, '/style.css'));
         boot.setAttribute('rel', 'stylesheet');
         boot.setAttribute('href', path.join(node_modulesPath, '../assets/form-1/assets/css/bootstrap.min.css'));
         window._ = require(path.join(node_modulesPath, '/lodash/index.js'));
